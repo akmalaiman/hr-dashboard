@@ -1,0 +1,47 @@
+### Global Ignore
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# System Files
+.DS_Store
+Thumbs.db
+
+#Temporary files
+/tmp/
+/temp/
+
+# IDE
+/.idea/
+.project
+.classpath
+*.iml
+*.mvn
+
+
+### Angular Ignore
+
+#Compiled Output
+/hr-dashboard-ui/dist/
+/hr-dashboard-ui/out-tsc/
+/hr-dashboard-ui/bazel-out/
+
+# Node
+/hr-dashboard-ui/node_modules/
+
+# Miscellaneous
+/hr-dashboard-ui/.angular/cache/
+/hr-dashboard-ui/.saas-cache/
+/hr-dashboard-ui/connect.lock/
+/hr-dashboard-ui/coverage/
+/hr-dashboard-ui/libpeerconnection.log/
+/hr-dashboard-ui/testem.log/
+/hr-dashboard-ui/typings/
+
+
+### Java Spring Boot Ignore
+/hr-dashboard-api/target/
+!hr-dashboard-api/**/src/main/**/target/
+!hr-dashboard-api/**/src/test/**/target/
