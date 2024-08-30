@@ -36,7 +36,4 @@ public class JobPosition {
         @Column(name = "updated_by")
         private int updatedBy;
 
-        //TODO: Add createdBy which link to the user table
-        //TODO: Add updatedBy which link to the user table
-
 }
