@@ -9,8 +9,8 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "user")
-public class User {
+@Entity(name = "user_details")
+public class UserDetails {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,37 +1,38 @@
-version: '3.8'
-
 services:
-  postgres:
-    container_name: hr-dashboard-db
-    image: "postgres:16.3"
-    env_file:
-      - ./compose.env
-    ports:
-      - "5432:5432"
-    networks:
-      node_net:
-        ipv4_address: 172.28.1.1
-    volumes:
-      - ./postgres-volume:/var/lib/postgresql/data
+        postgres:
+                container_name: hr-dashboard-db
+                image: "postgres:16.3"
+                env_file:
+                        - ./compose.env
+                environment:
+                        - POSTGRES_DB=hr-dashboard
+                ports:
+                        - "5432:5432"
+                networks:
+                        node_net:
+                                ipv4_address: 172.28.1.1
+                volumes:
+                        - ./postgres-volume:/var/lib/postgresql/data
 
-  hr-dashboard-api:
-    container_name: hr-dashboard-api
-    build:
-      context: ./
-      dockerfile: ./hr-dashboard-api/Dockerfile
-    env_file:
-      - ./compose.env
-    ports:
-      - "8080:8080"
-    restart: on-failure:10
-    networks:
-      node_net:
-        ipv4_address: 172.28.1.2
-    depends_on:
-      - postgres
+        hr-dashboard-api:
+                container_name: hr-dashboard-api
+                image: "hr-dashboard-api:latest"
+                build:
+                        context: ./hr-dashboard-api
+                        dockerfile: Dockerfile
+                env_file:
+                        - ./compose.env
+                ports:
+                        - "8080:8080"
+                restart: on-failure:10
+                networks:
+                        node_net:
+                                ipv4_address: 172.28.1.2
+                depends_on:
+                        - postgres
 
 networks:
-  node_net:
-    ipam:
-      config:
-        - subnet: 172.28.0.0/16
+        node_net:
+                ipam:
+                        config:
+                                - subnet: 172.28.0.0/16
