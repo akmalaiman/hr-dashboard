@@ -45,3 +45,4 @@ Thumbs.db
 /hr-dashboard-api/target/
 !hr-dashboard-api/**/src/main/**/target/
 !hr-dashboard-api/**/src/test/**/target/
+/postgres-volume
