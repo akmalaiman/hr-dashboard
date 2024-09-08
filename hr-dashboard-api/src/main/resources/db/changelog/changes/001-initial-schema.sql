@@ -1,15 +1,3 @@
-CREATE TABLE role (
-    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    created_by INT,
-    updated_at TIMESTAMP,
-    updated_by INT
-);
-
-CREATE INDEX idx_role_name ON role(name, status);
-
 CREATE TABLE job_position (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255) NOT NULL,
@@ -35,6 +23,7 @@ CREATE TABLE user_details (
     postal_code INT,
     country VARCHAR(255),
     job_position_id INT NOT NULL,
+    role VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     created_by INT,
