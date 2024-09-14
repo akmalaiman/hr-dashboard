@@ -1,9 +1,12 @@
 package aaiman.hrdashboardapi.service;
 
+import aaiman.hrdashboardapi.exception.JwtAuthenticationException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +19,21 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
+@Slf4j
 public class JwtService {
 
         public static final String SECRET = generateSecretKey();
         private long jwtExpiration = 3600000;   //this is in millisecond which is equivalent to 1 hour
 
         public String extractUsername(String token) {
-                return extractClaim(token, Claims::getSubject);
+
+                try {
+                        return extractClaim(token, Claims::getSubject);
+                } catch(JwtException e) {
+                        log.error("Failed to extract username from token: {}", e.getMessage());
+                        throw new JwtAuthenticationException("Invalid JWT token");
+                }
+
         }
 
         public Date extractExpiration(String token) {
@@ -35,8 +46,17 @@ public class JwtService {
         }
 
         public Boolean validateToken(String token, UserDetails userDetails) {
-                final String username = extractUsername(token);
-                return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+
+                try {
+
+                        final String username = extractUsername(token);
+                        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+
+                } catch(JwtException e) {
+                        log.error("Token validation failed: {}", e.getMessage());
+                        throw  new JwtAuthenticationException("Invalid JWT token");
+                }
+
         }
 
         public String generateToken(String username){
