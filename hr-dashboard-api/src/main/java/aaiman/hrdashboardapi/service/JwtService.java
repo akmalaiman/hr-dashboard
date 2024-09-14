@@ -2,12 +2,12 @@ package aaiman.hrdashboardapi.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.security.Key;
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -20,6 +20,7 @@ import java.util.function.Function;
 public class JwtService {
 
         public static final String SECRET = generateSecretKey();
+        private long jwtExpiration = 3600000;   //this is in millisecond which is equivalent to 1 hour
 
         public String extractUsername(String token) {
                 return extractClaim(token, Claims::getSubject);
@@ -47,20 +48,23 @@ public class JwtService {
         private String createToken(Map<String, Object> claims, String username) {
 
                 return Jwts.builder()
-                        .setClaims(claims)      //TODO: replace deprecated
-                        .setSubject(username)   //TODO: replace deprecated
-                        .setIssuedAt(new Date(System.currentTimeMillis()))      //TODO: replace deprecated
-                        .setExpiration(new Date(System.currentTimeMillis()+1000*60*1))  //TODO: replace deprecated
-                        .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();    //TODO: replace deprecated
+                        .claims(claims)
+                        .subject(username)
+                        .issuedAt(new Date())
+                        .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                        .signWith(getSignKey())
+                        .compact();
         }
 
         private Claims extractAllClaims(String token) {
+
                 return Jwts
                         .parser()
-                        .setSigningKey(getSignKey())    //TODO: replace deprecated
+                        .verifyWith(getSignKey())
                         .build()
-                        .parseClaimsJws(token)  //TODO: replace deprecated
-                        .getBody();     //TODO: replace deprecated
+                        .parseSignedClaims(token)
+                        .getPayload();
+
         }
 
         private Boolean isTokenExpired(String token) {
@@ -81,7 +85,7 @@ public class JwtService {
 
         }
 
-        private Key getSignKey() {
+        private SecretKey getSignKey() {
                 byte[] keyBytes = Decoders.BASE64.decode(SECRET);
                 return Keys.hmacShaKeyFor(keyBytes);
         }
