@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
@@ -40,7 +39,7 @@ public class JwtService {
                 return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
         }
 
-        public String GenerateToken(String username){
+        public String generateToken(String username){
                 Map<String, Object> claims = new HashMap<>();
                 return createToken(claims, username);
         }

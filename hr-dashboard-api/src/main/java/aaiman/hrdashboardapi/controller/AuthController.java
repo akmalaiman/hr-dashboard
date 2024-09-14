@@ -8,11 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -31,22 +34,23 @@ public class AuthController {
 
                 Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
                 if (authentication.isAuthenticated()) {
+
+                        String username = loginDto.getUsername();
+                        String authorities = authentication.getAuthorities().stream()
+                                .map(GrantedAuthority::getAuthority)
+                                .collect(Collectors.joining(","));
+
+                        String token = jwtService.generateToken(username);
+
                         JwtResponseDto jwtResponse = JwtResponseDto.builder()
-                                .accessToken(jwtService.GenerateToken(loginDto.getUsername()))
+                                .accessToken(token)
+                                .authorities(authorities)
                                 .build();
 
-//                        return ResponseEntity.ok(jwtResponse); // HTTP 200 OK with the token in the body
                         return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
                 } else {
                         throw new UsernameNotFoundException("Invalid user request..!!");
                 }
-
-                /*if(authentication.isAuthenticated()){
-                        return JwtResponseDto.builder()
-                                .accessToken(jwtService.GenerateToken(loginDto.getUsername()).build());
-                } else {
-                        throw new UsernameNotFoundException("invalid user request..!!");
-                }*/
 
         }
 
