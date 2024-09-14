@@ -2,9 +2,10 @@ package aaiman.hrdashboardapi;
 
 import aaiman.hrdashboardapi.model.JobPosition;
 import aaiman.hrdashboardapi.model.Role;
-import aaiman.hrdashboardapi.model.UserDetails;
+import aaiman.hrdashboardapi.model.User;
 import aaiman.hrdashboardapi.repository.JobPositionRepository;
-import aaiman.hrdashboardapi.repository.UserDetailsRepository;
+import aaiman.hrdashboardapi.repository.RoleRepository;
+import aaiman.hrdashboardapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,13 +25,25 @@ public class HrDashboardApiApplication implements CommandLineRunner {
         private JobPositionRepository jobPositionRepository;
 
         @Autowired
-        private UserDetailsRepository userDetailsRepository;
+        private UserRepository userRepository;
+
+        @Autowired
+        private RoleRepository roleRepository;
 
         public static void main(String[] args) {
                 SpringApplication.run(HrDashboardApiApplication.class, args);
         }
 
         public void run(String... args) {
+
+                List<Role> roleList = roleRepository.findAll();
+                if (roleList.isEmpty()) {
+
+                        Role role = new Role();
+                        role.setName("ADMIN");
+                        roleRepository.save(role);
+
+                }
 
                 List<JobPosition> jobPositionList = jobPositionRepository.findAllByStatus("Active");
                 if (jobPositionList.isEmpty()) {
@@ -45,23 +57,28 @@ public class HrDashboardApiApplication implements CommandLineRunner {
 
                 }
 
-                List<UserDetails> userDetailsList = userDetailsRepository.findAllByStatus("Active");
+                List<User> userDetailsList = userRepository.findAllByStatus("Active");
                 if (userDetailsList.isEmpty()) {
 
                         JobPosition jobPosition = jobPositionRepository.findByNameAndStatus("Administrator", "Active");
 
-                        UserDetails user = new UserDetails();
+                        Role adminRole = roleRepository.findByName("ADMIN");
+
+                        Set<Role> role = new HashSet<>();
+                        role.add(adminRole);
+
+                        User user = new User();
                         user.setFirstName("");
                         user.setLastName("");
                         user.setUsername("admin");
                         user.setEmail("admin@gmail.com");
                         user.setPassword(new BCryptPasswordEncoder().encode("admin"));
                         user.setJobPositionId(jobPosition);
-                        user.setRole(Role.ADMIN);
+                        user.setRoles(role);
                         user.setStatus("Active");
                         user.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
                         user.setCreatedBy(1);
-                        userDetailsRepository.save(user);
+                        userRepository.save(user);
 
                 }
 

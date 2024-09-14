@@ -10,7 +10,8 @@ import java.sql.Timestamp;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "job_position")
+@Entity
+@Table(name = "job_position")
 public class JobPosition {
 
         @Id()
