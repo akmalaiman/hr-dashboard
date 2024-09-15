@@ -1,5 +1,6 @@
 package aaiman.hrdashboardapi.exception;
 
+import aaiman.hrdashboardapi.dto.JwtResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +21,18 @@ public class GlobalExceptionHandler {
         }
 
         @ExceptionHandler(AuthenticationException.class)
-        public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
+        public ResponseEntity<JwtResponseDto> handleAuthenticationException(AuthenticationException e) {
+
+                JwtResponseDto jwtResponse = JwtResponseDto.builder()
+                        .ok(false)
+                        .status(HttpStatus.UNAUTHORIZED.value())
+                        .build();
+
                 log.error("Authentication failed: {}", e.getMessage());
-                return new ResponseEntity<>("Authentication required", HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(jwtResponse, HttpStatus.UNAUTHORIZED);
         }
 
-        @ExceptionHandler(AccessDeniedException.class)
+        /*@ExceptionHandler(AccessDeniedException.class)
         public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException e) {
                 log.error("Access denied: {}", e.getMessage());
                 return new ResponseEntity<>("Access denied", HttpStatus.FORBIDDEN);
@@ -35,6 +42,6 @@ public class GlobalExceptionHandler {
         public ResponseEntity<String> handleGenericException(Exception e) {
                 log.error("Unexpected error: {}", e.getMessage());
                 return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
 
 }

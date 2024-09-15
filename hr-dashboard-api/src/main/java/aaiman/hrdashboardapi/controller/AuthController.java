@@ -10,10 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
 
@@ -45,11 +42,20 @@ public class AuthController {
                         JwtResponseDto jwtResponse = JwtResponseDto.builder()
                                 .accessToken(token)
                                 .authorities(authorities)
+                                .ok(true)
+                                .status(HttpStatus.OK.value())
                                 .build();
 
                         return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
                 } else {
-                        throw new UsernameNotFoundException("Invalid user request..!!");
+
+                        JwtResponseDto jwtResponse = JwtResponseDto.builder()
+                                .ok(false)
+                                .status(HttpStatus.UNAUTHORIZED.value())
+                                .build();
+
+                        return new ResponseEntity<>(jwtResponse, HttpStatus.UNAUTHORIZED);
+
                 }
 
         }

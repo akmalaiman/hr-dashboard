@@ -1,1 +1,57 @@
-<p>login works!</p>
+<div class="container-fluid">
+        <div class="row">
+                <div class="col-md-12">
+                        <form>
+                                <h4>Sign in to your account</h4>
+                                <p>Enter your email & password to login</p>
+
+                                <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <div class="input-group">
+                                                <span class="input-group-text"><i class='bx bxs-user'></i></span>
+                                                <input type="text" name="username" id="username" [(ngModel)]="loginObject.username" placeholder="Username" class="form-control">
+                                        </div>
+                                </div>
+
+                                <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="input-group">
+                                                <span class="input-group-text"><i class='bx bxs-key' ></i></span>
+                                                <input type="password" name="password" id="password" [(ngModel)]="loginObject.password" placeholder="Password" class="form-control">
+                                        </div>
+                                </div>
+
+                                <button class="btn btn-primary btn-block w-100" (click)="onLogin()" type="submit">Sign in</button>
+                        </form>
+                </div>
+                <!--<div class="col-md-7 p-0">
+                        <img class="bg-img-cover" src="assets/images/login-background.jpg">
+                </div>
+                <div class="col-md-5 p-0">
+                        <div class="login-col" style="background-image: url('assets/images/login-card-bg.jpg');">
+                                <form>
+                                        <h4>Sign in to your account</h4>
+                                        <p>Enter your email & password to login</p>
+
+                                        <div class="mb-3">
+                                                <label for="username" class="form-label">Username</label>
+                                                <div class="input-group">
+                                                        <span class="input-group-text"><i class='bx bxs-user'></i></span>
+                                                        <input type="text" name="username" id="username" placeholder="Username" class="form-control">
+                                                </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                                <label for="password" class="form-label">Password</label>
+                                                <div class="input-group">
+                                                        <span class="input-group-text"><i class='bx bxs-key' ></i></span>
+                                                        <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+                                                </div>
+                                        </div>
+
+                                        <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
+                                </form>
+                        </div>
+                </div>-->
+        </div>
+</div>
