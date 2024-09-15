@@ -10,7 +10,7 @@ CREATE TABLE job_position (
 
 CREATE INDEX idx_job_position_name ON job_position(name, status);
 
-CREATE TABLE user_details (
+CREATE TABLE "user" (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -23,7 +23,6 @@ CREATE TABLE user_details (
     postal_code INT,
     country VARCHAR(255),
     job_position_id INT NOT NULL,
-    role VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     created_by INT,
@@ -32,4 +31,9 @@ CREATE TABLE user_details (
     FOREIGN KEY (job_position_id) REFERENCES job_position(id)
 );
 
-CREATE INDEX idx_user_details_username ON user_details(username, password, status);
+CREATE INDEX idx_user_details_username ON "user"(username, password, status);
+
+CREATE TABLE role (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY ,
+    name VARCHAR(255) NOT NULL
+);
