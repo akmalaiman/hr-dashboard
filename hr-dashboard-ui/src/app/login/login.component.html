@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="container-fluid">
+        <div class="row">
+                <div class="col-sm-7 p-0 m-0">
+                        <img class="bg-img-cover" src="assets/images/login-background.jpg">
+                </div>
+                <div class="col-sm-5 p-0 m-0">
+                        <div class="login-card-bg" style="background: url('assets/images/login-card-bg.jpg')">
+                                <div class="login-card">
+                                        <form>
+                                                <h4>Sign in to your account</h4>
+                                                <p class="text-secondary">Enter your email & password to login</p>
+
+                                                <div *ngIf="errorMessage">
+                                                        <div class="alert alert-danger">
+                                                                {{errorMessage}}
+                                                        </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                        <label for="username" class="form-label">Username</label>
+                                                        <div class="input-group">
+                                                                <span class="input-group-text"><i class='bx bxs-user'></i></span>
+                                                                <input type="text" name="username" id="username" [(ngModel)]="loginObject.username" placeholder="Username" class="form-control">
+                                                        </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                        <label for="password" class="form-label">Password</label>
+                                                        <div class="input-group">
+                                                                <span class="input-group-text"><i class='bx bxs-key' ></i></span>
+                                                                <input type="password" name="password" id="password" [(ngModel)]="loginObject.password" placeholder="Password" class="form-control">
+                                                        </div>
+                                                </div>
+
+                                                <button class="btn btn-primary btn-block w-100" type="submit" (click)="onLogin()">Sign in</button>
+                                        </form>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
