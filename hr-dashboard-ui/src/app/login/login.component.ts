@@ -2,17 +2,19 @@ import {Component} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {NgIf} from "@angular/common";
 
 @Component({
         selector: 'app-login',
         standalone: true,
-        imports: [FormsModule],
+        imports: [FormsModule, NgIf],
         templateUrl: './login.component.html',
         styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
         loginObject: Login;
+        errorMessage: string | null = null;
 
         constructor(private http: HttpClient, private router: Router) {
                 this.loginObject = new Login();
@@ -22,12 +24,12 @@ export class LoginComponent {
                 this.http.post('http://localhost:8080/api/auth/login', this.loginObject).subscribe({
                         next: (res: any) => {
                                 if (res.ok) {
-                                        console.log("Successfully logged in");
+                                        this.errorMessage = null;
                                         this.router.navigateByUrl("/home");
                                 }
                         },
                         error: (err) => {
-                                console.log("Failed to log in");
+                                this.errorMessage = "Invalid credentials. Please try again.";
                         }
                 });
         }
