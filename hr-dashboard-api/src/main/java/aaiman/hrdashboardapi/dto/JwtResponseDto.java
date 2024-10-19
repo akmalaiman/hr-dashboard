@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class JwtResponseDto {
 
         private String accessToken;
-        private String authorities;
         private int status;
         private boolean ok;
 

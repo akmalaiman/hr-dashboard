@@ -5,7 +5,7 @@ COPY ./pom.xml /usr/src/app
 
 RUN mvn -f /usr/src/app/pom.xml clean package -DskipTests
 
-FROM amd64/eclipse-temurin:21-jre-jammy
+FROM arm64v8/eclipse-temurin:21-jre-jammy
 
 COPY --from=build /usr/src/app/target/hr-dashboard-api-0.0.1-SNAPSHOT.jar /usr/app/hr-dashboard-api-0.0.1-SNAPSHOT.jar
 

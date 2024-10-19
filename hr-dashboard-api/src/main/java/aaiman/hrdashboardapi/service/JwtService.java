@@ -45,6 +45,18 @@ public class JwtService {
                 return claimsResolver.apply(claims);
         }
 
+        public int extractUserId(String token) {
+                return extractClaim(token, claims -> claims.get("userId", Integer.class));
+        }
+
+        public String extractFirstName(String token) {
+                return extractClaim(token, claims -> claims.get("firstName", String.class));
+        }
+
+        public String extractRole(String token) {
+                return extractClaim(token, claims -> claims.get("role", String.class));
+        }
+
         public Boolean validateToken(String token, UserDetails userDetails) {
 
                 try {
@@ -59,8 +71,11 @@ public class JwtService {
 
         }
 
-        public String generateToken(String username){
+        public String generateToken(String username, String firstName, int userId, String userRole){
                 Map<String, Object> claims = new HashMap<>();
+                claims.put("userId", userId);
+                claims.put("firstName", firstName);
+                claims.put("roles", userRole);
                 return createToken(claims, username);
         }
 
