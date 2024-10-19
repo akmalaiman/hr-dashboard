@@ -15,9 +15,22 @@ export class LoginComponent {
 
         loginObject: Login;
         errorMessage: string | null = null;
+        successMessage: string | null = null;
 
         constructor(private http: HttpClient, private router: Router) {
+
                 this.loginObject = new Login();
+
+                const navigation = this.router.getCurrentNavigation();
+                if (navigation?.extras?.state?.['successMessage']) {
+                        this.successMessage = navigation.extras?.state['successMessage'];
+                }
+
+                const token = localStorage.getItem("access_token");
+                if (token) {
+                        this.router.navigate(['/home']);
+                }
+
         }
 
         onLogin() {
@@ -25,6 +38,8 @@ export class LoginComponent {
                         next: (res: any) => {
                                 if (res.ok) {
                                         this.errorMessage = null;
+                                        this.successMessage = null;
+                                        localStorage.setItem("access_token", res.accessToken);
                                         this.router.navigateByUrl("/home");
                                 }
                         },

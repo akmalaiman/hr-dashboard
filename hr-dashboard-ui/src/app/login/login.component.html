@@ -7,14 +7,20 @@
                         <div class="login-card-bg" style="background: url('assets/images/login-card-bg.jpg')">
                                 <div class="login-card">
                                         <form>
-                                                <h4>Sign in to your account</h4>
-                                                <p class="text-secondary">Enter your email & password to login</p>
-
                                                 <div *ngIf="errorMessage">
-                                                        <div class="alert alert-danger">
+                                                        <div class="alert alert-danger text-center">
                                                                 {{errorMessage}}
                                                         </div>
                                                 </div>
+
+                                                <div *ngIf="successMessage">
+                                                        <div class="alert alert-success text-center">
+                                                                {{successMessage}}
+                                                        </div>
+                                                </div>
+
+                                                <h4>Sign in to your account</h4>
+                                                <p class="text-secondary">Enter your email & password to login</p>
 
                                                 <div class="mb-3">
                                                         <label for="username" class="form-label">Username</label>
