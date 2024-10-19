@@ -1,1 +1,8 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg bg-dark-subtle">
+        <div class="container-fluid">
+                <a class="navbar-brand" [routerLink]="['/home']">HrDashboard</a>
+                <div class="d-flex">
+                        <button class="btn btn-outline-danger" type="submit" (click)="onLogout()"><i class='bx bx-log-out'></i> Logout</button>
+                </div>
+        </div>
+</nav>
