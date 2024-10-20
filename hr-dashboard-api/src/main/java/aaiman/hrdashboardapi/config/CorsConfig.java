@@ -19,6 +19,15 @@ public class CorsConfig {
                                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                                         .allowedHeaders("Authorization", "Content-Type")
                                         .allowCredentials(true);
+
+                                registry.addMapping("/v3/api-docs/**")
+                                        .allowedOrigins("http://localhost:8080")
+                                        .allowedMethods("GET")
+                                        .allowedHeaders("Authorization", "Content-Type");
+
+                                registry.addMapping("/swagger-ui/**")
+                                        .allowedOrigins("http://localhost:8080")
+                                        .allowedMethods("GET");
                         }
                 };
 

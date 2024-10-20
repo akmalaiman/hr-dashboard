@@ -47,6 +47,8 @@ public class SecurityConfig {
                         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                         .authorizeHttpRequests((authorize) -> {
                                 authorize.requestMatchers("/api/auth/**").permitAll();
+                                authorize.requestMatchers("/swagger-ui/**").permitAll();
+                                authorize.requestMatchers("/v3/api-docs/**").permitAll();
                                 authorize.anyRequest().authenticated();
                         })
                         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -68,7 +70,7 @@ public class SecurityConfig {
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
                 CorsConfiguration configuration = new CorsConfiguration();
-                configuration.setAllowedOrigins(List.of("http://localhost:4200"));  // Allow Angular app's origin
+                configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost:8080"));  // Allow Angular app's origin
                 configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
                 configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
                 configuration.setAllowCredentials(true);  // Allow credentials like cookies or authorization headers
