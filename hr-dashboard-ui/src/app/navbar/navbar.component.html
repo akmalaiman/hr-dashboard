@@ -1,8 +1,34 @@
-<nav class="navbar navbar-expand-lg bg-dark-subtle">
+<nav class="navbar bg-dark-subtle">
         <div class="container-fluid">
-                <a class="navbar-brand" [routerLink]="['/home']">HrDashboard</a>
-                <div class="d-flex">
-                        <button class="btn btn-outline-danger" type="submit" (click)="onLogout()"><i class='bx bx-log-out'></i> Logout</button>
+                <div class="d-flex justify-content-start">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offCanvasNavbar" aria-controls="offCanvasNavbar">
+                                <span class="navbar-toggler-icon"></span>
+                        </button>
+                </div>
+
+                <div class="d-flex justify-content-center mx-auto">
+                        <a class="navbar-brand" [routerLink]="['/home']">HrDashboard</a>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                        <button class="btn btn-outline-danger" type="submit" (click)="onLogout()"><i class="bx bx-log-out"></i> Logout</button>
+                </div>
+
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offCanvasNavbar" aria-labelledby="offCanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offCanvasNavbarLabel">HrDashboard</h5>
+                                <button class="btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                        <li class="nav-item">
+                                                <a class="nav-link text-primary" [routerLink]="['/home']">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" [routerLink]="['/user']">User Management</a>
+                                        </li>
+                                </ul>
+                        </div>
                 </div>
         </div>
 </nav>
