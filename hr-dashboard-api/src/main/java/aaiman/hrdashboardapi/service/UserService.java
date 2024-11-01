@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -39,6 +40,10 @@ public class UserService {
                 userRepository.save(newUser);
                 return newUser;
 
+        }
+
+        public List<User> getAllActiveUsers() {
+                return userRepository.findAllByStatus("Active");
         }
 
 }

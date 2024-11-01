@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user")
 @Tag(name = "User", description = "Handles user management operations such as creation, retrieval, and updating of users.")
@@ -36,6 +38,16 @@ public class UserController {
                 User createdUser = userService.createUser(user, userId);
 
                 return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+
+        }
+
+        @PostMapping("/all")
+        @PreAuthorize("hasAuthority('ADMIN')")
+        public ResponseEntity<List<User>> getAllActive() {
+
+                List<User> userList = userService.getAllActiveUsers();
+
+                return ResponseEntity.status(HttpStatus.OK).body(userList);
 
         }
 
