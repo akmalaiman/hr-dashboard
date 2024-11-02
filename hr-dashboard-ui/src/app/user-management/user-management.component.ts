@@ -17,7 +17,7 @@ import {NgForOf, NgIf} from "@angular/common";
 })
 export class UserManagementComponent implements OnInit, AfterViewChecked, OnDestroy{
 
-        pageName: string = "User Management";
+        pageName: string = "Staff Management";
         staffList: Staff[] = [];
         loading: boolean = true;
         private dataTable: any;

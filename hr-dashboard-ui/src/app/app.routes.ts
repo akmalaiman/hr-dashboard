@@ -4,6 +4,7 @@ import {HomeComponent} from "./home/home.component";
 import {LayoutComponent} from "./layout/layout.component";
 import {authGuard} from "./auth.guard";
 import {UserManagementComponent} from "./user-management/user-management.component";
+import {NewUserComponent} from "./new-user/new-user.component";
 
 export const routes: Routes = [
         {
@@ -27,6 +28,11 @@ export const routes: Routes = [
                         {
                                 path: "user",
                                 component: UserManagementComponent,
+                                canActivate: [authGuard]
+                        },
+                        {
+                                path: "user/new",
+                                component: NewUserComponent,
                                 canActivate: [authGuard]
                         }
                 ]
