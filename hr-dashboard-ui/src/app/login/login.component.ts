@@ -24,6 +24,8 @@ export class LoginComponent {
                 const navigation = this.router.getCurrentNavigation();
                 if (navigation?.extras?.state?.['successMessage']) {
                         this.successMessage = navigation.extras?.state['successMessage'];
+                } else if (navigation?.extras?.state?.['errorMessage']) {
+                        this.errorMessage = navigation.extras?.state['errorMessage'];
                 }
 
                 const token = localStorage.getItem("access_token");
