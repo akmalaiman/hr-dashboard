@@ -24,6 +24,7 @@ public class UserService {
                 User newUser = new User();
                 newUser.setFirstName(user.getFirstName());
                 newUser.setLastName(user.getLastName());
+                newUser.setUsername(user.getUsername());
                 newUser.setEmail(user.getEmail());
                 newUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
                 newUser.setAddress(user.getAddress());
