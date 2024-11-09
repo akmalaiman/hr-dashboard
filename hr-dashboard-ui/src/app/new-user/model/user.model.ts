@@ -14,7 +14,7 @@ export interface User {
         postalCode: number;
         country: string;
         jobPositionId: JobPosition;
-        roles: Role;
+        roles: Role[];
         status: string;
         createdAt: Date;
         createdBy: number;

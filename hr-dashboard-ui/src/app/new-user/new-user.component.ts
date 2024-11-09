@@ -99,7 +99,7 @@ export class NewUserComponent implements OnInit {
                                 updatedAt: new Date(),
                                 updatedBy: 0,
                                 jobPositionId: jobPosition,
-                                roleId: role,
+                                roles: role ? [{id: role.id, name: role.name}] : [],
                         };
 
                         this.userService.createUser(userData).subscribe(
