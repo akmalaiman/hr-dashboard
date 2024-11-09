@@ -5,6 +5,7 @@ import aaiman.hrdashboardapi.dto.LoginDto;
 import aaiman.hrdashboardapi.model.User;
 import aaiman.hrdashboardapi.repository.UserRepository;
 import aaiman.hrdashboardapi.service.JwtService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,11 +14,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "Authentication", description = "Handles authentication processes")
 public class AuthController {
 
         private final UserRepository userRepository;

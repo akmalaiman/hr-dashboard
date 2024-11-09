@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
-import {NavigationExtras, Router, RouterLink} from "@angular/router";
+import {NavigationExtras, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
         selector: 'app-navbar',
         standalone: true,
         imports: [
-                RouterLink
+                RouterLink,
+                RouterLinkActive
         ],
         templateUrl: './navbar.component.html',
         styleUrl: './navbar.component.css'

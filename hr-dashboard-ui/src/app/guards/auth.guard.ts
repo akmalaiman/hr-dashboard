@@ -12,7 +12,6 @@ export const authGuard: CanActivateFn = (route, state) => {
                 const expirationTime = decodedToken.exp * 1000;
 
                 if (Date.now() > expirationTime) {
-                        console.log('expiration expired');
                         const navigationExtras: NavigationExtras = {
                                 state: {
                                         errorMessage: 'You have been logged out due to session expiration. Please log in again.'
