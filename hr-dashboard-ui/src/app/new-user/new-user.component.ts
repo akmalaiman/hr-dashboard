@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
 import {UserService} from "./service/user.service";
 import {JobPosition} from "./model/job-position.model";
 import {Role} from "./model/role.model";
 import {User} from "./model/user.model";
+import Swal from "sweetalert2";
 
 @Component({
         selector: 'app-new-user',
@@ -27,7 +28,7 @@ export class NewUserComponent implements OnInit {
         jobPositions: JobPosition[] = [];
         roles: Role[] = [];
 
-        constructor(private formBuilder: FormBuilder, private userService: UserService) {
+        constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
         }
 
         ngOnInit(): void {
@@ -104,7 +105,25 @@ export class NewUserComponent implements OnInit {
 
                         this.userService.createUser(userData).subscribe(
                                 (response) => {
-                                        console.log("User created successfully!");
+                                        Swal.fire({
+                                                icon: "success",
+                                                text: "New User Successfully Created!",
+                                                confirmButtonText: "Close",
+                                                showCancelButton: true,
+                                                cancelButtonText: "Add more staff",
+                                                allowOutsideClick: false,
+                                                allowEscapeKey: false,
+                                                customClass: {
+                                                        confirmButton: "btn btn-success",
+                                                        cancelButton: "btn btn-primary",
+                                                }
+                                        }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                        this.router.navigate(['/user']);
+                                                } else {
+                                                        this.newStaffForm.reset();
+                                                }
+                                        });
                                 },
                                 (error) => {
                                         console.error("Error creating new user: ", error);
