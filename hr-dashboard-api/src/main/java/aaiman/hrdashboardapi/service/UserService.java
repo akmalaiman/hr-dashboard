@@ -46,4 +46,8 @@ public class UserService {
                 return userRepository.findAllByStatus("Active");
         }
 
+        public User getActiveUserByUsername(String username) {
+                return userRepository.findByUsernameAndStatus(username, "Active");
+        }
+
 }

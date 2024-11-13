@@ -27,6 +27,7 @@ export class NewUserComponent implements OnInit {
         newStaffForm!: FormGroup;
         jobPositions: JobPosition[] = [];
         roles: Role[] = [];
+        usernameValid: boolean = true;
 
         constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
         }
@@ -36,7 +37,7 @@ export class NewUserComponent implements OnInit {
                         firstName: ['', [Validators.required]],
                         lastName: ['', [Validators.required]],
                         username: ['', [Validators.required]],
-                        email: ['', [Validators.required]],
+                        email: ['', [Validators.required, Validators.email]],
                         password: ['', [Validators.required]],
                         jobPositionId: ['', [Validators.required]],
                         roleId: ['', [Validators.required]],
@@ -45,6 +46,10 @@ export class NewUserComponent implements OnInit {
                         country: [''],
                         state: [''],
                         postalCode: ['']
+                });
+
+                this.newStaffForm.get("username")?.valueChanges.subscribe(value => {
+                        this.checkUsername(value);
                 });
 
                 this.loadJobPositions();
@@ -69,6 +74,17 @@ export class NewUserComponent implements OnInit {
                         },
                         (error) => {
                                 console.error("Error fetching roles: ", error);
+                        }
+                );
+        }
+
+        checkUsername(username: string): void {
+                this.userService.getUsername(username).subscribe(
+                        (response) => {
+                                this.usernameValid = true;
+                        },
+                        (error) => {
+                                this.usernameValid = false;
                         }
                 );
         }

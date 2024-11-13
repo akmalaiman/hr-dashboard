@@ -57,4 +57,22 @@ public class UserController {
 
         }
 
+        @GetMapping("/byUsername")
+        @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+        public ResponseEntity<String> getActiveUserByUsername(@RequestParam("username") String username) {
+
+                if (username.isBlank() || username.isEmpty()) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username cannot be blank or empty!");
+                }
+
+                User user = userService.getActiveUserByUsername(username);
+
+                if (user == null) {
+                        return ResponseEntity.status(HttpStatus.OK).body(null);
+                }
+
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+
+        }
+
 }
