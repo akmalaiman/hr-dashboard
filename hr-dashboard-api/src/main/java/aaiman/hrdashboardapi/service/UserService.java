@@ -50,4 +50,8 @@ public class UserService {
                 return userRepository.findByUsernameAndStatus(username, "Active");
         }
 
+        public User getActiveUserByEmail(String email) {
+                return userRepository.findByEmailAndStatus(email, "Active");
+        }
+
 }

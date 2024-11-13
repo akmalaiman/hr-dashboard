@@ -54,7 +54,7 @@
                                                         <div *ngIf="newStaffForm.get('username')?.touched && newStaffForm.get('username')?.invalid" class="text-danger">
                                                                 <small><b>Username is required</b></small>
                                                         </div>
-                                                        <div *ngIf="!usernameValid && newStaffForm.get('username')?.valid" class="text-danger">
+                                                        <div *ngIf="!isUsernameExist && newStaffForm.get('username')?.valid" class="text-danger">
                                                                 <small><b>This username has been taken. Please choose another username</b></small>
                                                         </div>
                                                 </div>
@@ -111,6 +111,9 @@
                                                 <div *ngIf="newStaffForm.get('email')?.touched && !newStaffForm.get('email')?.errors?.['required'] && newStaffForm.get('email')?.errors?.['email']" class="text-danger">
                                                         <small><b>Please enter a valid email address</b></small>
                                                 </div>
+                                                <div *ngIf="!isEmailExist && newStaffForm.get('email')?.valid" class="text-danger">
+                                                        <small><b>This email has been taken. Please choose another email</b></small>
+                                                </div>
                                         </div>
                                         <div class="row mb-3">
                                                 <div class="col-lg-8">
@@ -153,7 +156,7 @@
                                                 </div>
                                         </div>
                                         <div class="row mb-3 px-2">
-                                                <button type="submit" class="btn btn-primary" [disabled]="newStaffForm!.invalid || !usernameValid">Add New Staff</button>
+                                                <button type="submit" class="btn btn-primary" [disabled]="newStaffForm!.invalid || !isUsernameExist || !isEmailExist">Add New Staff</button>
                                         </div>
                                 </div>
                         </form>

@@ -27,7 +27,8 @@ export class NewUserComponent implements OnInit {
         newStaffForm!: FormGroup;
         jobPositions: JobPosition[] = [];
         roles: Role[] = [];
-        usernameValid: boolean = true;
+        isUsernameExist: boolean = false;
+        isEmailExist: boolean = false;
 
         constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
         }
@@ -48,12 +49,17 @@ export class NewUserComponent implements OnInit {
                         postalCode: ['']
                 });
 
+                this.loadJobPositions();
+                this.loadRoles();
+
                 this.newStaffForm.get("username")?.valueChanges.subscribe(value => {
                         this.checkUsername(value);
                 });
 
-                this.loadJobPositions();
-                this.loadRoles();
+                this.newStaffForm.get("email")?.valueChanges.subscribe(value => {
+                        this.checkEmail(value);
+                });
+
         }
 
         loadJobPositions(): void {
@@ -81,10 +87,21 @@ export class NewUserComponent implements OnInit {
         checkUsername(username: string): void {
                 this.userService.getUsername(username).subscribe(
                         (response) => {
-                                this.usernameValid = true;
+                                this.isUsernameExist = true;
                         },
                         (error) => {
-                                this.usernameValid = false;
+                                this.isUsernameExist = false;
+                        }
+                );
+        }
+
+        checkEmail(email: string): void {
+                this.userService.getEmail(email).subscribe(
+                        (response) => {
+                                this.isEmailExist = true;
+                        },
+                        (error) => {
+                                this.isEmailExist = false;
                         }
                 );
         }

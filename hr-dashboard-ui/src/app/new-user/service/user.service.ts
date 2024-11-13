@@ -14,6 +14,7 @@ export class UserService {
         private roleUrl = "http://localhost:8080/api/role/all";
         private createUserUrl = "http://localhost:8080/api/user/add";
         private getUsernameUrl = "http://localhost:8080/api/user/byUsername";
+        private getEmailurl = "http://localhost:8080/api/user/byEmail";
 
         constructor(private http: HttpClient) { }
 
@@ -48,6 +49,15 @@ export class UserService {
                 });
                 const params = new HttpParams().set("username", username);
                 return this.http.get<any>(this.getUsernameUrl, {headers, params});
+        }
+
+        getEmail(email: string): Observable<any> {
+                const token = localStorage.getItem("access_token");
+                const headers = new HttpHeaders({
+                        'Authorization': `Bearer ${token}`
+                });
+                const params = new HttpParams().set("email", email);
+                return this.http.get<any>(this.getEmailurl, {headers, params});
         }
 
 }
