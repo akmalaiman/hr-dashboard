@@ -63,47 +63,47 @@ export class NewUserComponent implements OnInit {
         }
 
         loadJobPositions(): void {
-                this.userService.getJobPosition().subscribe(
-                        (data) => {
+                this.userService.getJobPosition().subscribe({
+                        next: data => {
                                 this.jobPositions = data;
                         },
-                        (error) => {
+                        error: error => {
                                 console.error("Error fetching job positions: ", error);
                         }
-                );
+                });
         }
 
         loadRoles(): void {
-                this.userService.getRole().subscribe(
-                        (data) => {
+                this.userService.getRole().subscribe({
+                        next: data => {
                                 this.roles = data;
                         },
-                        (error) => {
+                        error: error => {
                                 console.error("Error fetching roles: ", error);
                         }
-                );
+                });
         }
 
         checkUsername(username: string): void {
-                this.userService.getUsername(username).subscribe(
-                        (response) => {
+                this.userService.getUsername(username).subscribe({
+                        next: data => {
                                 this.isUsernameExist = true;
                         },
-                        (error) => {
+                        error: error => {
                                 this.isUsernameExist = false;
                         }
-                );
+                });
         }
 
         checkEmail(email: string): void {
-                this.userService.getEmail(email).subscribe(
-                        (response) => {
+                this.userService.getEmail(email).subscribe({
+                        next: data => {
                                 this.isEmailExist = true;
                         },
-                        (error) => {
+                        error: error => {
                                 this.isEmailExist = false;
                         }
-                );
+                });
         }
 
         onSubmit(): void {
@@ -136,8 +136,8 @@ export class NewUserComponent implements OnInit {
                                 roles: role ? [{id: role.id, name: role.name}] : [],
                         };
 
-                        this.userService.createUser(userData).subscribe(
-                                (response) => {
+                        this.userService.createUser(userData).subscribe({
+                                next: User => {
                                         Swal.fire({
                                                 icon: "success",
                                                 text: "New User Successfully Created!",
@@ -147,7 +147,7 @@ export class NewUserComponent implements OnInit {
                                                 allowOutsideClick: false,
                                                 allowEscapeKey: false,
                                                 customClass: {
-                                                        confirmButton: "btn btn-success",
+                                                        confirmButton: "btn btn-danger",
                                                         cancelButton: "btn btn-primary",
                                                 }
                                         }).then((result) => {
@@ -158,10 +158,10 @@ export class NewUserComponent implements OnInit {
                                                 }
                                         });
                                 },
-                                (error) => {
+                                error: error => {
                                         console.error("Error creating new user: ", error);
                                 }
-                        );
+                        });
                 }
         }
 
