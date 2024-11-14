@@ -57,4 +57,31 @@ public class UserController {
 
         }
 
+        @GetMapping("/byUsername")
+        @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+        public ResponseEntity<User> getActiveUserByUsername(@RequestParam("username") String username) {
+
+                User user = userService.getActiveUserByUsername(username);
+
+                if (user == null) {
+                        return ResponseEntity.status(HttpStatus.OK).body(null);
+                }
+
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+
+        }
+
+        @GetMapping("/byEmail")
+        @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+        public ResponseEntity<User> getActiveUserByEmail(@RequestParam("email") String email) {
+
+                User user = userService.getActiveUserByEmail(email);
+
+                if (user == null) {
+                        return ResponseEntity.status(HttpStatus.OK).body(null);
+                }
+
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(user);
+        }
+
 }

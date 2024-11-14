@@ -26,7 +26,7 @@
                                                                 </div>
                                                         </div>
                                                         <div *ngIf="newStaffForm.get('firstName')?.touched && newStaffForm.get('firstName')?.invalid" class="text-danger">
-                                                                <small>First Name is required</small>
+                                                                <small><b>First Name is required</b></small>
                                                         </div>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -36,6 +36,9 @@
                                                                         <input type="text" formControlName="lastName" id="lastName"  placeholder="Last Name" class="form-control border-dark-subtle">
                                                                         <label for="lastName">Last Name</label>
                                                                 </div>
+                                                        </div>
+                                                        <div *ngIf="newStaffForm.get('lastName')?.touched && newStaffForm.get('lastName')?.invalid" class="text-danger">
+                                                                <small><b>Last Name is required</b></small>
                                                         </div>
                                                 </div>
                                         </div>
@@ -48,6 +51,12 @@
                                                                         <label for="username">Username</label>
                                                                 </div>
                                                         </div>
+                                                        <div *ngIf="newStaffForm.get('username')?.touched && newStaffForm.get('username')?.invalid" class="text-danger">
+                                                                <small><b>Username is required</b></small>
+                                                        </div>
+                                                        <div *ngIf="!isUsernameExist && newStaffForm.get('username')?.valid" class="text-danger">
+                                                                <small><b>This username has been taken. Please choose another username</b></small>
+                                                        </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                         <div class="input-group">
@@ -56,6 +65,9 @@
                                                                         <input type="password" formControlName="password" id="password" placeholder="Password" class="form-control border-dark-subtle">
                                                                         <label for="password">Password</label>
                                                                 </div>
+                                                        </div>
+                                                        <div *ngIf="newStaffForm.get('password')?.touched && newStaffForm.get('password')?.invalid" class="text-danger">
+                                                                <small><b>Password is required</b></small>
                                                         </div>
                                                 </div>
                                         </div>
@@ -68,6 +80,9 @@
                                                                         <option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id">{{jobPosition.name}}</option>
                                                                 </select>
                                                         </div>
+                                                        <div *ngIf="newStaffForm.get('jobPositionId')?.touched && newStaffForm.get('jobPositionId')?.invalid" class="text-danger">
+                                                                <small><b>Job Position is required</b></small>
+                                                        </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                         <div class="input-group">
@@ -76,6 +91,9 @@
                                                                         <option value="" selected>Please Select Role</option>
                                                                         <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
                                                                 </select>
+                                                        </div>
+                                                        <div *ngIf="newStaffForm.get('roleId')?.touched && newStaffForm.get('roleId')?.invalid" class="text-danger">
+                                                                <small><b>Role is required</b></small>
                                                         </div>
                                                 </div>
                                         </div>
@@ -86,6 +104,15 @@
                                                                 <input type="email" formControlName="email" id="email" placeholder="Email Address" class="form-control border-dark-subtle">
                                                                 <label for="email" disabled="">Email Address</label>
                                                         </div>
+                                                </div>
+                                                <div *ngIf="newStaffForm.get('email')?.touched && newStaffForm.get('email')?.errors?.['required']" class="text-danger">
+                                                        <small><b>Email is required</b></small>
+                                                </div>
+                                                <div *ngIf="newStaffForm.get('email')?.touched && !newStaffForm.get('email')?.errors?.['required'] && newStaffForm.get('email')?.errors?.['email']" class="text-danger">
+                                                        <small><b>Please enter a valid email address</b></small>
+                                                </div>
+                                                <div *ngIf="!isEmailExist && newStaffForm.get('email')?.valid" class="text-danger">
+                                                        <small><b>This email has been taken. Please choose another email</b></small>
                                                 </div>
                                         </div>
                                         <div class="row mb-3">
@@ -129,7 +156,7 @@
                                                 </div>
                                         </div>
                                         <div class="row mb-3 px-2">
-                                                <button type="submit" class="btn btn-primary" [disabled]="newStaffForm!.invalid">Add New Staff</button>
+                                                <button type="submit" class="btn btn-primary" [disabled]="newStaffForm!.invalid || !isUsernameExist || !isEmailExist">Add New Staff</button>
                                         </div>
                                 </div>
                         </form>

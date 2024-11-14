@@ -27,6 +27,8 @@ export class NewUserComponent implements OnInit {
         newStaffForm!: FormGroup;
         jobPositions: JobPosition[] = [];
         roles: Role[] = [];
+        isUsernameExist: boolean = false;
+        isEmailExist: boolean = false;
 
         constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
         }
@@ -36,7 +38,7 @@ export class NewUserComponent implements OnInit {
                         firstName: ['', [Validators.required]],
                         lastName: ['', [Validators.required]],
                         username: ['', [Validators.required]],
-                        email: ['', [Validators.required]],
+                        email: ['', [Validators.required, Validators.email]],
                         password: ['', [Validators.required]],
                         jobPositionId: ['', [Validators.required]],
                         roleId: ['', [Validators.required]],
@@ -49,28 +51,59 @@ export class NewUserComponent implements OnInit {
 
                 this.loadJobPositions();
                 this.loadRoles();
+
+                this.newStaffForm.get("username")?.valueChanges.subscribe(value => {
+                        this.checkUsername(value);
+                });
+
+                this.newStaffForm.get("email")?.valueChanges.subscribe(value => {
+                        this.checkEmail(value);
+                });
+
         }
 
         loadJobPositions(): void {
-                this.userService.getJobPosition().subscribe(
-                        (data) => {
+                this.userService.getJobPosition().subscribe({
+                        next: data => {
                                 this.jobPositions = data;
                         },
-                        (error) => {
+                        error: error => {
                                 console.error("Error fetching job positions: ", error);
                         }
-                );
+                });
         }
 
         loadRoles(): void {
-                this.userService.getRole().subscribe(
-                        (data) => {
+                this.userService.getRole().subscribe({
+                        next: data => {
                                 this.roles = data;
                         },
-                        (error) => {
+                        error: error => {
                                 console.error("Error fetching roles: ", error);
                         }
-                );
+                });
+        }
+
+        checkUsername(username: string): void {
+                this.userService.getUsername(username).subscribe({
+                        next: data => {
+                                this.isUsernameExist = true;
+                        },
+                        error: error => {
+                                this.isUsernameExist = false;
+                        }
+                });
+        }
+
+        checkEmail(email: string): void {
+                this.userService.getEmail(email).subscribe({
+                        next: data => {
+                                this.isEmailExist = true;
+                        },
+                        error: error => {
+                                this.isEmailExist = false;
+                        }
+                });
         }
 
         onSubmit(): void {
@@ -103,8 +136,8 @@ export class NewUserComponent implements OnInit {
                                 roles: role ? [{id: role.id, name: role.name}] : [],
                         };
 
-                        this.userService.createUser(userData).subscribe(
-                                (response) => {
+                        this.userService.createUser(userData).subscribe({
+                                next: User => {
                                         Swal.fire({
                                                 icon: "success",
                                                 text: "New User Successfully Created!",
@@ -114,7 +147,7 @@ export class NewUserComponent implements OnInit {
                                                 allowOutsideClick: false,
                                                 allowEscapeKey: false,
                                                 customClass: {
-                                                        confirmButton: "btn btn-success",
+                                                        confirmButton: "btn btn-danger",
                                                         cancelButton: "btn btn-primary",
                                                 }
                                         }).then((result) => {
@@ -125,10 +158,10 @@ export class NewUserComponent implements OnInit {
                                                 }
                                         });
                                 },
-                                (error) => {
+                                error: error => {
                                         console.error("Error creating new user: ", error);
                                 }
-                        );
+                        });
                 }
         }
 
