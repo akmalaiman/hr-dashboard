@@ -54,4 +54,9 @@ public class UserService {
                 return userRepository.findByEmailAndStatus(email, "Active");
         }
 
+        public int deleteUserById(int userId, int requestorId) {
+                Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+                return userRepository.updateUserStatus("Deleted", requestorId, now, userId);
+        }
+
 }

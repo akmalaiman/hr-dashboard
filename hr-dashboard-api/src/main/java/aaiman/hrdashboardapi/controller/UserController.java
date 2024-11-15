@@ -84,4 +84,19 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(user);
         }
 
+        @DeleteMapping("/delete")
+        @PreAuthorize("hasAuthority('ADMIN')")
+        public ResponseEntity<User> deleteUser(@RequestParam("userId") Integer userId, HttpServletRequest request) {
+
+                int requestorId = (Integer) request.getAttribute("userId");
+
+                int updateStatus = userService.deleteUserById(userId, requestorId);
+
+                if (updateStatus == 0) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                }
+
+                return ResponseEntity.status(HttpStatus.OK).body(null);
+        }
+
 }
