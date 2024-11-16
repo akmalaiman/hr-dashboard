@@ -41,7 +41,9 @@
                                                 <td>{{staff.email}}</td>
                                                 <td>{{staff.jobPosition}}</td>
                                                 <td>{{staff.role}}</td>
-                                                <td></td>
+                                                <td class="text-center">
+                                                        <button class="btn btn-danger" (click)="deleteStaff(staff.id)"><i class='bx bx-trash' ></i></button>
+                                                </td>
                                         </tr>
                                 </tbody>
                         </table>
