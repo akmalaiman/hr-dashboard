@@ -15,6 +15,7 @@ export class UserService {
         private createUserUrl = "http://localhost:8080/api/user/add";
         private getUsernameUrl = "http://localhost:8080/api/user/byUsername";
         private getEmailurl = "http://localhost:8080/api/user/byEmail";
+        private deleteUserUrl = "http://localhost:8080/api/user/delete";
 
         constructor(private http: HttpClient) { }
 
@@ -58,6 +59,15 @@ export class UserService {
                 });
                 const params = new HttpParams().set("email", email);
                 return this.http.get<any>(this.getEmailurl, {headers, params});
+        }
+
+        deleteUser(id: number): Observable<any> {
+                const token = localStorage.getItem("access_token");
+                const headers = new HttpHeaders({
+                        'Authorization': `Bearer ${token}`
+                });
+                const params = new HttpParams().set("userId", id);
+                return this.http.delete<any>(this.deleteUserUrl, {headers, params});
         }
 
 }

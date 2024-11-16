@@ -3,6 +3,9 @@ import {RouterLink} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'datatables.net';
 import {NgForOf, NgIf} from "@angular/common";
+import Swal from "sweetalert2";
+import {UserService} from "../new-user/service/user.service";
+import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
         selector: 'app-user-management',
@@ -10,7 +13,8 @@ import {NgForOf, NgIf} from "@angular/common";
         imports: [
                 RouterLink,
                 NgForOf,
-                NgIf
+                NgIf,
+                NgbTooltip
         ],
         templateUrl: './user-management.component.html',
         styleUrl: './user-management.component.css'
@@ -23,7 +27,7 @@ export class UserManagementComponent implements OnInit, AfterViewChecked, OnDest
         private dataTable: any;
         private isDataTableInit = false;
 
-        constructor(private http: HttpClient) {
+        constructor(private http: HttpClient, private userService: UserService) {
         }
 
         ngOnInit(): void {
@@ -59,12 +63,57 @@ export class UserManagementComponent implements OnInit, AfterViewChecked, OnDest
                                 item.jobPositionId ? item.jobPositionId.name : 'N/A',
                                 item.roles && item.roles.length > 0 ? item.roles[0].name : 'N/A'
                         ));
-
                         this.loading = false;
                 }, error => {
                         console.error("Failed to fetch staff data: ", error);
                         this.loading = false;
                 });
+        }
+
+        deleteStaff(id: number): void {
+                Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You won\'t be able to undo this action!',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'Cancel',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                }).then((result) => {
+                        if (result.isConfirmed) {
+                                this.userService.deleteUser(id).subscribe({
+                                        next: data => {
+                                                Swal.fire({
+                                                        title: 'Deleted Successfully!',
+                                                        text: 'The staff record has been removed from the system.',
+                                                        icon: 'success',
+                                                        timer: 2000,
+                                                        showConfirmButton: false
+                                                });
+                                                this.refreshdata();
+                                        },
+                                        error: error => {
+                                                Swal.fire({
+                                                        title: 'Oops!',
+                                                        text: 'An error occurred while deleting the staff record. Please try again.',
+                                                        icon: 'error',
+                                                        confirmButtonText: 'OK'
+                                                });
+                                        }
+                                });
+                        }
+                });
+        }
+
+        refreshdata(): void {
+                if (this.dataTable) {
+                        this.dataTable.destroy();
+                }
+                this.loading = true;
+                this.fetchStaffData();
         }
 
         initDataTable(): void {
