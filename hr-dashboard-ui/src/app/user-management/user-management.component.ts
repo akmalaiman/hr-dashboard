@@ -5,6 +5,7 @@ import 'datatables.net';
 import {NgForOf, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
 import {UserService} from "../new-user/service/user.service";
+import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
         selector: 'app-user-management',
@@ -12,7 +13,8 @@ import {UserService} from "../new-user/service/user.service";
         imports: [
                 RouterLink,
                 NgForOf,
-                NgIf
+                NgIf,
+                NgbTooltip
         ],
         templateUrl: './user-management.component.html',
         styleUrl: './user-management.component.css'
