@@ -3,9 +3,9 @@ import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {LayoutComponent} from "./layout/layout.component";
 import {authGuard} from "./guards/auth.guard";
-import {StaffHomeComponent} from "./staff-home/staff-home.component";
-import {StaffNewComponent} from "./staff-new/staff-new.component";
-import {JobHomeComponent} from "./job-home/job-home.component";
+import {StaffHomeComponent} from "./staff/staff-home/staff-home.component";
+import {StaffNewComponent} from "./staff/staff-new/staff-new.component";
+import {JobHomeComponent} from "./job/job-home/job-home.component";
 
 export const routes: Routes = [
         {

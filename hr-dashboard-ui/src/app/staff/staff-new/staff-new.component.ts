@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
-import {StaffService} from "./service/staff.service";
-import {JobPosition} from "./model/job-position.model";
-import {Role} from "./model/role.model";
-import {User} from "./model/staff.model";
+import {StaffService} from "../service/staff.service";
+import {JobPosition} from "../../common/model/job-position.model";
+import {Role} from "../../common/model/role.model";
+import {User} from "../../common/model/staff.model";
 import Swal from "sweetalert2";
 
 @Component({

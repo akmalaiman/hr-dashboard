@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'datatables.net';
 import {NgForOf, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
-import {StaffService} from "../staff-new/service/staff.service";
+import {StaffService} from "../service/staff.service";
 import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
