@@ -16,6 +16,6 @@ public class JobPositionDto {
         private int createdBy;
         private Timestamp updatedAt;
         private int updatedBy;
-        private int staffJobCount;
+        private int staffCount;
 
 }

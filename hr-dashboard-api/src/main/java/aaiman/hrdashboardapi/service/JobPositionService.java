@@ -47,7 +47,7 @@ public class JobPositionService {
                         .map(row -> {
                                 JobPositionDto jobPositionDto = new JobPositionDto();
                                 jobPositionDto.setName((String) row.get("name"));
-                                jobPositionDto.setStaffJobCount(((Number) row.get("staffJobCount")).intValue());
+                                jobPositionDto.setStaffCount(((Number) row.get("staffJobCount")).intValue());
                                 return jobPositionDto;
                         }).collect(Collectors.toList());
         }

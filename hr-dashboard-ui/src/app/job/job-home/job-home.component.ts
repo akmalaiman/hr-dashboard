@@ -65,7 +65,7 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                         next: (data: any[]) => {
                                 this.jobPositionList = data.map(item => ({
                                         name: item.name,
-                                        staffCount: item.staffJobCount
+                                        staffCount: item.staffCount
                                 }));
                                 this.loading = false;
                         },
