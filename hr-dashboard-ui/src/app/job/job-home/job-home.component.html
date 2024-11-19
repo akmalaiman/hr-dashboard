@@ -35,7 +35,9 @@
                                 <tr *ngFor="let jobPosition of jobPositionList">
                                         <td>{{jobPosition.name}}</td>
                                         <td class="text-center" ><i class='bx bxs-user' ></i> {{jobPosition.staffCount}}</td>
-                                        <td class="text-center" ></td>
+                                        <td class="text-center">
+                                                <button class="btn btn-danger" placement="auto" ngbTooltip="Delete {{jobPosition.name}}" (click)="deleteJobPosition(jobPosition.id, jobPosition.staffCount)"><i class='bx bx-trash' ></i></button>
+                                        </td>
                                 </tr>
                         </tbody>
                 </table>
