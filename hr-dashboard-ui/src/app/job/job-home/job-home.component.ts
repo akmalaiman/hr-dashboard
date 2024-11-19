@@ -1,9 +1,11 @@
 import {AfterViewChecked, Component, OnDestroy, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
-import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbModalConfig, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 import {JobPosition} from "../../common/model/job-position.model";
 import {JobService} from "../service/job.service";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
         selector: 'app-job-home',
@@ -12,7 +14,8 @@ import {JobService} from "../service/job.service";
                 RouterLink,
                 NgIf,
                 NgForOf,
-                NgbTooltip
+                NgbTooltip,
+                ReactiveFormsModule
         ],
         templateUrl: './job-home.component.html',
         styleUrl: './job-home.component.css'
@@ -24,12 +27,24 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
         jobPositionList: JobPosition[] = [];
         private dataTable: any;
         private isDataTableInit = false;
+        newJobPositionForm!: FormGroup;
+        isJobNameExists = false;
 
-        constructor(private jobService: JobService) {
+        constructor(private jobService: JobService, config: NgbModalConfig, private modalService: NgbModal, private formBuilder: FormBuilder) {
+                config.backdrop = "static";
+                config.keyboard = false;
         }
 
         ngOnInit(): void {
                 this.fetchData();
+
+                this.newJobPositionForm = this.formBuilder.group({
+                        name: ['', [Validators.required]]
+                });
+
+                this.newJobPositionForm.get("name")?.valueChanges.subscribe(value => {
+                        this.checkJobPositionName(value);
+                });
         }
 
         ngAfterViewChecked() {
@@ -88,9 +103,66 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
         refreshData(): void {
                 if (this.dataTable) {
                         this.dataTable.destroy();
+                        this.isDataTableInit = false;
                 }
                 this.loading = true;
                 this.fetchData();
+        }
+
+        openModal(content: any): void {
+                this.modalService.open(content, {centered: true});
+        }
+
+        checkJobPositionName(name: string): void {
+                this.jobService.getJobPositionName(name).subscribe({
+                        next: (data: any[]) => {
+                                this.isJobNameExists = true;
+                        },
+                        error: error => {
+                                this.isJobNameExists = false;
+                        }
+                });
+        }
+
+        onSubmit() {
+
+                if (this.newJobPositionForm?.valid) {
+                        const jobPositionData: JobPosition = {
+                                ...this.newJobPositionForm.value,
+                                id: 0,
+                                name: this.newJobPositionForm.value.name,
+                                status: "",
+                                createdAt: new Date(),
+                                createdBy: 0,
+                                updatedAt: new Date(),
+                                updatedBy: 0
+                        };
+
+                        this.jobService.createJobPosition(jobPositionData).subscribe({
+                                next: JobPosition => {
+                                        this.modalService.dismissAll();
+                                        this.newJobPositionForm.reset();
+                                        Swal.fire({
+                                                icon: "success",
+                                                text: "New Job Position Successfully Created!",
+                                                allowOutsideClick: false,
+                                                allowEscapeKey: false,
+                                                showConfirmButton: false,
+                                                timer: 2000,
+                                        });
+                                        this.refreshData();
+                                },
+                                error: error => {
+                                        Swal.fire({
+                                                title: 'Oops!',
+                                                text: 'An error occurred while creating the new Job Position. Please try again.',
+                                                icon: 'error',
+                                                confirmButtonText: 'OK'
+                                        });
+                                }
+                        });
+                }
+
         }
 
 }

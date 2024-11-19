@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {JobPosition} from "../../common/model/job-position.model";
 
@@ -8,7 +8,9 @@ import {JobPosition} from "../../common/model/job-position.model";
 })
 export class JobService {
 
-        private jobListUrl = 'http://localhost:8080/api/jobPosition/all';
+        private getJobListUrl = 'http://localhost:8080/api/jobPosition/all';
+        private getJobNameUrl = 'http://localhost:8080/api/jobPosition/byName';
+        private createJobUrl = 'http://localhost:8080/api/jobPosition/add';
 
         constructor(private http: HttpClient) { }
 
@@ -17,7 +19,24 @@ export class JobService {
                 const headers = new HttpHeaders({
                         'Authorization': `Bearer ${token}`
                 });
-                return this.http.get<JobPosition[]>(this.jobListUrl, {headers});
+                return this.http.get<JobPosition[]>(this.getJobListUrl, {headers});
+        }
+
+        getJobPositionName(jobName: string): Observable<any[]> {
+                const token = localStorage.getItem("access_token");
+                const headers = new HttpHeaders({
+                        'Authorization': `Bearer ${token}`
+                });
+                const params = new HttpParams().set("name", jobName);
+                return this.http.get<any>(this.getJobNameUrl, {headers, params});
+        }
+
+        createJobPosition(jobPosition: JobPosition): Observable<JobPosition> {
+                const token = localStorage.getItem("access_token");
+                const headers = new HttpHeaders({
+                        'Authorization': `Bearer ${token}`
+                });
+                return this.http.post<JobPosition>(this.createJobUrl, jobPosition, {headers});
         }
 
 }

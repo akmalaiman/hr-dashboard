@@ -111,6 +111,7 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
         refreshdata(): void {
                 if (this.dataTable) {
                         this.dataTable.destroy();
+                        this.isDataTableInit = false;
                 }
                 this.loading = true;
                 this.fetchStaffData();

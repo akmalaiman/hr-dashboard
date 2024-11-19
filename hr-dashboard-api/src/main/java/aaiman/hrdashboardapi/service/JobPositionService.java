@@ -29,7 +29,7 @@ public class JobPositionService {
                 newJobPosition.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
                 newJobPosition.setCreatedBy(userId);
 
-                jobPositionRepository.save(jobPosition);
+                jobPositionRepository.save(newJobPosition);
                 return newJobPosition;
 
         }
