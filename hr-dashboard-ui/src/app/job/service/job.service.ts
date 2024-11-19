@@ -12,6 +12,7 @@ export class JobService {
         private getJobNameUrl = 'http://localhost:8080/api/jobPosition/byName';
         private createJobUrl = 'http://localhost:8080/api/jobPosition/add';
         private getJobNameWithStaffCountUrl = 'http://localhost:8080/api/jobPosition/nameWithCount';
+        private deleteJobPositionUrl = 'http://localhost:8080/api/jobPosition/delete';
 
         constructor(private http: HttpClient) { }
 
@@ -46,6 +47,15 @@ export class JobService {
                         'Authorization': `Bearer ${token}`
                 });
                 return this.http.get<any[]>(this.getJobNameWithStaffCountUrl, {headers});
+        }
+
+        deleteJobPosition(id: number): Observable<any> {
+                const token = localStorage.getItem("access_token");
+                const headers = new HttpHeaders({
+                        'Authorization': `Bearer ${token}`
+                });
+                const params = new HttpParams().set("id", id);
+                return this.http.delete<any>(this.deleteJobPositionUrl, {headers, params});
         }
 
 }

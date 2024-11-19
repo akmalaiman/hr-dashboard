@@ -64,6 +64,7 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                 this.jobService.getJobNameWithStaffCount().subscribe({
                         next: (data: any[]) => {
                                 this.jobPositionList = data.map(item => ({
+                                        id: item.id,
                                         name: item.name,
                                         staffCount: item.staffCount
                                 }));
@@ -151,6 +152,48 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                                         Swal.fire({
                                                 title: 'Oops!',
                                                 text: 'An error occurred while creating the new Job Position. Please try again.',
+                                                icon: 'error',
+                                                confirmButtonText: 'OK'
+                                        });
+                                }
+                        });
+                }
+
+        }
+
+        deleteJobPosition(jobPositionId: number, staffCount: number): void {
+
+                if (staffCount > 0) {
+                        Swal.fire({
+                                icon: "warning",
+                                title: "Job Position cannot be deleted!",
+                                text: "There are active staff with the Job Position.",
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                showConfirmButton: false,
+                                showCloseButton: true,
+                                showCancelButton: true,
+                                customClass: {
+                                        cancelButton: 'btn btn-danger'
+                                }
+                        });
+                } else {
+                        this.jobService.deleteJobPosition(jobPositionId).subscribe({
+                                next: (data: any) => {
+                                        Swal.fire({
+                                                icon: "success",
+                                                text: "Job Position Successfully Deleted!!",
+                                                allowOutsideClick: false,
+                                                allowEscapeKey: false,
+                                                showConfirmButton: false,
+                                                timer: 2000,
+                                        });
+                                        this.refreshData();
+                                },
+                                error: error => {
+                                        Swal.fire({
+                                                title: 'Oops!',
+                                                text: 'An error occurred while deleting the Job Position. Please try again.',
                                                 icon: 'error',
                                                 confirmButtonText: 'OK'
                                         });

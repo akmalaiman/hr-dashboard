@@ -20,7 +20,7 @@ public interface JobPositionRepository extends JpaRepository<JobPosition, Intege
         JobPosition findByNameAndStatus(String name, String status);
 
         @Query(
-                value = "SELECT jp.\"name\" AS name, COUNT(u.id) AS staffJobCount " +
+                value = "SELECT jp.id as id, jp.\"name\" AS name, COUNT(u.id) AS staffJobCount " +
                         "FROM job_position jp " +
                         "LEFT JOIN \"user\" u ON u.job_position_id = jp.id AND u.status = 'Active' " +
                         "WHERE jp.status = 'Active' " +

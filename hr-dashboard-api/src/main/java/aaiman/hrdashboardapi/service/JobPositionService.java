@@ -47,6 +47,7 @@ public class JobPositionService {
                 return rawResults.stream()
                         .map(row -> {
                                 JobPositionDto jobPositionDto = new JobPositionDto();
+                                jobPositionDto.setId(((Number) row.get("id")).intValue());
                                 jobPositionDto.setName((String) row.get("name"));
                                 jobPositionDto.setStaffCount(((Number) row.get("staffJobCount")).intValue());
                                 return jobPositionDto;
