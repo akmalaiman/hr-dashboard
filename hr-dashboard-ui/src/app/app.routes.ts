@@ -3,8 +3,8 @@ import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {LayoutComponent} from "./layout/layout.component";
 import {authGuard} from "./guards/auth.guard";
-import {UserManagementComponent} from "./user-management/user-management.component";
-import {NewUserComponent} from "./new-user/new-user.component";
+import {StaffHomeComponent} from "./staff-home/staff-home.component";
+import {StaffNewComponent} from "./staff-new/staff-new.component";
 
 export const routes: Routes = [
         {
@@ -27,12 +27,12 @@ export const routes: Routes = [
                         },
                         {
                                 path: "user",
-                                component: UserManagementComponent,
+                                component: StaffHomeComponent,
                                 canActivate: [authGuard]
                         },
                         {
                                 path: "user/new",
-                                component: NewUserComponent,
+                                component: StaffNewComponent,
                                 canActivate: [authGuard]
                         }
                 ]

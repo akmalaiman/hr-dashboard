@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
-import {UserService} from "./service/user.service";
+import {StaffService} from "./service/staff.service";
 import {JobPosition} from "./model/job-position.model";
 import {Role} from "./model/role.model";
-import {User} from "./model/user.model";
+import {User} from "./model/staff.model";
 import Swal from "sweetalert2";
 
 @Component({
@@ -17,11 +17,11 @@ import Swal from "sweetalert2";
                 NgIf,
                 NgForOf
         ],
-        templateUrl: './new-user.component.html',
-        styleUrl: './new-user.component.css',
-        providers: [UserService]
+        templateUrl: './staff-new.component.html',
+        styleUrl: './staff-new.component.css',
+        providers: [StaffService]
 })
-export class NewUserComponent implements OnInit {
+export class StaffNewComponent implements OnInit {
 
         pageName: string = "New Staff Form";
         newStaffForm!: FormGroup;
@@ -30,7 +30,7 @@ export class NewUserComponent implements OnInit {
         isUsernameExist: boolean = false;
         isEmailExist: boolean = false;
 
-        constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
+        constructor(private formBuilder: FormBuilder, private userService: StaffService, private router: Router) {
         }
 
         ngOnInit(): void {
