@@ -32,10 +32,6 @@ public class UserController {
 
                         int userId = (Integer) request.getAttribute("userId");
 
-                        if (userId == 0) {
-                                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-                        }
-
                         User createdUser = userService.createUser(user, userId);
 
                         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);

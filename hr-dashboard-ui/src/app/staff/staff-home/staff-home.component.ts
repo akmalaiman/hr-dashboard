@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'datatables.net';
 import {NgForOf, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
-import {UserService} from "../new-user/service/user.service";
+import {StaffService} from "../service/staff.service";
 import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -16,10 +16,10 @@ import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
                 NgIf,
                 NgbTooltip
         ],
-        templateUrl: './user-management.component.html',
-        styleUrl: './user-management.component.css'
+        templateUrl: './staff-home.component.html',
+        styleUrl: './staff-home.component.css'
 })
-export class UserManagementComponent implements OnInit, AfterViewChecked, OnDestroy{
+export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
 
         pageName: string = "Staff Management";
         staffList: Staff[] = [];
@@ -27,7 +27,7 @@ export class UserManagementComponent implements OnInit, AfterViewChecked, OnDest
         private dataTable: any;
         private isDataTableInit = false;
 
-        constructor(private http: HttpClient, private userService: UserService) {
+        constructor(private http: HttpClient, private userService: StaffService) {
         }
 
         ngOnInit(): void {
@@ -111,6 +111,7 @@ export class UserManagementComponent implements OnInit, AfterViewChecked, OnDest
         refreshdata(): void {
                 if (this.dataTable) {
                         this.dataTable.destroy();
+                        this.isDataTableInit = false;
                 }
                 this.loading = true;
                 this.fetchStaffData();

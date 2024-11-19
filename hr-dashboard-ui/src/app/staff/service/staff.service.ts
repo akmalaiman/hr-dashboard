@@ -1,14 +1,14 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
-import {User} from "../model/user.model";
+import {User} from "../../common/model/staff.model";
 import {catchError, Observable, of, throwError} from "rxjs";
-import {JobPosition} from "../model/job-position.model";
-import {Role} from "../model/role.model";
+import {JobPosition} from "../../common/model/job-position.model";
+import {Role} from "../../common/model/role.model";
 import {Injectable} from "@angular/core";
 
 @Injectable({
         providedIn: 'root'
 })
-export class UserService {
+export class StaffService {
 
         private jobPositionUrl = "http://localhost:8080/api/jobPosition/all";
         private roleUrl = "http://localhost:8080/api/role/all";
