@@ -90,4 +90,20 @@ public class JobPositionController {
 
         }
 
+        @DeleteMapping("/delete")
+        @PreAuthorize("hasAuthority('ADMIN')")
+        public ResponseEntity<JobPosition> deleteJobPosition(@RequestParam("id") int id, HttpServletRequest request) {
+
+                int userId = (Integer) request.getAttribute("userId");
+
+                int updateStatus = jobPositionService.deleteJobPositionById(id, userId);
+
+                if (updateStatus == 0) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                }
+
+                return ResponseEntity.status(HttpStatus.OK).body(null);
+
+        }
+
 }

@@ -2,6 +2,7 @@ package aaiman.hrdashboardapi.service;
 
 import aaiman.hrdashboardapi.dto.JobPositionDto;
 import aaiman.hrdashboardapi.model.JobPosition;
+import aaiman.hrdashboardapi.model.User;
 import aaiman.hrdashboardapi.repository.JobPositionRepository;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,11 @@ public class JobPositionService {
                                 jobPositionDto.setStaffCount(((Number) row.get("staffJobCount")).intValue());
                                 return jobPositionDto;
                         }).collect(Collectors.toList());
+        }
+
+        public int deleteJobPositionById(int jobPositionId, int userId) {
+                Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+                return jobPositionRepository.updateJobPositionStatusById("Deleted", userId, now, jobPositionId);
         }
 
 }
