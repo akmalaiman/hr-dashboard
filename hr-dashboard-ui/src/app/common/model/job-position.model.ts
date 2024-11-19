@@ -6,4 +6,5 @@ export interface JobPosition {
         createdBy: number;
         updatedAt: Date;
         updatedBy: number;
+        staffCount: number;
 }

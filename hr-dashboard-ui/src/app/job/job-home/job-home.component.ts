@@ -24,7 +24,7 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         pageName: string = "Job Position Management";
         loading: boolean = true;
-        jobPositionList: JobPosition[] = [];
+        jobPositionList: any[] = [];
         private dataTable: any;
         private isDataTableInit = false;
         newJobPositionForm!: FormGroup;
@@ -61,16 +61,11 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
 
         fetchData() {
-                this.jobService.getJobList().subscribe({
+                this.jobService.getJobNameWithStaffCount().subscribe({
                         next: (data: any[]) => {
                                 this.jobPositionList = data.map(item => ({
-                                        id: item.id,
                                         name: item.name,
-                                        status: item.status,
-                                        createdAt: new Date(item.createdAt),
-                                        createdBy: item.createdBy,
-                                        updatedAt: new Date(item.updatedAt),
-                                        updatedBy: item.updatedBy
+                                        staffCount: item.staffJobCount
                                 }));
                                 this.loading = false;
                         },

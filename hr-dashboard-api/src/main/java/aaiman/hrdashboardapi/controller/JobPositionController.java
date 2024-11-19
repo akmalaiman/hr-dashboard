@@ -1,5 +1,6 @@
 package aaiman.hrdashboardapi.controller;
 
+import aaiman.hrdashboardapi.dto.JobPositionDto;
 import aaiman.hrdashboardapi.model.JobPosition;
 import aaiman.hrdashboardapi.service.JobPositionService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -72,6 +73,20 @@ public class JobPositionController {
                 }
 
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+
+        }
+
+        @GetMapping("/nameWithCount")
+        @PreAuthorize("hasAuthority('ADMIN')")
+        public ResponseEntity<List<JobPositionDto>> getAllActiveJobPositionsWIthCount() {
+
+                List<JobPositionDto> jobPositionCountList = jobPositionService.getAllActiveJobPositionsWIthCount();
+
+                if (jobPositionCountList.isEmpty()) {
+                        return ResponseEntity.noContent().build();
+                } else {
+                        return ResponseEntity.status(HttpStatus.OK).body(jobPositionCountList);
+                }
 
         }
 
