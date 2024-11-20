@@ -16,7 +16,7 @@
                         <div class="container mt-5">
                                 <div class="card shadow-lg">
                                         <div class="card-header bg-dark text-white text-center">
-                                                <h5 class="card-title mb-0">Upload Attachment</h5>
+                                                <h5 class="card-title mb-0"><i class='bx bx-cloud-upload'></i> Upload Attachment</h5>
                                         </div>
                                         <div class="card-body">
                                                 <form>
@@ -28,7 +28,7 @@
                                                                 <div class="input-group">
                                                                         <input type="file" class="form-control" id="attachment" accept=".csv">
                                                                         <label class="input-group-text bg-secondary text-white" for="attachment">
-                                                                                Browse
+                                                                                <i class='bx bx-folder-open'></i> Browse
                                                                         </label>
                                                                 </div>
                                                                 <div class="form-text">
@@ -48,6 +48,29 @@
                                                                 </button>
                                                         </div>
                                                 </form>
+                                                <!-- Divider -->
+                                                <hr class="my-4">
+
+                                                <!-- Template Download Section -->
+                                                <div class="mb-3">
+                                                        <label for="templateDropdown" class="form-label fw-bold">
+                                                                Download Template
+                                                        </label>
+                                                        <div class="dropdown">
+                                                                <button class="btn btn-primary dropdown-toggle" type="button" id="templateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <i class='bx bx-file'></i> Select Template
+                                                                </button>
+                                                                <ul class="dropdown-menu" aria-labelledby="templateDropdown">
+                                                                        <li><button class="dropdown-item" (click)="downloadTemplate('staff')"><i class='bx bx-file-blank'></i> Staff</button></li>
+                                                                        <li><button class="dropdown-item" (click)="downloadTemplate('jobPosition')"><i class='bx bx-file-blank'></i> Job Position</button></li>
+                                                                </ul>
+                                                        </div>
+                                                        <div class="form-text">
+                                                                <small class="text-muted">
+                                                                        Select a template to download. All templates are in <b>.csv</b> format.
+                                                                </small>
+                                                        </div>
+                                                </div>
                                         </div>
                                 </div>
                         </div>

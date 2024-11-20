@@ -1,16 +1,30 @@
 .card {
-        border-radius: 10px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
 }
 
 input[type="file"] {
         cursor: pointer;
 }
 
+.dropdown-menu {
+        border-radius: 10px;
+}
+
+.dropdown-item {
+        padding: 0.75rem 1.5rem;
+}
+
 button {
-        border-radius: 50px;
+        border-radius: 25px;
+}
+
+button:hover {
+        transform: scale(1.05);
+        transition: transform 0.2s ease-in-out;
 }
