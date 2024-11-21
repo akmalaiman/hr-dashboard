@@ -26,8 +26,9 @@
                         <table *ngIf="!loading" id="staffListTable" class="table table-striped table-hover table-bordered">
                                 <thead class="table-primary text-center" style="width: 100%">
                                         <tr>
-                                                <th class="text-center" style="width: 20%;">First Name</th>
-                                                <th class="text-center" style="width: 20%;">Last Name</th>
+                                                <th class="text-center" style="width: 15%;">First Name</th>
+                                                <th class="text-center" style="width: 15%;">Last Name</th>
+                                                <th class="text-center" style="width: 10%;">Username</th>
                                                 <th class="text-center" style="width: 25%;">E-mail</th>
                                                 <th class="text-center" style="width: 15%;">Job Position</th>
                                                 <th class="text-center" style="width: 10%;">Role</th>
@@ -38,6 +39,7 @@
                                         <tr *ngFor="let staff of staffList">
                                                 <td>{{staff.firstName}}</td>
                                                 <td>{{staff.lastName}}</td>
+                                                <td>{{staff.username}}</td>
                                                 <td>{{staff.email}}</td>
                                                 <td>{{staff.jobPosition}}</td>
                                                 <td>{{staff.role}}</td>

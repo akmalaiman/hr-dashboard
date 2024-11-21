@@ -1,0 +1,260 @@
+entity,firstName,lastName,username,email,password,address,city,state,postalCode,country,jobPositionId,role
+staff,Ahmad,Mustafa,ahmad.mustafa,ahmad.mustafa@example.com,Welcome123,123 Jalan Ampang,Kuala Lumpur,Kuala Lumpur,50450,Malaysia,Chief Executive Officer (CEO),ADMIN
+staff,Siti,Nurhaliza,siti.nurhaliza,siti.nurhaliza@example.com,Welcome123,45 Lorong Damai,Petaling Jaya,Selangor,47400,Malaysia,Chief Operating Officer (COO),ADMIN
+staff,Zul,Fahmi,zul.fahmi,zul.fahmi@example.com,Welcome123,789 Jalan Bukit Bintang,Kuala Lumpur,Kuala Lumpur,55100,Malaysia,Chief Financial Officer (CFO),ADMIN
+staff,Nur,Amirah,nur.amirah,nur.amirah@example.com,Welcome123,67 Jalan Merdeka,Shah Alam,Selangor,40000,Malaysia,Chief Technology Officer (CTO),ADMIN
+staff,Hafiz,Rahman,hafiz.rahman,hafiz.rahman@example.com,Welcome123,101 Persiaran Putra,Putrajaya,Putrajaya,62000,Malaysia,Chief Marketing Officer (CMO),ADMIN
+staff,Mohd,Aziz,mohd.aziz,mohd.aziz@example.com,Welcome123,88 Jalan Anggerik,Subang Jaya,Selangor,47500,Malaysia,Director of Operations,ADMIN
+staff,Zainal,Ahmad,zainal.ahmad,zainal.ahmad@example.com,Welcome123,45 Lorong Cempaka,Kota Bharu,Kelantan,15000,Malaysia,Director of Finance,ADMIN
+staff,Siti,Aminah,siti.aminah,siti.aminah@example.com,Welcome123,56 Jalan Melati,Melaka,Melaka,75050,Malaysia,Director of Technology,ADMIN
+staff,Daniel,Ng,daniel.ng,daniel.ng@example.com,Welcome123,10 Jalan Intan,George Town,Penang,10200,Malaysia,Director of Marketing,ADMIN
+staff,Firdaus,Ismail,firdaus.ismail,firdaus.ismail@example.com,Welcome123,123 Jalan Mawar,Klang,Selangor,41200,Malaysia,Director of Human Resources,ADMIN
+staff,Syafiq,Zain,syafiq.zain,syafiq.zain@example.com,Welcome123,101 Lorong Damai,Kota Kinabalu,Sabah,88100,Malaysia,Software Engineer,USER
+staff,Firdaus,Hassan,firdaus.hassan,firdaus.hassan@example.com,Welcome123,89 Lorong Sentul,Seri Kembangan,Selangor,43300,Malaysia,Software Engineer,USER
+staff,Hisham,Latif,hisham.latif,hisham.latif@example.com,Welcome123,56 Jalan Jaya,Kuching,Sarawak,93150,Malaysia,Software Engineer,USER
+staff,Nabila,Ahmad,nabila.ahmad,nabila.ahmad@example.com,Welcome123,22 Jalan Permai,Petaling Jaya,Selangor,47420,Malaysia,Junior Software Engineer,USER
+staff,Amir,Hakim,amir.hakim,amir.hakim@example.com,Welcome123,32 Jalan Mutiara,Tawau,Sabah,91000,Malaysia,Junior Software Engineer,USER
+staff,Siti,Nuraini,siti.nuraini,siti.nuraini@example.com,Welcome123,78 Lorong Cempaka,Melaka,Melaka,75000,Malaysia,Frontend Developer,USER
+staff,Farah,Yusof,farah.yusof,farah.yusof@example.com,Welcome123,56 Jalan Merdeka,Shah Alam,Selangor,40000,Malaysia,Frontend Developer,USER
+staff,Zainal,Fahmi,zainal.fahmi,zainal.fahmi@example.com,Welcome123,25 Jalan Permai,Johor Bahru,Johor,81200,Malaysia,Frontend Developer,USER
+staff,Firdaus,Rahim,firdaus.rahim,firdaus.rahim@example.com,Welcome123,13 Lorong Cahaya,Ipoh,Perak,30000,Malaysia,Backend Developer,USER
+staff,Hafiz,Zakaria,hafiz.zakaria,hafiz.zakaria@example.com,Welcome123,34 Jalan Sentosa,Kota Bharu,Kelantan,15050,Malaysia,Backend Developer,USER
+staff,Farid,Hassan,farid.hassan,farid.hassan@example.com,Welcome123,45 Jalan Intan,Klang,Selangor,41200,Malaysia,Full Stack Developer,USER
+staff,Nur,Ain,nur.ain,nur.ain@example.com,Welcome123,78 Lorong Permai,Johor Bahru,Johor,81100,Malaysia,Full Stack Developer,USER
+staff,Hafiz,Hakim,hafiz.hakim,hafiz.hakim@example.com,Welcome123,90 Jalan Penang,George Town,Penang,10200,Malaysia,Full Stack Developer,USER
+staff,Aqilah,Rahim,aqilah.rahim,aqilah.rahim@example.com,Welcome123,123 Lorong Damai,Kota Kinabalu,Sabah,88100,Malaysia,DevOps Engineer,USER
+staff,Siti,Fatimah,siti.fatimah,siti.fatimah@example.com,Welcome123,23 Jalan Sentosa,Shah Alam,Selangor,40000,Malaysia,DevOps Engineer,USER
+staff,Zainal,Rahman,zainal.rahman,zainal.rahman@example.com,Welcome123,67 Lorong Mawar,Petaling Jaya,Selangor,47410,Malaysia,Site Reliability Engineer (SRE),USER
+staff,Firdaus,Amin,firdaus.amin,firdaus.amin@example.com,Welcome123,10 Jalan Melati,Melaka,Melaka,75050,Malaysia,Site Reliability Engineer (SRE),USER
+staff,Sarah,Latif,sarah.latif,sarah.latif@example.com,Welcome123,42 Jalan Jaya,Kuching,Sarawak,93100,Malaysia,Data Scientist,USER
+staff,Nurul,Amirah,nurul.amirah,nurul.amirah@example.com,Welcome123,99 Lorong Mawar,Kuala Lumpur,Kuala Lumpur,50450,Malaysia,Data Scientist,USER
+staff,Roslan,Hassan,roslan.hassan,roslan.hassan@example.com,Welcome123,78 Jalan Melati,Klang,Selangor,41250,Malaysia,Data Analyst,USER
+staff,Mariam,Fahmi,mariam.fahmi,mariam.fahmi@example.com,Welcome123,25 Jalan Mutiara,Seri Kembangan,Selangor,43300,Malaysia,Data Analyst,USER
+staff,Fahmi,Rahim,fahmi.rahim,fahmi.rahim@example.com,Welcome123,34 Lorong Cempaka,George Town,Penang,10250,Malaysia,Data Analyst,USER
+staff,Ali,Mustafa,ali.mustafa,ali.mustafa@example.com,Welcome123,45 Jalan Intan,Kota Bharu,Kelantan,15050,Malaysia,System Administrator,USER
+staff,Firdaus,Zakaria,firdaus.zakaria,firdaus.zakaria@example.com,Welcome123,12 Lorong Permai,Shah Alam,Selangor,40000,Malaysia,System Administrator,USER
+staff,Siti,Rahim,siti.rahim,siti.rahim@example.com,Welcome123,67 Jalan Bukit,Petaling Jaya,Selangor,47420,Malaysia,System Administrator,USER
+staff,Rina,Hakim,rina.hakim,rina.hakim@example.com,Welcome123,78 Lorong Permai,Johor Bahru,Johor,81200,Malaysia,IT Support Specialist,USER
+staff,Amir,Zulkifli,amir.zulkifli,amir.zulkifli@example.com,Welcome123,23 Lorong Intan,Klang,Selangor,41200,Malaysia,IT Support Specialist,USER
+staff,Noraini,Fatimah,noraini.fatimah,noraini.fatimah@example.com,Welcome123,45 Jalan Mawar,Kota Kinabalu,Sabah,88100,Malaysia,IT Support Specialist,USER
+staff,Hafiz,Fahmi,hafiz.fahmi,hafiz.fahmi@example.com,Welcome123,56 Jalan Penang,George Town,Penang,10200,Malaysia,Cybersecurity Analyst,USER
+staff,Siti,Nurul,siti.nurul,siti.nurul@example.com,Welcome123,101 Lorong Damai,Shah Alam,Selangor,40000,Malaysia,Cybersecurity Analyst,USER
+staff,Mohd,Rahim,mohd.rahim,mohd.rahim@example.com,Welcome123,23 Jalan Mawar,Shah Alam,Selangor,40000,Malaysia,Database Administrator,USER
+staff,Siti,Fatimah,siti.fatimah,siti.fatimah@example.com,Welcome123,67 Lorong Cempaka,Klang,Selangor,41200,Malaysia,Database Administrator,USER
+staff,Ridzuan,Ali,ridzuan.ali,ridzuan.ali@example.com,Welcome123,34 Jalan Intan,Kota Kinabalu,Sabah,88100,Malaysia,Network Administrator,USER
+staff,Farah,Yusof,farah.yusof,farah.yusof@example.com,Welcome123,78 Jalan Penang,George Town,Penang,10250,Malaysia,Network Administrator,USER
+staff,Zainal,Fahmi,zainal.fahmi,zainal.fahmi@example.com,Welcome123,56 Lorong Permai,Kuching,Sarawak,93050,Malaysia,Cloud Engineer,USER
+staff,Hafiz,Zakaria,hafiz.zakaria,hafiz.zakaria@example.com,Welcome123,89 Jalan Bukit,Tawau,Sabah,91050,Malaysia,Cloud Engineer,USER
+staff,Sarah,Hassan,sarah.hassan,sarah.hassan@example.com,Welcome123,101 Jalan Melati,Melaka,Melaka,75050,Malaysia,Cloud Engineer,USER
+staff,Daniel,Rahim,daniel.rahim,daniel.rahim@example.com,Welcome123,34 Lorong Mawar,Ipoh,Perak,30010,Malaysia,Product Manager,USER
+staff,Nur,Izzah,nur.izzah,nur.izzah@example.com,Welcome123,45 Jalan Jaya,Seri Kembangan,Selangor,43300,Malaysia,Product Manager,USER
+staff,Amir,Hakimi,amir.hakimi,amir.hakimi@example.com,Welcome123,78 Lorong Intan,Petaling Jaya,Selangor,47410,Malaysia,Project Manager,USER
+staff,Sharifah,Fatimah,sharifah.fatimah,sharifah.fatimah@example.com,Welcome123,90 Jalan Permai,Kuala Lumpur,Kuala Lumpur,50450,Malaysia,Project Manager,USER
+staff,Siti,Fadilah,siti.fadilah,siti.fadilah@example.com,Welcome123,67 Lorong Jaya,Shah Alam,Selangor,40010,Malaysia,Project Manager,USER
+staff,Firdaus,Ismail,firdaus.ismail,firdaus.ismail@example.com,Welcome123,12 Jalan Mutiara,Johor Bahru,Johor,81250,Malaysia,Business Analyst,USER
+staff,Mariam,Hassan,mariam.hassan,mariam.hassan@example.com,Welcome123,99 Lorong Penang,George Town,Penang,10200,Malaysia,Business Analyst,USER
+staff,Zul,Rahman,zul.rahman,zul.rahman@example.com,Welcome123,42 Lorong Mawar,Tawau,Sabah,91010,Malaysia,Scrum Master,USER
+staff,Aiman,Rahim,aiman.rahim,aiman.rahim@example.com,Welcome123,34 Jalan Bukit,Kota Bharu,Kelantan,15010,Malaysia,Agile Coach,USER
+staff,Siti,Hidayah,siti.hidayah,siti.hidayah@example.com,Welcome123,56 Jalan Permai,Shah Alam,Selangor,40000,Malaysia,Agile Coach,USER
+staff,Hafiz,Hassan,hafiz.hassan,hafiz.hassan@example.com,Welcome123,22 Jalan Melati,Kuching,Sarawak,93050,Malaysia,UX Designer,USER
+staff,Nurul,Zakaria,nurul.zakaria,nurul.zakaria@example.com,Welcome123,78 Lorong Mawar,Kuala Lumpur,Kuala Lumpur,50460,Malaysia,UX Designer,USER
+staff,Roslan,Fahmi,roslan.fahmi,roslan.fahmi@example.com,Welcome123,34 Jalan Permai,Kuala Lumpur,Kuala Lumpur,50450,Malaysia,HR Manager,USER
+staff,Amirah,Salleh,amirah.salleh,amirah.salleh@example.com,Welcome123,23 Lorong Intan,Shah Alam,Selangor,40000,Malaysia,HR Manager,USER
+staff,Siti,Fatimah,siti.fatimah,siti.fatimah@example.com,Welcome123,45 Jalan Jaya,Kota Kinabalu,Sabah,88100,Malaysia,Recruitment Specialist,USER
+staff,Zul,Hassan,zul.hassan,zul.hassan@example.com,Welcome123,78 Lorong Bukit,George Town,Penang,10200,Malaysia,Recruitment Specialist,USER
+staff,Fahmi,Nor,fahmi.nor,fahmi.nor@example.com,Welcome123,56 Jalan Sentosa,Ipoh,Perak,30010,Malaysia,Recruitment Specialist,USER
+staff,Hafiz,Yusof,hafiz.yusof,hafiz.yusof@example.com,Welcome123,90 Lorong Melati,Kuching,Sarawak,93010,Malaysia,Learning and Development Manager,USER
+staff,Siti,Zakaria,siti.zakaria,siti.zakaria@example.com,Welcome123,67 Jalan Mawar,Tawau,Sabah,91010,Malaysia,Learning and Development Manager,USER
+staff,Nurul,Hakim,nurul.hakim,nurul.hakim@example.com,Welcome123,42 Lorong Intan,Kuala Lumpur,Kuala Lumpur,50460,Malaysia,Compensation and Benefits Manager,USER
+staff,Firdaus,Ali,firdaus.ali,firdaus.ali@example.com,Welcome123,34 Jalan Permai,Kota Bharu,Kelantan,15010,Malaysia,Compensation and Benefits Manager,USER
+staff,Adib,Rashid,adib.rashid,adib.rashid@example.com,Welcome123,101 Jalan Damai,Shah Alam,Selangor,40020,Malaysia,Employee Relations Specialist,USER
+staff,Siti,Zain,siti.zain,siti.zain@example.com,Welcome123,23 Lorong Bukit,Johor Bahru,Johor,81200,Malaysia,Employee Relations Specialist,USER
+staff,Mariam,Fatimah,mariam.fatimah,mariam.fatimah@example.com,Welcome123,45 Jalan Mawar,Klang,Selangor,41200,Malaysia,Marketing Manager,USER
+staff,Rina,Latif,rina.latif,rina.latif@example.com,Welcome123,78 Lorong Sentosa,George Town,Penang,10250,Malaysia,Marketing Manager,USER
+staff,Ali,Ismail,ali.ismail,ali.ismail@example.com,Welcome123,12 Lorong Jaya,Kota Kinabalu,Sabah,88150,Malaysia,Digital Marketing Specialist,USER
+staff,Syafiq,Nur,syafiq.nur,syafiq.nur@example.com,Welcome123,67 Jalan Intan,Kuching,Sarawak,93020,Malaysia,Digital Marketing Specialist,USER
+staff,Fahmi,Rahim,fahmi.rahim,fahmi.rahim@example.com,Welcome123,90 Jalan Bukit,Shah Alam,Selangor,40030,Malaysia,Digital Marketing Specialist,USER
+staff,Sarah,Ali,sarah.ali,sarah.ali@example.com,Welcome123,34 Jalan Melati,Petaling Jaya,Selangor,47410,Malaysia,SEO Specialist,USER
+staff,Hafiz,Firdaus,hafiz.firdaus,hafiz.firdaus@example.com,Welcome123,56 Jalan Damai,Tawau,Sabah,91020,Malaysia,SEO Specialist,USER
+staff,Adib,Hassan,adib.hassan,adib.hassan@example.com,Welcome123,78 Jalan Sentosa,Kuching,Sarawak,93030,Malaysia,Content Marketing Specialist,USER
+staff,Nurul,Amirah,nurul.amirah,nurul.amirah@example.com,Welcome123,45 Lorong Permai,George Town,Penang,10260,Malaysia,Content Marketing Specialist,USER
+staff,Ahmad,Mustafa,ahmad.mustafa.sales,ahmad.mustafa.sales@example.com,Welcome123,56 Jalan Mawar,Klang,Selangor,41200,Malaysia,Sales Manager,USER
+staff,Siti,Nurul,siti.nurul.sales,siti.nurul.sales@example.com,Welcome123,34 Lorong Jaya,Petaling Jaya,Selangor,47420,Malaysia,Sales Manager,USER
+staff,Roslan,Hakim,roslan.hakim.sales,roslan.hakim.sales@example.com,Welcome123,78 Jalan Intan,Kota Kinabalu,Sabah,88100,Malaysia,Sales Executive,USER
+staff,Zul,Fahmi,zul.fahmi.sales,zul.fahmi.sales@example.com,Welcome123,101 Lorong Permai,Kuching,Sarawak,93010,Malaysia,Sales Executive,USER
+staff,Mariam,Ali,mariam.ali.sales,mariam.ali.sales@example.com,Welcome123,23 Jalan Bukit,George Town,Penang,10200,Malaysia,Sales Executive,USER
+staff,Amirah,Zain,amirah.zain.cs,amirah.zain.cs@example.com,Welcome123,56 Lorong Damai,Shah Alam,Selangor,40010,Malaysia,Customer Success Manager,USER
+staff,Sarah,Fatimah,sarah.fatimah.cs,sarah.fatimah.cs@example.com,Welcome123,45 Jalan Melati,Ipoh,Perak,30000,Malaysia,Customer Success Manager,USER
+staff,Ridzuan,Rashid,ridzuan.rashid.cs,ridzuan.rashid.cs@example.com,Welcome123,67 Lorong Sentosa,Kuala Lumpur,Kuala Lumpur,50450,Malaysia,Customer Support Specialist,USER
+staff,Nurul,Hassan,nurul.hassan.cs,nurul.hassan.cs@example.com,Welcome123,34 Jalan Permai,Tawau,Sabah,91050,Malaysia,Customer Support Specialist,USER
+staff,Hafiz,Zakaria,hafiz.zakaria.cs,hafiz.zakaria.cs@example.com,Welcome123,78 Jalan Mawar,George Town,Penang,10250,Malaysia,Customer Support Specialist,USER
+staff,Firdaus,Fahmi,firdaus.fahmi.fa,firdaus.fahmi.fa@example.com,Welcome123,45 Lorong Intan,Kuching,Sarawak,93010,Malaysia,Financial Analyst,USER
+staff,Siti,Aminah,siti.aminah.fa,siti.aminah.fa@example.com,Welcome123,23 Jalan Melati,Kota Kinabalu,Sabah,88110,Malaysia,Financial Analyst,USER
+staff,Fahmi,Ali,fahmi.ali.fa,fahmi.ali.fa@example.com,Welcome123,101 Lorong Permai,Shah Alam,Selangor,40020,Malaysia,Accountant,USER
+staff,Adib,Hakim,adib.hakim.fa,adib.hakim.fa@example.com,Welcome123,67 Lorong Damai,Klang,Selangor,41210,Malaysia,Accountant,USER
+staff,Mariam,Nor,mariam.nor.fa,mariam.nor.fa@example.com,Welcome123,34 Jalan Sentosa,Petaling Jaya,Selangor,47430,Malaysia,Treasury Analyst,USER
+staff,Zainal,Hassan,zainal.hassan.fa,zainal.hassan.fa@example.com,Welcome123,56 Lorong Jaya,Johor Bahru,Johor,81200,Malaysia,Treasury Analyst,USER
+staff,Amir,Rashid,amir.rashid.legal,amir.rashid.legal@example.com,Welcome123,78 Jalan Intan,Kuala Lumpur,Kuala Lumpur,50470,Malaysia,Legal Counsel,USER
+staff,Siti,Fatimah,siti.fatimah.legal,siti.fatimah.legal@example.com,Welcome123,101 Jalan Permai,George Town,Penang,10260,Malaysia,Legal Counsel,USER
+staff,Nur,Ain,nur.ain.legal,nur.ain.legal@example.com,Welcome123,34 Lorong Bukit,Kuching,Sarawak,93020,Malaysia,Compliance Officer,USER
+staff,Rina,Hakim,rina.hakim.legal,rina.hakim.legal@example.com,Welcome123,56 Jalan Sentosa,Shah Alam,Selangor,40040,Malaysia,Compliance Officer,USER
+staff,Nurul,Aminah,nurul.aminah.admin,nurul.aminah.admin@example.com,Welcome123,45 Jalan Mawar,Kuala Lumpur,Kuala Lumpur,50450,Malaysia,Administrative Assistant,USER
+staff,Hafiz,Rahim,hafiz.rahim.admin,hafiz.rahim.admin@example.com,Welcome123,34 Lorong Intan,Shah Alam,Selangor,40000,Malaysia,Administrative Assistant,USER
+staff,Siti,Fatimah,siti.fatimah.admin,siti.fatimah.admin@example.com,Welcome123,56 Jalan Jaya,Klang,Selangor,41200,Malaysia,Office Manager,USER
+staff,Rina,Hassan,rina.hassan.admin,rina.hassan.admin@example.com,Welcome123,78 Lorong Mawar,Petaling Jaya,Selangor,47400,Malaysia,Office Manager,USER
+staff,Mariam,Fahmi,mariam.fahmi.creative,mariam.fahmi.creative@example.com,Welcome123,89 Jalan Sentosa,Kota Kinabalu,Sabah,88100,Malaysia,Graphic Designer,USER
+staff,Adib,Zakaria,adib.zakaria.creative,adib.zakaria.creative@example.com,Welcome123,90 Lorong Melati,George Town,Penang,10200,Malaysia,Graphic Designer,USER
+staff,Fahmi,Hakim,fahmi.hakim.creative,fahmi.hakim.creative@example.com,Welcome123,101 Jalan Damai,Kuching,Sarawak,93010,Malaysia,Graphic Designer,USER
+staff,Siti,Hidayah,siti.hidayah.creative,siti.hidayah.creative@example.com,Welcome123,12 Lorong Bukit,Shah Alam,Selangor,40010,Malaysia,UX Designer,USER
+staff,Roslan,Ali,roslan.ali.creative,roslan.ali.creative@example.com,Welcome123,34 Jalan Permai,Johor Bahru,Johor,81200,Malaysia,UX Designer,USER
+staff,Ali,Firdaus,ali.firdaus.creative,ali.firdaus.creative@example.com,Welcome123,45 Jalan Jaya,Tawau,Sabah,91010,Malaysia,UI Designer,USER
+staff,Nur,Izzah,nur.izzah.creative,nur.izzah.creative@example.com,Welcome123,56 Jalan Mawar,George Town,Penang,10250,Malaysia,UI Designer,USER
+staff,Zul,Rahman,zul.rahman.creative,zul.rahman.creative@example.com,Welcome123,78 Jalan Sentosa,Shah Alam,Selangor,40030,Malaysia,Motion Graphics Designer,USER
+staff,Hisham,Zakaria,hisham.zakaria.creative,hisham.zakaria.creative@example.com,Welcome123,23 Lorong Damai,Kuala Lumpur,Kuala Lumpur,50460,Malaysia,Motion Graphics Designer,USER
+staff,Firdaus,Rashid,firdaus.rashid.creative,firdaus.rashid.creative@example.com,Welcome123,67 Lorong Permai,Ipoh,Perak,30010,Malaysia,Video Editor,USER
+staff,Amirah,Hassan,amirah.hassan.creative,amirah.hassan.creative@example.com,Welcome123,12 Lorong Melati,Kuching,Sarawak,93020,Malaysia,Video Editor,USER
+staff,Nurul,Fatimah,nurul.fatimah.creative,nurul.fatimah.creative@example.com,Welcome123,101 Jalan Damai,Kota Kinabalu,Sabah,88120,Malaysia,Photographer,USER
+staff,Ridzuan,Ali,ridzuan.ali.creative,ridzuan.ali.creative@example.com,Welcome123,56 Jalan Mawar,Klang,Selangor,41210,Malaysia,Photographer,USER
+staff,Siti,Nurul,siti.nurul.event,siti.nurul.event@example.com,Welcome123,78 Jalan Sentosa,Shah Alam,Selangor,40040,Malaysia,Event Coordinator,USER
+staff,Zainal,Hakim,zainal.hakim.event,zainal.hakim.event@example.com,Welcome123,34 Lorong Mawar,Kuching,Sarawak,93030,Malaysia,Event Coordinator,USER
+staff,Hafiz,Fahmi,hafiz.fahmi.randd,hafiz.fahmi.randd@example.com,Welcome123,23 Jalan Bukit,George Town,Penang,10260,Malaysia,Research and Development Manager,USER
+staff,Siti,Zain,siti.zain.procurement,siti.zain.procurement@example.com,Welcome123,12 Jalan Intan,Kuala Lumpur,Kuala Lumpur,50470,Malaysia,Procurement Manager,USER
+staff,Ridzuan,Fahmi,ridzuan.fahmi.procurement,ridzuan.fahmi.procurement@example.com,Welcome123,45 Lorong Mawar,Shah Alam,Selangor,40050,Malaysia,Procurement Manager,USER
+staff,Nurul,Hassan,nurul.hassan.procurement,nurul.hassan.procurement@example.com,Welcome123,67 Jalan Melati,Klang,Selangor,41230,Malaysia,Procurement Specialist,USER
+staff,Firdaus,Zakaria,firdaus.zakaria.procurement,firdaus.zakaria.procurement@example.com,Welcome123,34 Jalan Bukit,George Town,Penang,10210,Malaysia,Procurement Specialist,USER
+staff,Amirah,Rashid,amirah.rashid.procurement,amirah.rashid.procurement@example.com,Welcome123,78 Lorong Permai,Kota Kinabalu,Sabah,88110,Malaysia,Procurement Specialist,USER
+staff,Zul,Rahman,zul.rahman.logistics,zul.rahman.logistics@example.com,Welcome123,89 Jalan Intan,Kuching,Sarawak,93040,Malaysia,Logistics Manager,USER
+staff,Hafiz,Hassan,hafiz.hassan.logistics,hafiz.hassan.logistics@example.com,Welcome123,34 Jalan Sentosa,Shah Alam,Selangor,40060,Malaysia,Logistics Manager,USER
+staff,Siti,Nurul,siti.nurul.logistics,siti.nurul.logistics@example.com,Welcome123,78 Jalan Permai,Johor Bahru,Johor,81230,Malaysia,Supply Chain Analyst,USER
+staff,Roslan,Ali,roslan.ali.logistics,roslan.ali.logistics@example.com,Welcome123,45 Lorong Mawar,Kuala Lumpur,Kuala Lumpur,50480,Malaysia,Supply Chain Analyst,USER
+staff,Mariam,Zain,mariam.zain.logistics,mariam.zain.logistics@example.com,Welcome123,67 Jalan Bukit,Kota Bharu,Kelantan,15020,Malaysia,Supply Chain Analyst,USER
+staff,Nur,Izzah,nur.izzah.qa,nur.izzah.qa@example.com,Welcome123,56 Lorong Damai,George Town,Penang,10220,Malaysia,Quality Assurance Manager,USER
+staff,Fahmi,Latif,fahmi.latif.qa,fahmi.latif.qa@example.com,Welcome123,12 Jalan Intan,Kota Kinabalu,Sabah,88130,Malaysia,Quality Assurance Manager,USER
+staff,Adib,Hakim,adib.hakim.qa,adib.hakim.qa@example.com,Welcome123,89 Jalan Mawar,Ipoh,Perak,30020,Malaysia,Quality Assurance Specialist,USER
+staff,Hisham,Fahmi,hisham.fahmi.qa,hisham.fahmi.qa@example.com,Welcome123,45 Lorong Sentosa,Klang,Selangor,41250,Malaysia,Quality Assurance Specialist,USER
+staff,Sarah,Nor,sarah.nor.qa,sarah.nor.qa@example.com,Welcome123,34 Jalan Jaya,Kuching,Sarawak,93050,Malaysia,Quality Assurance Specialist,USER
+staff,Rina,Hakim,rina.hakim.qa,rina.hakim.qa@example.com,Welcome123,78 Lorong Mawar,Shah Alam,Selangor,40070,Malaysia,Test Engineer,USER
+staff,Zainal,Fatimah,zainal.fatimah.qa,zainal.fatimah.qa@example.com,Welcome123,67 Lorong Intan,Kota Kinabalu,Sabah,88140,Malaysia,Test Engineer,USER
+staff,Hafiz,Rahman,hafiz.rahman.qa,hafiz.rahman.qa@example.com,Welcome123,56 Jalan Damai,George Town,Penang,10230,Malaysia,Test Engineer,USER
+staff,Amir,Zakaria,amir.zakaria.qa,amir.zakaria.qa@example.com,Welcome123,34 Jalan Permai,Kuala Lumpur,Kuala Lumpur,50490,Malaysia,Test Engineer,USER
+staff,Noraini,Hassan,noraini.hassan.qa,noraini.hassan.qa@example.com,Welcome123,12 Lorong Sentosa,Shah Alam,Selangor,40080,Malaysia,Test Engineer,USER
+staff,Ahmad,Mustafa,ahmad.mustafa.security,ahmad.mustafa.security@example.com,Welcome123,45 Jalan Melati,Kuala Lumpur,Kuala Lumpur,50450,Malaysia,Security Manager,USER
+staff,Zul,Hassan,zul.hassan.security,zul.hassan.security@example.com,Welcome123,34 Lorong Mawar,Shah Alam,Selangor,40090,Malaysia,Security Manager,USER
+staff,Siti,Fatimah,siti.fatimah.security,siti.fatimah.security@example.com,Welcome123,56 Jalan Damai,Klang,Selangor,41230,Malaysia,Security Specialist,USER
+staff,Firdaus,Rahim,firdaus.rahim.security,firdaus.rahim.security@example.com,Welcome123,78 Jalan Mawar,George Town,Penang,10240,Malaysia,Security Specialist,USER
+staff,Amirah,Hassan,amirah.hassan.security,amirah.hassan.security@example.com,Welcome123,67 Jalan Jaya,Kota Kinabalu,Sabah,88150,Malaysia,Security Specialist,USER
+staff,Rina,Hakim,rina.hakim.facility,rina.hakim.facility@example.com,Welcome123,12 Lorong Bukit,Kuching,Sarawak,93060,Malaysia,Facility Manager,USER
+staff,Hisham,Ali,hisham.ali.facility,hisham.ali.facility@example.com,Welcome123,45 Jalan Melati,Kuala Lumpur,Kuala Lumpur,50460,Malaysia,Facility Manager,USER
+staff,Fahmi,Zakaria,fahmi.zakaria.facility,fahmi.zakaria.facility@example.com,Welcome123,34 Lorong Intan,Shah Alam,Selangor,40020,Malaysia,Maintenance Technician,USER
+staff,Nurul,Hassan,nurul.hassan.facility,nurul.hassan.facility@example.com,Welcome123,78 Jalan Sentosa,Petaling Jaya,Selangor,47450,Malaysia,Maintenance Technician,USER
+staff,Adib,Fatimah,adib.fatimah.facility,adib.fatimah.facility@example.com,Welcome123,56 Jalan Bukit,Johor Bahru,Johor,81240,Malaysia,Maintenance Technician,USER
+staff,Sarah,Nor,sarah.nor.facility,sarah.nor.facility@example.com,Welcome123,67 Lorong Melati,Kota Kinabalu,Sabah,88160,Malaysia,Building Engineer,USER
+staff,Firdaus,Rashid,firdaus.rashid.facility,firdaus.rashid.facility@example.com,Welcome123,89 Jalan Intan,Kuching,Sarawak,93070,Malaysia,Building Engineer,USER
+staff,Ridzuan,Hassan,ridzuan.hassan.facility,ridzuan.hassan.facility@example.com,Welcome123,101 Jalan Damai,Shah Alam,Selangor,40030,Malaysia,Building Engineer,USER
+staff,Mariam,Rahim,mariam.rahim.legal,mariam.rahim.legal@example.com,Welcome123,45 Lorong Intan,Klang,Selangor,41220,Malaysia,Paralegal,USER
+staff,Zainal,Ali,zainal.ali.legal,zainal.ali.legal@example.com,Welcome123,34 Jalan Bukit,George Town,Penang,10250,Malaysia,Paralegal,USER
+staff,Hafiz,Yusof,hafiz.yusof.randd,hafiz.yusof.randd@example.com,Welcome123,78 Lorong Mawar,Kuching,Sarawak,93080,Malaysia,Innovation Manager,USER
+staff,Siti,Hidayah,siti.hidayah.randd,siti.hidayah.randd@example.com,Welcome123,12 Jalan Sentosa,Kota Kinabalu,Sabah,88170,Malaysia,Innovation Manager,USER
+staff,Amir,Fahmi,amir.fahmi.randd,amir.fahmi.randd@example.com,Welcome123,101 Jalan Jaya,Shah Alam,Selangor,40040,Malaysia,Research Scientist,USER
+staff,Nur,Izzah,nur.izzah.randd,nur.izzah.randd@example.com,Welcome123,56 Lorong Permai,Kuala Lumpur,Kuala Lumpur,50470,Malaysia,Research Scientist,USER
+staff,Roslan,Zakaria,roslan.zakaria.randd,roslan.zakaria.randd@example.com,Welcome123,34 Jalan Melati,Ipoh,Perak,30030,Malaysia,Research Scientist,USER
+staff,Siti,Aminah,siti.aminah.hr,siti.aminah.hr@example.com,Welcome123,12 Jalan Intan,Kuala Lumpur,Kuala Lumpur,50480,Malaysia,HR Specialist,USER
+staff,Fahmi,Zakaria,fahmi.zakaria.hr,fahmi.zakaria.hr@example.com,Welcome123,45 Lorong Mawar,Shah Alam,Selangor,40050,Malaysia,HR Specialist,USER
+staff,Zul,Fahmi,zul.fahmi.hr,zul.fahmi.hr@example.com,Welcome123,67 Jalan Bukit,Klang,Selangor,41240,Malaysia,Training Coordinator,USER
+staff,Adib,Fatimah,adib.fatimah.hr,adib.fatimah.hr@example.com,Welcome123,78 Jalan Sentosa,Petaling Jaya,Selangor,47460,Malaysia,Training Coordinator,USER
+staff,Rina,Rashid,rina.rashid.hr,rina.rashid.hr@example.com,Welcome123,89 Jalan Damai,Kota Kinabalu,Sabah,88130,Malaysia,Recruitment Coordinator,USER
+staff,Sarah,Latif,sarah.latif.hr,sarah.latif.hr@example.com,Welcome123,101 Jalan Intan,Kuching,Sarawak,93090,Malaysia,Recruitment Coordinator,USER
+staff,Roslan,Hassan,roslan.hassan.hr,roslan.hassan.hr@example.com,Welcome123,34 Jalan Mawar,George Town,Penang,10260,Malaysia,Employee Engagement Specialist,USER
+staff,Hafiz,Rahim,hafiz.rahim.hr,hafiz.rahim.hr@example.com,Welcome123,12 Jalan Sentosa,Kuala Lumpur,Kuala Lumpur,50490,Malaysia,Employee Engagement Specialist,USER
+staff,Nurul,Fatimah,nurul.fatimah.finance,nurul.fatimah.finance@example.com,Welcome123,45 Lorong Jaya,Shah Alam,Selangor,40060,Malaysia,Finance Manager,USER
+staff,Ahmad,Yusof,ahmad.yusof.finance,ahmad.yusof.finance@example.com,Welcome123,78 Jalan Bukit,Ipoh,Perak,30040,Malaysia,Finance Manager,USER
+staff,Adib,Rashid,adib.rashid.finance,adib.rashid.finance@example.com,Welcome123,101 Jalan Permai,Kota Kinabalu,Sabah,88140,Malaysia,Finance Analyst,USER
+staff,Hisham,Fahmi,hisham.fahmi.finance,hisham.fahmi.finance@example.com,Welcome123,89 Lorong Mawar,Kuching,Sarawak,93030,Malaysia,Finance Analyst,USER
+staff,Siti,Fatimah,siti.fatimah.finance,siti.fatimah.finance@example.com,Welcome123,12 Jalan Melati,Petaling Jaya,Selangor,47470,Malaysia,Auditor,USER
+staff,Zainal,Zakaria,zainal.zakaria.finance,zainal.zakaria.finance@example.com,Welcome123,34 Lorong Sentosa,Shah Alam,Selangor,40070,Malaysia,Auditor,USER
+staff,Amirah,Zain,amirah.zain.finance,amirah.zain.finance@example.com,Welcome123,56 Jalan Bukit,Kuala Lumpur,Kuala Lumpur,50470,Malaysia,Tax Specialist,USER
+staff,Rina,Hakim,rina.hakim.finance,rina.hakim.finance@example.com,Welcome123,45 Jalan Permai,Klang,Selangor,41250,Malaysia,Tax Specialist,USER
+staff,Sarah,Latif,sarah.latif.finance,sarah.latif.finance@example.com,Welcome123,67 Lorong Mawar,George Town,Penang,10280,Malaysia,Compliance Manager,USER
+staff,Fahmi,Rahim,fahmi.rahim.finance,fahmi.rahim.finance@example.com,Welcome123,78 Jalan Intan,Kuching,Sarawak,93040,Malaysia,Compliance Manager,USER
+staff,Ridzuan,Ali,ridzuan.ali.finance,ridzuan.ali.finance@example.com,Welcome123,12 Lorong Damai,Ipoh,Perak,30050,Malaysia,Budget Analyst,USER
+staff,Nur,Izzah,nur.izzah.finance,nur.izzah.finance@example.com,Welcome123,34 Jalan Sentosa,Kuala Lumpur,Kuala Lumpur,50490,Malaysia,Budget Analyst,USER
+staff,Rina,Hassan,rina.hassan.admin,rina.hassan.admin@example.com,Welcome123,67 Jalan Damai,Kuala Lumpur,Kuala Lumpur,50460,Malaysia,Administrative Manager,USER
+staff,Nurul,Fatimah,nurul.fatimah.admin,nurul.fatimah.admin@example.com,Welcome123,89 Lorong Sentosa,Shah Alam,Selangor,40090,Malaysia,Administrative Manager,USER
+staff,Amir,Fahmi,amir.fahmi.admin,amir.fahmi.admin@example.com,Welcome123,101 Jalan Intan,Kuching,Sarawak,93020,Malaysia,Administrative Assistant,USER
+staff,Sarah,Rashid,sarah.rashid.admin,sarah.rashid.admin@example.com,Welcome123,34 Lorong Mawar,Petaling Jaya,Selangor,47450,Malaysia,Administrative Assistant,USER
+staff,Fahmi,Latif,fahmi.latif.creative,fahmi.latif.creative@example.com,Welcome123,78 Jalan Bukit,Kota Kinabalu,Sabah,88130,Malaysia,Creative Director,USER
+staff,Ali,Hakim,ali.hakim.creative,ali.hakim.creative@example.com,Welcome123,56 Lorong Melati,George Town,Penang,10250,Malaysia,Creative Director,USER
+staff,Siti,Aminah,siti.aminah.creative,siti.aminah.creative@example.com,Welcome123,12 Jalan Bukit,Shah Alam,Selangor,40080,Malaysia,Copywriter,USER
+staff,Zul,Fahmi,zul.fahmi.creative,zul.fahmi.creative@example.com,Welcome123,78 Jalan Mawar,Klang,Selangor,41270,Malaysia,Copywriter,USER
+staff,Roslan,Hassan,roslan.hassan.creative,roslan.hassan.creative@example.com,Welcome123,45 Jalan Sentosa,Petaling Jaya,Selangor,47460,Malaysia,Brand Strategist,USER
+staff,Hafiz,Zakaria,hafiz.zakaria.creative,hafiz.zakaria.creative@example.com,Welcome123,67 Lorong Intan,Kuala Lumpur,Kuala Lumpur,50490,Malaysia,Brand Strategist,USER
+staff,Siti,Nurul,siti.nurul.event,siti.nurul.event@example.com,Welcome123,12 Lorong Bukit,Ipoh,Perak,30030,Malaysia,Event Planner,USER
+staff,Mariam,Fahmi,mariam.fahmi.event,mariam.fahmi.event@example.com,Welcome123,34 Jalan Mawar,Johor Bahru,Johor,81230,Malaysia,Event Planner,USER
+staff,Zainal,Rahim,zainal.rahim.event,zainal.rahim.event@example.com,Welcome123,56 Jalan Damai,Kota Kinabalu,Sabah,88150,Malaysia,Event Coordinator,USER
+staff,Ridzuan,Zakaria,ridzuan.zakaria.event,ridzuan.zakaria.event@example.com,Welcome123,78 Lorong Sentosa,Kuching,Sarawak,93060,Malaysia,Event Coordinator,USER
+staff,Hisham,Rashid,hisham.rashid.randd,hisham.rashid.randd@example.com,Welcome123,89 Jalan Intan,Kuala Lumpur,Kuala Lumpur,50480,Malaysia,Research Associate,USER
+staff,Nur,Izzah,nur.izzah.randd,nur.izzah.randd@example.com,Welcome123,101 Lorong Melati,Shah Alam,Selangor,40090,Malaysia,Research Associate,USER
+staff,Adib,Hassan,adib.hassan.randd,adib.hassan.randd@example.com,Welcome123,23 Jalan Permai,George Town,Penang,10260,Malaysia,Research Associate,USER
+staff,Zul,Rahman,zul.rahman.qa,zul.rahman.qa@example.com,Welcome123,45 Jalan Mawar,Kota Kinabalu,Sabah,88120,Malaysia,QA Tester,USER
+staff,Nurul,Fatimah,nurul.fatimah.qa,nurul.fatimah.qa@example.com,Welcome123,67 Lorong Damai,Kuching,Sarawak,93040,Malaysia,QA Tester,USER
+staff,Hafiz,Hakim,hafiz.hakim.qa,hafiz.hakim.qa@example.com,Welcome123,89 Jalan Jaya,Kuala Lumpur,Kuala Lumpur,50460,Malaysia,QA Tester,USER
+staff,Siti,Nurul,siti.nurul.sales,siti.nurul.sales@example.com,Welcome123,45 Jalan Bukit,Kuala Lumpur,Kuala Lumpur,50480,Malaysia,Sales Manager,USER
+staff,Zul,Hassan,zul.hassan.sales,zul.hassan.sales@example.com,Welcome123,67 Lorong Mawar,Shah Alam,Selangor,40050,Malaysia,Sales Manager,USER
+staff,Nur,Fatimah,nur.fatimah.sales,nur.fatimah.sales@example.com,Welcome123,89 Jalan Intan,Petaling Jaya,Selangor,47480,Malaysia,Sales Executive,USER
+staff,Amirah,Rahim,amirah.rahim.sales,amirah.rahim.sales@example.com,Welcome123,12 Lorong Permai,George Town,Penang,10260,Malaysia,Sales Executive,USER
+staff,Adib,Hakim,adib.hakim.sales,adib.hakim.sales@example.com,Welcome123,34 Jalan Melati,Kuching,Sarawak,93020,Malaysia,Sales Executive,USER
+staff,Sarah,Fahmi,sarah.fahmi.support,sarah.fahmi.support@example.com,Welcome123,78 Jalan Bukit,Shah Alam,Selangor,40040,Malaysia,Customer Support Manager,USER
+staff,Ali,Zakaria,ali.zakaria.support,ali.zakaria.support@example.com,Welcome123,45 Jalan Intan,Kota Kinabalu,Sabah,88130,Malaysia,Customer Support Manager,USER
+staff,Fahmi,Rahim,fahmi.rahim.support,fahmi.rahim.support@example.com,Welcome123,67 Lorong Damai,Petaling Jaya,Selangor,47460,Malaysia,Customer Support Specialist,USER
+staff,Mariam,Latif,mariam.latif.support,mariam.latif.support@example.com,Welcome123,12 Lorong Mawar,Ipoh,Perak,30030,Malaysia,Customer Support Specialist,USER
+staff,Zainal,Fatimah,zainal.fatimah.support,zainal.fatimah.support@example.com,Welcome123,34 Jalan Sentosa,Klang,Selangor,41270,Malaysia,Customer Support Specialist,USER
+staff,Firdaus,Hassan,firdaus.hassan.finance,firdaus.hassan.finance@example.com,Welcome123,78 Jalan Damai,Kota Bharu,Kelantan,15050,Malaysia,Financial Manager,USER
+staff,Ridzuan,Hakim,ridzuan.hakim.finance,ridzuan.hakim.finance@example.com,Welcome123,101 Jalan Mawar,George Town,Penang,10230,Malaysia,Financial Manager,USER
+staff,Nurul,Rashid,nurul.rashid.finance,nurul.rashid.finance@example.com,Welcome123,89 Lorong Jaya,Kuching,Sarawak,93040,Malaysia,Tax Specialist,USER
+staff,Siti,Yusof,siti.yusof.finance,siti.yusof.finance@example.com,Welcome123,45 Jalan Permai,Kuala Lumpur,Kuala Lumpur,50470,Malaysia,Tax Specialist,USER
+staff,Zul,Ali,zul.ali.finance,zul.ali.finance@example.com,Welcome123,12 Lorong Mawar,Kota Kinabalu,Sabah,88140,Malaysia,Auditor,USER
+staff,Hafiz,Fatimah,hafiz.fatimah.finance,hafiz.fatimah.finance@example.com,Welcome123,67 Jalan Sentosa,Petaling Jaya,Selangor,47430,Malaysia,Auditor,USER
+staff,Sarah,Fahmi,sarah.fahmi.randd,sarah.fahmi.randd@example.com,Welcome123,34 Jalan Melati,Shah Alam,Selangor,40060,Malaysia,Research Scientist,USER
+staff,Roslan,Zakaria,roslan.zakaria.randd,roslan.zakaria.randd@example.com,Welcome123,78 Lorong Damai,Kota Kinabalu,Sabah,88120,Malaysia,Research Scientist,USER
+staff,Amir,Rashid,amir.rashid.randd,amir.rashid.randd@example.com,Welcome123,101 Jalan Mawar,George Town,Penang,10280,Malaysia,Innovation Manager,USER
+staff,Rina,Hakim,rina.hakim.randd,rina.hakim.randd@example.com,Welcome123,12 Lorong Permai,Ipoh,Perak,30040,Malaysia,Innovation Manager,USER
+staff,Hafiz,Yusof,hafiz.yusof.security,hafiz.yusof.security@example.com,Welcome123,34 Jalan Permai,Kuala Lumpur,Kuala Lumpur,50480,Malaysia,Security Manager,USER
+staff,Siti,Fatimah,siti.fatimah.security,siti.fatimah.security@example.com,Welcome123,67 Lorong Mawar,Shah Alam,Selangor,40050,Malaysia,Security Specialist,USER
+staff,Ridzuan,Rahim,ridzuan.rahim.security,ridzuan.rahim.security@example.com,Welcome123,78 Jalan Intan,Kota Kinabalu,Sabah,88120,Malaysia,Security Specialist,USER
+staff,Fahmi,Latif,fahmi.latif.facility,fahmi.latif.facility@example.com,Welcome123,12 Lorong Mawar,George Town,Penang,10250,Malaysia,Facility Manager,USER
+staff,Roslan,Hassan,roslan.hassan.facility,roslan.hassan.facility@example.com,Welcome123,45 Jalan Sentosa,Kuching,Sarawak,93020,Malaysia,Facility Manager,USER
+staff,Adib,Hakim,adib.hakim.facility,adib.hakim.facility@example.com,Welcome123,67 Lorong Bukit,Klang,Selangor,41230,Malaysia,Maintenance Technician,USER
+staff,Nurul,Zakaria,nurul.zakaria.facility,nurul.zakaria.facility@example.com,Welcome123,78 Jalan Melati,Kuala Lumpur,Kuala Lumpur,50490,Malaysia,Maintenance Technician,USER
+staff,Rina,Fahmi,rina.fahmi.facility,rina.fahmi.facility@example.com,Welcome123,34 Lorong Mawar,Ipoh,Perak,30030,Malaysia,Building Engineer,USER
+staff,Ali,Zain,ali.zain.facility,ali.zain.facility@example.com,Welcome123,56 Jalan Intan,Kota Kinabalu,Sabah,88130,Malaysia,Building Engineer,USER
+staff,Zainal,Hassan,zainal.hassan.facility,zainal.hassan.facility@example.com,Welcome123,12 Jalan Damai,Kuching,Sarawak,93050,Malaysia,Building Engineer,USER
+staff,Sarah,Fatimah,sarah.fatimah.legal,sarah.fatimah.legal@example.com,Welcome123,78 Jalan Bukit,Klang,Selangor,41260,Malaysia,Legal Counsel,USER
+staff,Hafiz,Zakaria,hafiz.zakaria.legal,hafiz.zakaria.legal@example.com,Welcome123,67 Lorong Mawar,Kuala Lumpur,Kuala Lumpur,50460,Malaysia,Legal Counsel,USER
+staff,Nur,Izzah,nur.izzah.legal,nur.izzah.legal@example.com,Welcome123,34 Jalan Damai,Petaling Jaya,Selangor,47470,Malaysia,Paralegal,USER
+staff,Ridzuan,Fatimah,ridzuan.fatimah.legal,ridzuan.fatimah.legal@example.com,Welcome123,56 Jalan Sentosa,George Town,Penang,10270,Malaysia,Paralegal,USER
+staff,Siti,Hidayah,siti.hidayah.randd,siti.hidayah.randd@example.com,Welcome123,78 Lorong Bukit,Shah Alam,Selangor,40070,Malaysia,Innovation Manager,USER
+staff,Ahmad,Rahman,ahmad.rahman.randd,ahmad.rahman.randd@example.com,Welcome123,45 Jalan Mawar,Kota Bharu,Kelantan,15040,Malaysia,Innovation Manager,USER
+staff,Adib,Hakim,adib.hakim.randd,adib.hakim.randd@example.com,Welcome123,12 Jalan Permai,Kuching,Sarawak,93080,Malaysia,Research Associate,USER
+staff,Nur,Fatimah,nur.fatimah.randd,nur.fatimah.randd@example.com,Welcome123,67 Jalan Melati,George Town,Penang,10280,Malaysia,Research Associate,USER
+staff,Roslan,Hassan,roslan.hassan.randd,roslan.hassan.randd@example.com,Welcome123,34 Lorong Mawar,Kuala Lumpur,Kuala Lumpur,50470,Malaysia,Research Associate,USER
+staff,Siti,Latif,siti.latif.randd,siti.latif.randd@example.com,Welcome123,89 Jalan Intan,Shah Alam,Selangor,40080,Malaysia,Research Associate,USER
+staff,Hafiz,Yusof,hafiz.yusof.marketing,hafiz.yusof.marketing@example.com,Welcome123,34 Jalan Permai,Kuala Lumpur,Kuala Lumpur,50480,Malaysia,Marketing Manager,USER
+staff,Siti,Rashid,siti.rashid.marketing,siti.rashid.marketing@example.com,Welcome123,67 Lorong Mawar,Shah Alam,Selangor,40050,Malaysia,Marketing Specialist,USER
+staff,Roslan,Hakim,roslan.hakim.marketing,roslan.hakim.marketing@example.com,Welcome123,78 Jalan Intan,Petaling Jaya,Selangor,47480,Malaysia,Marketing Specialist,USER
+staff,Firdaus,Ali,firdaus.ali.creative,firdaus.ali.creative@example.com,Welcome123,45 Jalan Damai,Kota Kinabalu,Sabah,88130,Malaysia,Content Writer,USER
+staff,Adib,Hassan,adib.hassan.creative,adib.hassan.creative@example.com,Welcome123,12 Lorong Mawar,Kuching,Sarawak,93020,Malaysia,Content Writer,USER
+staff,Nur,Izzah,nur.izzah.hr,nur.izzah.hr@example.com,Welcome123,89 Jalan Intan,Klang,Selangor,41270,Malaysia,HR Manager,USER
+staff,Mariam,Rahim,mariam.rahim.hr,mariam.rahim.hr@example.com,Welcome123,34 Jalan Melati,Petaling Jaya,Selangor,47450,Malaysia,HR Coordinator,USER
+staff,Zul,Fahmi,zul.fahmi.hr,zul.fahmi.hr@example.com,Welcome123,78 Jalan Damai,Kuala Lumpur,Kuala Lumpur,50490,Malaysia,HR Coordinator,USER
+staff,Ridzuan,Latif,ridzuan.latif.procurement,ridzuan.latif.procurement@example.com,Welcome123,12 Lorong Mawar,George Town,Penang,10250,Malaysia,Procurement Manager,USER
+staff,Siti,Zakaria,siti.zakaria.procurement,siti.zakaria.procurement@example.com,Welcome123,45 Jalan Permai,Kota Kinabalu,Sabah,88120,Malaysia,Procurement Specialist,USER
+staff,Hisham,Rahman,hisham.rahman.procurement,hisham.rahman.procurement@example.com,Welcome123,34 Jalan Mawar,Kuching,Sarawak,93020,Malaysia,Procurement Specialist,USER
+staff,Fahmi,Ali,fahmi.ali.support,fahmi.ali.support@example.com,Welcome123,67 Lorong Intan,Shah Alam,Selangor,40070,Malaysia,Customer Support Manager,USER
+staff,Rina,Hassan,rina.hassan.support,rina.hassan.support@example.com,Welcome123,89 Jalan Damai,Klang,Selangor,41230,Malaysia,Customer Support Specialist,USER
+staff,Ali,Fahmi,ali.fahmi.support,ali.fahmi.support@example.com,Welcome123,78 Jalan Melati,Kuala Lumpur,Kuala Lumpur,50450,Malaysia,Customer Support Specialist,USER
+staff,Sarah,Hassan,sarah.hassan.qa,sarah.hassan.qa@example.com,Welcome123,12 Jalan Mawar,Ipoh,Perak,30030,Malaysia,QA Tester,USER
+staff,Zainal,Rahim,zainal.rahim.qa,zainal.rahim.qa@example.com,Welcome123,45 Lorong Permai,Kota Kinabalu,Sabah,88130,Malaysia,QA Tester,USER
+staff,Nurul,Fatimah,nurul.fatimah.randd,nurul.fatimah.randd@example.com,Welcome123,34 Jalan Bukit,George Town,Penang,10260,Malaysia,Research Scientist,USER
+staff,Hafiz,Zakaria,hafiz.zakaria.randd,hafiz.zakaria.randd@example.com,Welcome123,67 Lorong Damai,Kuching,Sarawak,93040,Malaysia,Research Scientist,USER
+staff,Amirah,Fahmi,amirah.fahmi.randd,amirah.fahmi.randd@example.com,Welcome123,78 Jalan Melati,Kota Bharu,Kelantan,15060,Malaysia,Innovation Manager,USER
+staff,Zul,Hakim,zul.hakim.randd,zul.hakim.randd@example.com,Welcome123,101 Jalan Intan,Kuala Lumpur,Kuala Lumpur,50460,Malaysia,Innovation Manager,USER
