@@ -61,8 +61,8 @@
                                                                         <i class='bx bx-file'></i> Select Template
                                                                 </button>
                                                                 <ul class="dropdown-menu" aria-labelledby="templateDropdown">
-                                                                        <li><button class="dropdown-item" (click)="downloadTemplate('staff')"><i class='bx bx-file-blank'></i> Staff</button></li>
-                                                                        <li><button class="dropdown-item" (click)="downloadTemplate('jobPosition')"><i class='bx bx-file-blank'></i> Job Position</button></li>
+                                                                        <li><button class="dropdown-item" (click)="downloadTemplate('staff', 'Staff')"><i class='bx bx-file-blank'></i> Staff</button></li>
+                                                                        <li><button class="dropdown-item" (click)="downloadTemplate('jobPosition', 'Job Position')"><i class='bx bx-file-blank'></i> Job Position</button></li>
                                                                 </ul>
                                                         </div>
                                                         <div class="form-text">
@@ -70,6 +70,20 @@
                                                                         Select a template to download. All templates are in <b>.csv</b> format.
                                                                 </small>
                                                         </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <!-- Toast Notifications -->
+                                <div *ngIf="showToast" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050">
+                                        <div
+                                                class="toast show"
+                                                role="alert"
+                                                [ngClass]="toastType === 'success' ? 'bg-success text-white' : 'bg-danger text-white'"
+                                                aria-live="assertive"
+                                                aria-atomic="true"
+                                        >
+                                                <div class="toast-body">
+                                                        {{ toastMessage }}
                                                 </div>
                                         </div>
                                 </div>
