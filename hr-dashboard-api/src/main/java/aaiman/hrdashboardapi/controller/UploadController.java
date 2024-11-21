@@ -3,6 +3,7 @@ package aaiman.hrdashboardapi.controller;
 import aaiman.hrdashboardapi.dto.CsvProcessDto;
 import aaiman.hrdashboardapi.service.UploadService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +30,11 @@ public class UploadController {
 
         @PostMapping("/file")
         @PreAuthorize("hasAuthority('ADMIN')")
-        public ResponseEntity<CsvProcessDto> uploadFile(@RequestParam("file") MultipartFile file) {
+        public ResponseEntity<CsvProcessDto> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 
                 try {
+
+                        int userId = (Integer) request.getAttribute("userId");
 
                         if (file.isEmpty()) {
                                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -41,7 +44,7 @@ public class UploadController {
                                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
                         }
 
-                        CsvProcessDto result = uploadService.processFile(file);
+                        CsvProcessDto result = uploadService.processFile(file, userId);
 
                         return ResponseEntity.status(HttpStatus.OK).body(result);
 

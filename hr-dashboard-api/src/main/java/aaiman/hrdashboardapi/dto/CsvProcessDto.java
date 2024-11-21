@@ -9,5 +9,6 @@ public class CsvProcessDto {
 
         private int savedCount;
         private int duplicateCount;
+        private String entity;
 
 }

@@ -1,4 +1,4 @@
-import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnDestroy, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'datatables.net';
@@ -59,6 +59,7 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
                                 item.id,
                                 item.firstName,
                                 item.lastName,
+                                item.username,
                                 item.email,
                                 item.jobPositionId ? item.jobPositionId.name : 'N/A',
                                 item.roles && item.roles.length > 0 ? item.roles[0].name : 'N/A'
@@ -143,14 +144,16 @@ export class Staff {
         id: number;
         firstName: string;
         lastName: string;
+        username: string;
         email: string;
         jobPosition: string;
         role: string
 
-        constructor(id: number, firstName: string, lastName: string, email: string, jobPosition: string, role: string) {
+        constructor(id: number, firstName: string, lastName: string, username: string, email: string, jobPosition: string, role: string) {
                 this.id = id;
                 this.firstName = firstName;
                 this.lastName = lastName;
+                this.username = username;
                 this.email = email;
                 this.jobPosition = jobPosition;
                 this.role = role;

@@ -39,9 +39,13 @@ public class HrDashboardApiApplication implements CommandLineRunner {
                 List<Role> roleList = roleRepository.findAll();
                 if (roleList.isEmpty()) {
 
-                        Role role = new Role();
-                        role.setName("ADMIN");
-                        roleRepository.save(role);
+                        Role adminRole = new Role();
+                        adminRole.setName("ADMIN");
+                        roleRepository.save(adminRole);
+
+                        Role userRole = new Role();
+                        userRole.setName("USER");
+                        roleRepository.save(userRole);
 
                 }
 

@@ -27,7 +27,7 @@ export class UploadComponent {
         showToast: boolean = false;
         selectedFile: File | null = null;
         isUploading: boolean = false;
-        uploadResult: {savedCount: number; duplicateCount: number} |null = null;
+        uploadResult: {savedCount: number; duplicateCount: number; entity: string}  = {savedCount: 0, duplicateCount: 0, entity: ''};
 
         constructor(private http: HttpClient, private uploadService: UploadService) {
         }
@@ -112,8 +112,14 @@ export class UploadComponent {
                 this.uploadService.uploadFile(this.selectedFile).subscribe({
                         next: (response) => {
                                 this.uploadResult = response;
+                                console.log("upload result: ", this.uploadResult);
                                 this.isUploading = false;
                                 this.selectedFile = null;
+
+                                const input = document.getElementById("attachment") as HTMLInputElement;
+                                if (input) {
+                                        input.value = "";
+                                }
                         },
                         error: (error) => {
                                 Swal.fire({

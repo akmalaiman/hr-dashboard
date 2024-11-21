@@ -21,14 +21,14 @@ export class UploadService {
                 return this.http.get(this.templateUrl, {headers, params, responseType: 'blob'});
         }
 
-        uploadFile(file: File): Observable<{ savedCount: number; duplicateCount: number }> {
+        uploadFile(file: File): Observable<{ savedCount: number; duplicateCount: number; entity: string }> {
                 const token = localStorage.getItem("access_token");
                 const headers = new HttpHeaders({
                         'Authorization': `Bearer ${token}`
                 });
                 const formData = new FormData();
                 formData.append("file", file);
-                return this.http.post<{ savedCount: number; duplicateCount: number }>(this.uploadUrl, formData, {headers});
+                return this.http.post<{ savedCount: number; duplicateCount: number; entity: string }>(this.uploadUrl, formData, {headers});
         }
 
 }
