@@ -3,6 +3,8 @@ import {RouterLink} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {UploadService} from "./service/upload.service";
 import {NgClass, NgIf} from "@angular/common";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
         selector: 'app-upload',
@@ -10,7 +12,9 @@ import {NgClass, NgIf} from "@angular/common";
         imports: [
                 RouterLink,
                 NgClass,
-                NgIf
+                NgIf,
+                ReactiveFormsModule,
+                FormsModule
         ],
         templateUrl: './upload.component.html',
         styleUrl: './upload.component.css'
@@ -21,6 +25,9 @@ export class UploadComponent {
         toastMessage: string = "";
         toastType: 'success' | 'danger' = 'success';
         showToast: boolean = false;
+        selectedFile: File | null = null;
+        isUploading: boolean = false;
+        uploadResult: {savedCount: number; duplicateCount: number} |null = null;
 
         constructor(private http: HttpClient, private uploadService: UploadService) {
         }
@@ -40,7 +47,7 @@ export class UploadComponent {
                                 this.showToast = true;
                                 this.hideToastAfterDelay();
                         },
-                        error: error => {
+                        error: (error) => {
                                 console.error("Failed to download template: ", error);
 
                                 this.toastMessage = `Failed to download ${displayName} template. Please try again.`;
@@ -57,4 +64,67 @@ export class UploadComponent {
                 }, 5000);
         }
 
+        onFileSelected(event: Event): void {
+                const input = event.target as HTMLInputElement;
+                if (input?.files?.length) {
+                        const file = input.files[0];
+
+                        if (!file.name.endsWith(".csv")) {
+                                Swal.fire({
+                                        title: 'Oops!',
+                                        text: 'Only .csv files are allowed',
+                                        icon: 'error',
+                                        showConfirmButton: false,
+                                        showCloseButton: true
+                                });
+                                return;
+                        }
+
+                        if (file.size > 5 * 1024 * 1024) {
+                                Swal.fire({
+                                        title: 'Oops!',
+                                        text: 'Your file size exceeds 5MB.',
+                                        icon: 'warning',
+                                        showConfirmButton: false,
+                                        showCloseButton: true
+                                });
+                                return;
+                        }
+
+                        this.selectedFile = file;
+                }
+        }
+
+        onSubmit(): void {
+                if (!this.selectedFile) {
+                        Swal.fire({
+                                title: 'Oops!',
+                                text: 'No file is selected. Please choose a file to upload',
+                                icon: 'warning',
+                                showConfirmButton: false,
+                                showCloseButton: true
+                        });
+                        return;
+                }
+
+                this.isUploading = true;
+
+                this.uploadService.uploadFile(this.selectedFile).subscribe({
+                        next: (response) => {
+                                this.uploadResult = response;
+                                this.isUploading = false;
+                                this.selectedFile = null;
+                        },
+                        error: (error) => {
+                                Swal.fire({
+                                        title: 'Oops!',
+                                        text: 'An error occurred while uploading the file.',
+                                        icon: 'warning',
+                                        showConfirmButton: false,
+                                        showCloseButton: true
+                                });
+                                this.isUploading = false;
+                        }
+                });
+        }
 }

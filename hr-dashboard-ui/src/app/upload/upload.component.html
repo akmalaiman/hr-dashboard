@@ -19,14 +19,14 @@
                                                 <h5 class="card-title mb-0"><i class='bx bx-cloud-upload'></i> Upload Attachment</h5>
                                         </div>
                                         <div class="card-body">
-                                                <form>
+                                                <form (ngSubmit)="onSubmit()">
                                                         <!-- Attachment Field -->
                                                         <div class="mb-3">
                                                                 <label for="attachment" class="form-label fw-bold">
                                                                         Attachment <span class="text-danger">*</span>
                                                                 </label>
                                                                 <div class="input-group">
-                                                                        <input type="file" class="form-control" id="attachment" accept=".csv">
+                                                                        <input type="file" class="form-control" id="attachment" accept=".csv" (change)="onFileSelected($event)">
                                                                         <label class="input-group-text bg-secondary text-white" for="attachment">
                                                                                 <i class='bx bx-folder-open'></i> Browse
                                                                         </label>
@@ -40,8 +40,10 @@
 
                                                         <!-- Action Buttons -->
                                                         <div class="d-flex justify-content-end gap-2">
-                                                                <button type="submit" class="btn btn-success">
-                                                                        <i class="bx bx-cloud-upload"></i> Upload
+                                                                <button type="submit" class="btn btn-success" [disabled]="!selectedFile || isUploading">
+                                                                        <i class="bx bx-cloud-upload"></i>
+                                                                        <span *ngIf="isUploading">Uploading...</span>
+                                                                        <span *ngIf="!isUploading">Upload</span>
                                                                 </button>
                                                                 <button type="reset" class="btn btn-danger">
                                                                         <i class="bx bx-x"></i> Cancel
