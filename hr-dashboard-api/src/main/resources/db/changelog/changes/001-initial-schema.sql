@@ -1,4 +1,4 @@
-CREATE TABLE job_position (
+CREATE TABLE IF NOT EXISTS job_position (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
@@ -8,9 +8,9 @@ CREATE TABLE job_position (
     updated_by INT
 );
 
-CREATE INDEX idx_job_position_name ON job_position(name, status);
+CREATE INDEX IF NOT EXISTS idx_job_position_name ON job_position(name, status);
 
-CREATE TABLE "user" (
+CREATE TABLE IF NOT EXISTS "user" (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -31,9 +31,9 @@ CREATE TABLE "user" (
     FOREIGN KEY (job_position_id) REFERENCES job_position(id)
 );
 
-CREATE INDEX idx_user_details_username ON "user"(username, password, status);
+CREATE INDEX IF NOT EXISTS idx_user_details_username ON "user"(username, password, status);
 
-CREATE TABLE role (
+CREATE TABLE IF NOT EXISTS role (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY ,
     name VARCHAR(255) NOT NULL
 );
