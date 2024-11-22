@@ -43,10 +43,6 @@ public class HrDashboardApiApplication implements CommandLineRunner {
                         adminRole.setName("ADMIN");
                         roleRepository.save(adminRole);
 
-                        Role userRole = new Role();
-                        userRole.setName("USER");
-                        roleRepository.save(userRole);
-
                 }
 
                 List<JobPosition> jobPositionList = jobPositionRepository.findAllByStatus("Active");
