@@ -14,152 +14,160 @@
         <hr>
         <div class="row">
                 <div class="col-lg-12">
-                        <form [formGroup]="newStaffForm" (ngSubmit)="onSubmit()">
-                                <div class="border border-secondary-subtle p-3">
-                                        <div class="row mb-3">
-                                                <div class="col-lg-6">
-                                                        <div class="input-group">
-                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-user'></i></span>
-                                                                <div class="form-floating">
-                                                                        <input type="text" formControlName="firstName" id="firstName"  placeholder="First Name" class="form-control border-dark-subtle">
-                                                                        <label for="firstName">First Name</label>
+                        <div class="container mt-5">
+                                <div class="card shadow-lg">
+                                        <div class="card-header bg-dark text-white text-center">
+                                                <h5 class="card-title mb-0"><i class='bx bxs-user'></i> New Staff Form</h5>
+                                        </div>
+                                        <div class="card-body">
+                                                <form [formGroup]="newStaffForm" (ngSubmit)="onSubmit()">
+                                                        <div class="row mb-3">
+                                                                <div class="col-lg-6">
+                                                                        <div class="input-group">
+                                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-user'></i></span>
+                                                                                <div class="form-floating">
+                                                                                        <input type="text" formControlName="firstName" id="firstName"  placeholder="First Name" class="form-control border-dark-subtle">
+                                                                                        <label for="firstName">First Name</label>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div *ngIf="newStaffForm.get('firstName')?.touched && newStaffForm.get('firstName')?.invalid" class="text-danger">
+                                                                                <small><b>First Name is required</b></small>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                        <div class="input-group">
+                                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-user'></i></span>
+                                                                                <div class="form-floating">
+                                                                                        <input type="text" formControlName="lastName" id="lastName"  placeholder="Last Name" class="form-control border-dark-subtle">
+                                                                                        <label for="lastName">Last Name</label>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div *ngIf="newStaffForm.get('lastName')?.touched && newStaffForm.get('lastName')?.invalid" class="text-danger">
+                                                                                <small><b>Last Name is required</b></small>
+                                                                        </div>
                                                                 </div>
                                                         </div>
-                                                        <div *ngIf="newStaffForm.get('firstName')?.touched && newStaffForm.get('firstName')?.invalid" class="text-danger">
-                                                                <small><b>First Name is required</b></small>
-                                                        </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                        <div class="input-group">
-                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-user'></i></span>
-                                                                <div class="form-floating">
-                                                                        <input type="text" formControlName="lastName" id="lastName"  placeholder="Last Name" class="form-control border-dark-subtle">
-                                                                        <label for="lastName">Last Name</label>
+                                                        <div class="row mb-3">
+                                                                <div class="col-lg-6">
+                                                                        <div class="input-group">
+                                                                                <span class="input-group-text border-dark-subtle"><i class='bx bx-at'></i></span>
+                                                                                <div class="form-floating">
+                                                                                        <input type="text" formControlName="username" id="username" placeholder="Username" class="form-control border-dark-subtle">
+                                                                                        <label for="username">Username</label>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div *ngIf="newStaffForm.get('username')?.touched && newStaffForm.get('username')?.invalid" class="text-danger">
+                                                                                <small><b>Username is required</b></small>
+                                                                        </div>
+                                                                        <div *ngIf="!isUsernameExist && newStaffForm.get('username')?.valid" class="text-danger">
+                                                                                <small><b>This username has been taken. Please choose another username</b></small>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                        <div class="input-group">
+                                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-key'></i></span>
+                                                                                <div class="form-floating">
+                                                                                        <input type="password" formControlName="password" id="password" placeholder="Password" class="form-control border-dark-subtle">
+                                                                                        <label for="password">Password</label>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div *ngIf="newStaffForm.get('password')?.touched && newStaffForm.get('password')?.invalid" class="text-danger">
+                                                                                <small><b>Password is required</b></small>
+                                                                        </div>
                                                                 </div>
                                                         </div>
-                                                        <div *ngIf="newStaffForm.get('lastName')?.touched && newStaffForm.get('lastName')?.invalid" class="text-danger">
-                                                                <small><b>Last Name is required</b></small>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                                <div class="col-lg-6">
-                                                        <div class="input-group">
-                                                                <span class="input-group-text border-dark-subtle"><i class='bx bx-at'></i></span>
-                                                                <div class="form-floating">
-                                                                        <input type="text" formControlName="username" id="username" placeholder="Username" class="form-control border-dark-subtle">
-                                                                        <label for="username">Username</label>
+                                                        <div class="row mb-3">
+                                                                <div class="col-lg-6">
+                                                                        <div class="input-group">
+                                                                                <label for="jobPositionId" class="input-group-text border-dark-subtle"><i class='bx bxs-briefcase'></i></label>
+                                                                                <select formControlName="jobPositionId" id="jobPositionId" class="form-select border-dark-subtle">
+                                                                                        <option value="" selected>Please Select Job Position</option>
+                                                                                        <option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id">{{jobPosition.name}}</option>
+                                                                                </select>
+                                                                        </div>
+                                                                        <div *ngIf="newStaffForm.get('jobPositionId')?.touched && newStaffForm.get('jobPositionId')?.invalid" class="text-danger">
+                                                                                <small><b>Job Position is required</b></small>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                        <div class="input-group">
+                                                                                <label for="roleId" class="input-group-text border-dark-subtle"><i class='bx bxs-hard-hat'></i></label>
+                                                                                <select formControlName="roleId" id="roleId" class="form-select border-dark-subtle">
+                                                                                        <option value="" selected>Please Select Role</option>
+                                                                                        <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+                                                                                </select>
+                                                                        </div>
+                                                                        <div *ngIf="newStaffForm.get('roleId')?.touched && newStaffForm.get('roleId')?.invalid" class="text-danger">
+                                                                                <small><b>Role is required</b></small>
+                                                                        </div>
                                                                 </div>
                                                         </div>
-                                                        <div *ngIf="newStaffForm.get('username')?.touched && newStaffForm.get('username')?.invalid" class="text-danger">
-                                                                <small><b>Username is required</b></small>
-                                                        </div>
-                                                        <div *ngIf="!isUsernameExist && newStaffForm.get('username')?.valid" class="text-danger">
-                                                                <small><b>This username has been taken. Please choose another username</b></small>
-                                                        </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                        <div class="input-group">
-                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-key'></i></span>
-                                                                <div class="form-floating">
-                                                                        <input type="password" formControlName="password" id="password" placeholder="Password" class="form-control border-dark-subtle">
-                                                                        <label for="password">Password</label>
+                                                        <div class="row mb-3">
+                                                                <div class="input-group">
+                                                                        <span class="input-group-text border-dark-subtle"><i class='bx bxs-envelope'></i></span>
+                                                                        <div class="form-floating">
+                                                                                <input type="email" formControlName="email" id="email" placeholder="Email Address" class="form-control border-dark-subtle">
+                                                                                <label for="email" disabled="">Email Address</label>
+                                                                        </div>
+                                                                </div>
+                                                                <div *ngIf="newStaffForm.get('email')?.touched && newStaffForm.get('email')?.errors?.['required']" class="text-danger">
+                                                                        <small><b>Email is required</b></small>
+                                                                </div>
+                                                                <div *ngIf="newStaffForm.get('email')?.touched && !newStaffForm.get('email')?.errors?.['required'] && newStaffForm.get('email')?.errors?.['email']" class="text-danger">
+                                                                        <small><b>Please enter a valid email address</b></small>
+                                                                </div>
+                                                                <div *ngIf="!isEmailExist && newStaffForm.get('email')?.valid" class="text-danger">
+                                                                        <small><b>This email has been taken. Please choose another email</b></small>
                                                                 </div>
                                                         </div>
-                                                        <div *ngIf="newStaffForm.get('password')?.touched && newStaffForm.get('password')?.invalid" class="text-danger">
-                                                                <small><b>Password is required</b></small>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                                <div class="col-lg-6">
-                                                        <div class="input-group">
-                                                                <label for="jobPositionId" class="input-group-text border-dark-subtle"><i class='bx bxs-briefcase'></i></label>
-                                                                <select formControlName="jobPositionId" id="jobPositionId" class="form-select border-dark-subtle">
-                                                                        <option value="" selected>Please Select Job Position</option>
-                                                                        <option *ngFor="let jobPosition of jobPositions" [value]="jobPosition.id">{{jobPosition.name}}</option>
-                                                                </select>
-                                                        </div>
-                                                        <div *ngIf="newStaffForm.get('jobPositionId')?.touched && newStaffForm.get('jobPositionId')?.invalid" class="text-danger">
-                                                                <small><b>Job Position is required</b></small>
-                                                        </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                        <div class="input-group">
-                                                                <label for="roleId" class="input-group-text border-dark-subtle"><i class='bx bxs-hard-hat'></i></label>
-                                                                <select formControlName="roleId" id="roleId" class="form-select border-dark-subtle">
-                                                                        <option value="" selected>Please Select Role</option>
-                                                                        <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
-                                                                </select>
-                                                        </div>
-                                                        <div *ngIf="newStaffForm.get('roleId')?.touched && newStaffForm.get('roleId')?.invalid" class="text-danger">
-                                                                <small><b>Role is required</b></small>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                                <div class="input-group">
-                                                        <span class="input-group-text border-dark-subtle"><i class='bx bxs-envelope'></i></span>
-                                                        <div class="form-floating">
-                                                                <input type="email" formControlName="email" id="email" placeholder="Email Address" class="form-control border-dark-subtle">
-                                                                <label for="email" disabled="">Email Address</label>
-                                                        </div>
-                                                </div>
-                                                <div *ngIf="newStaffForm.get('email')?.touched && newStaffForm.get('email')?.errors?.['required']" class="text-danger">
-                                                        <small><b>Email is required</b></small>
-                                                </div>
-                                                <div *ngIf="newStaffForm.get('email')?.touched && !newStaffForm.get('email')?.errors?.['required'] && newStaffForm.get('email')?.errors?.['email']" class="text-danger">
-                                                        <small><b>Please enter a valid email address</b></small>
-                                                </div>
-                                                <div *ngIf="!isEmailExist && newStaffForm.get('email')?.valid" class="text-danger">
-                                                        <small><b>This email has been taken. Please choose another email</b></small>
-                                                </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                                <div class="col-lg-8">
-                                                        <div class="input-group">
-                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-home'></i></span>
-                                                                <div class="form-floating">
-                                                                        <input type="text" formControlName="address" id="address" placeholder="Address" class="form-control border-dark-subtle">
-                                                                        <label for="address">Address</label>
+                                                        <div class="row mb-3">
+                                                                <div class="col-lg-8">
+                                                                        <div class="input-group">
+                                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-home'></i></span>
+                                                                                <div class="form-floating">
+                                                                                        <input type="text" formControlName="address" id="address" placeholder="Address" class="form-control border-dark-subtle">
+                                                                                        <label for="address">Address</label>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                        <div class="input-group">
+                                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-city'></i></span>
+                                                                                <div class="form-floating">
+                                                                                        <input type="text" formControlName="city" id="city" placeholder="City" class="form-control border-dark-subtle">
+                                                                                        <label for="city">City</label>
+                                                                                </div>
+                                                                        </div>
                                                                 </div>
                                                         </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                        <div class="input-group">
-                                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-city'></i></span>
-                                                                <div class="form-floating">
-                                                                        <input type="text" formControlName="city" id="city" placeholder="City" class="form-control border-dark-subtle">
-                                                                        <label for="city">City</label>
+                                                        <div class="row mb-3">
+                                                                <div class="col-lg-4">
+                                                                        <div class="form-floating">
+                                                                                <input type="text" formControlName="country" id="country" placeholder="Country" class="form-control border-dark-subtle">
+                                                                                <label for="country">Country</label>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                        <div class="form-floating">
+                                                                                <input type="text" formControlName="state" id="state" placeholder="State" class="form-control border-dark-subtle">
+                                                                                <label for="state">State</label>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                        <div class="form-floating">
+                                                                                <input type="text" formControlName="postalCode" id="postalCode" placeholder="Postal Code" class="form-control border-dark-subtle">
+                                                                                <label for="postalCode">Postal Code</label>
+                                                                        </div>
                                                                 </div>
                                                         </div>
-                                                </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                                <div class="col-lg-4">
-                                                        <div class="form-floating">
-                                                                <input type="text" formControlName="country" id="country" placeholder="Country" class="form-control border-dark-subtle">
-                                                                <label for="country">Country</label>
+                                                        <hr class="my-4">
+                                                        <div class="row mb-3 px-2">
+                                                                <button type="submit" class="btn btn-primary" [disabled]="newStaffForm!.invalid || !isUsernameExist || !isEmailExist">Add New Staff</button>
                                                         </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                        <div class="form-floating">
-                                                                <input type="text" formControlName="state" id="state" placeholder="State" class="form-control border-dark-subtle">
-                                                                <label for="state">State</label>
-                                                        </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                        <div class="form-floating">
-                                                                <input type="text" formControlName="postalCode" id="postalCode" placeholder="Postal Code" class="form-control border-dark-subtle">
-                                                                <label for="postalCode">Postal Code</label>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="row mb-3 px-2">
-                                                <button type="submit" class="btn btn-primary" [disabled]="newStaffForm!.invalid || !isUsernameExist || !isEmailExist">Add New Staff</button>
+                                                </form>
                                         </div>
                                 </div>
-                        </form>
+                        </div>
                 </div>
         </div>
 </div>
