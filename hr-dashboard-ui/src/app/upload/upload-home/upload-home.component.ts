@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {UploadService} from "./service/upload.service";
+import {UploadService} from "../service/upload.service";
 import {NgClass, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import Swal from "sweetalert2";
@@ -16,10 +16,10 @@ import Swal from "sweetalert2";
                 ReactiveFormsModule,
                 FormsModule
         ],
-        templateUrl: './upload.component.html',
-        styleUrl: './upload.component.css'
+        templateUrl: './upload-home.component.html',
+        styleUrl: './upload-home.component.css'
 })
-export class UploadComponent {
+export class UploadHomeComponent {
 
         pageName: string = "Upload File";
         toastMessage: string = "";
