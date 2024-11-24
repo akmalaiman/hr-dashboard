@@ -22,12 +22,12 @@ import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
 
         pageName: string = "Staff Management";
-        staffList: Staff[] = [];
+        staffList: any[] = [];
         loading: boolean = true;
         private dataTable: any;
         private isDataTableInit = false;
 
-        constructor(private http: HttpClient, private userService: StaffService) {
+        constructor(private http: HttpClient, private staffService: StaffService) {
         }
 
         ngOnInit(): void {
@@ -48,26 +48,30 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
         }
 
         fetchStaffData(): void {
-                const token = localStorage.getItem("access_token");
+                this.staffService.getStaffList().subscribe({
+                        next: (data: any[]) => {
+                                if  (!data) {
+                                        this.loading = false;
+                                        this.staffList = [];
+                                        return;
+                                }
 
-                const headers = new HttpHeaders({
-                        'Authorization': `Bearer ${token}` ,
-                });
-
-                this.http.get<any[]>("http://localhost:8080/api/user/all", {headers}).subscribe((data) => {
-                        this.staffList = data.map(item => new Staff(
-                                item.id,
-                                item.firstName,
-                                item.lastName,
-                                item.username,
-                                item.email,
-                                item.jobPositionId ? item.jobPositionId.name : 'N/A',
-                                item.roles && item.roles.length > 0 ? item.roles[0].name : 'N/A'
-                        ));
-                        this.loading = false;
-                }, error => {
-                        console.error("Failed to fetch staff data: ", error);
-                        this.loading = false;
+                                this.staffList = data.map(item => ({
+                                        id: item.id,
+                                        firstName: item.firstName,
+                                        lastName: item.lastName,
+                                        username: item.username,
+                                        email: item.email,
+                                        jobPosition: item.jobPositionId ? item.jobPositionId.name : 'N/A',
+                                        role: item.roles && item.roles.length > 0 ? item.roles[0].name : 'N/A',
+                                        department: item.departmentId ? item.departmentId.name : 'N/A'
+                                }));
+                                this.loading = false;
+                        },
+                        error: (error) => {
+                                console.error("Failed to fetch staff data: ", error);
+                                this.loading = false;
+                        }
                 });
         }
 
@@ -85,7 +89,7 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
                         allowEscapeKey: false,
                 }).then((result) => {
                         if (result.isConfirmed) {
-                                this.userService.deleteUser(id).subscribe({
+                                this.staffService.deleteUser(id).subscribe({
                                         next: data => {
                                                 Swal.fire({
                                                         title: 'Deleted Successfully!',
@@ -132,31 +136,9 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
                         searching: false,
                         info: false,
                         language: {
-                                "emptyTable": "There is no active user found",
+                                "emptyTable": "There is no active staff found",
                         }
                 });
-        }
-
-}
-
-export class Staff {
-
-        id: number;
-        firstName: string;
-        lastName: string;
-        username: string;
-        email: string;
-        jobPosition: string;
-        role: string
-
-        constructor(id: number, firstName: string, lastName: string, username: string, email: string, jobPosition: string, role: string) {
-                this.id = id;
-                this.firstName = firstName;
-                this.lastName = lastName;
-                this.username = username;
-                this.email = email;
-                this.jobPosition = jobPosition;
-                this.role = role;
         }
 
 }

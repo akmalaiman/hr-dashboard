@@ -110,7 +110,6 @@ export class DepartmentHomeComponent implements OnInit, AfterViewChecked, OnDest
                 }
                 this.loading = true;
                 this.fetchData();
-                this.initDataTable()
         }
 
         openModal(content: any): void {

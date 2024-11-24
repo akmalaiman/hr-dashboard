@@ -5,7 +5,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {StaffService} from "../service/staff.service";
 import {JobPosition} from "../../common/model/job-position.model";
 import {Role} from "../../common/model/role.model";
-import {User} from "../../common/model/staff.model";
+import {Staff} from "../../common/model/staff.model";
 import Swal from "sweetalert2";
 import {Department} from "../../common/model/department.model";
 
@@ -140,7 +140,7 @@ export class StaffNewComponent implements OnInit {
                         const role = this.roles.find(value => value.id == selectedRole);
                         const department = this.departments.find(value => value.id == selectedDepartment);
 
-                        const userData: User = {
+                        const userData: Staff = {
                                 ...this.newStaffForm.value,
                                 id: 0,
                                 postalCode: this.newStaffForm.value.postalCode ? Number(this.newStaffForm.value.postalCode) : 0,
