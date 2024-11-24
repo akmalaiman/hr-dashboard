@@ -73,8 +73,11 @@
                                                                         <i class='bx bx-file'></i> Select Template
                                                                 </button>
                                                                 <ul class="dropdown-menu" aria-labelledby="templateDropdown">
-                                                                        <li><button class="dropdown-item" (click)="downloadTemplate('staff', 'Staff')"><i class='bx bx-file-blank'></i> Staff</button></li>
-                                                                        <li><button class="dropdown-item" (click)="downloadTemplate('jobPosition', 'Job Position')"><i class='bx bx-file-blank'></i> Job Position</button></li>
+                                                                        <li *ngFor="let template of templateList">
+                                                                                <button class="dropdown-item" (click)="downloadTemplate(template.filename, template.displayName)">
+                                                                                        <i class='bx bx-file-blank'></i> {{ template.displayName }}
+                                                                                </button>
+                                                                        </li>
                                                                 </ul>
                                                         </div>
                                                         <div class="form-text">

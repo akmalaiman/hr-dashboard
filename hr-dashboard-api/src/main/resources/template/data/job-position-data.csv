@@ -1,84 +1,45 @@
 entity,name
-jobPosition,Chief Executive Officer (CEO)
-jobPosition,Chief Operating Officer (COO)
-jobPosition,Chief Financial Officer (CFO)
-jobPosition,Chief Technology Officer (CTO)
-jobPosition,Chief Marketing Officer (CMO)
-jobPosition,Chief Human Resources Officer (CHRO)
-jobPosition,Chief Information Officer (CIO)
-jobPosition,Chief Product Officer (CPO)
-jobPosition,Chief Sustainability Officer (CSO)
-jobPosition,Chief Data Officer (CDO)
-jobPosition,General Manager
-jobPosition,Director of Operations
-jobPosition,Director of Finance
-jobPosition,Director of Technology
-jobPosition,Director of Marketing
-jobPosition,Director of Human Resources
 jobPosition,Software Engineer
 jobPosition,Senior Software Engineer
-jobPosition,Junior Software Engineer
 jobPosition,Frontend Developer
 jobPosition,Backend Developer
 jobPosition,Full Stack Developer
 jobPosition,Mobile Application Developer
-jobPosition,Cloud Engineer
-jobPosition,DevOps Engineer
-jobPosition,Site Reliability Engineer (SRE)
-jobPosition,Data Scientist
 jobPosition,Data Analyst
-jobPosition,Database Administrator
+jobPosition,Data Scientist
+jobPosition,Machine Learning Engineer
+jobPosition,DevOps Engineer
 jobPosition,System Administrator
-jobPosition,IT Support Specialist
-jobPosition,Network Administrator
-jobPosition,Cybersecurity Analyst
-jobPosition,Quality Assurance Engineer
-jobPosition,Test Automation Engineer
+jobPosition,Database Administrator
+jobPosition,Network Engineer
+jobPosition,Cloud Architect
 jobPosition,Product Manager
 jobPosition,Project Manager
+jobPosition,Quality Assurance Engineer
+jobPosition,Test Automation Engineer
+jobPosition,UI/UX Designer
+jobPosition,Graphic Designer
+jobPosition,Technical Support Specialist
+jobPosition,IT Support Specialist
+jobPosition,Cybersecurity Analyst
+jobPosition,Information Security Manager
+jobPosition,Technical Writer
 jobPosition,Business Analyst
-jobPosition,Scrum Master
-jobPosition,Agile Coach
 jobPosition,HR Manager
 jobPosition,Recruitment Specialist
-jobPosition,Learning and Development Manager
-jobPosition,Compensation and Benefits Manager
-jobPosition,Employee Relations Specialist
 jobPosition,Marketing Manager
 jobPosition,Digital Marketing Specialist
 jobPosition,SEO Specialist
-jobPosition,Content Marketing Specialist
-jobPosition,Social Media Manager
 jobPosition,Sales Manager
-jobPosition,Sales Executive
 jobPosition,Account Manager
-jobPosition,Business Development Manager
 jobPosition,Customer Success Manager
-jobPosition,Customer Support Specialist
-jobPosition,Operations Manager
-jobPosition,Supply Chain Manager
-jobPosition,Procurement Specialist
-jobPosition,Logistics Manager
-jobPosition,Warehouse Manager
-jobPosition,Financial Analyst
+jobPosition,Finance Manager
 jobPosition,Accountant
-jobPosition,Treasury Analyst
-jobPosition,Tax Specialist
-jobPosition,Legal Counsel
-jobPosition,Compliance Officer
-jobPosition,Administrative Assistant
-jobPosition,Office Manager
-jobPosition,Graphic Designer
-jobPosition,UX Designer
-jobPosition,UI Designer
-jobPosition,Motion Graphics Designer
-jobPosition,Video Editor
-jobPosition,Photographer
-jobPosition,Event Coordinator
-jobPosition,Facilities Manager
-jobPosition,Research and Development Manager
-jobPosition,Innovation Specialist
-jobPosition,Environmental Health and Safety Specialist
-jobPosition,Technical Writer
-jobPosition,Customer Relationship Manager
-jobPosition,Public Relations Specialist
+jobPosition,Legal Advisor
+jobPosition,Operations Manager
+jobPosition,Logistics Coordinator
+jobPosition,Procurement Specialist
+jobPosition,Training and Development Manager
+jobPosition,Content Writer
+jobPosition,Social Media Manager
+jobPosition,Corporate Communications Manager
