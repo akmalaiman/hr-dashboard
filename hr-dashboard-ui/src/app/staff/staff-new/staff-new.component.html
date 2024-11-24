@@ -77,7 +77,7 @@
                                                                 </div>
                                                         </div>
                                                         <div class="row mb-3">
-                                                                <div class="col-lg-6">
+                                                                <div class="col-lg-4">
                                                                         <div class="input-group">
                                                                                 <label for="jobPositionId" class="input-group-text border-dark-subtle"><i class='bx bxs-briefcase'></i></label>
                                                                                 <select formControlName="jobPositionId" id="jobPositionId" class="form-select border-dark-subtle">
@@ -89,7 +89,7 @@
                                                                                 <small><b>Job Position is required</b></small>
                                                                         </div>
                                                                 </div>
-                                                                <div class="col-lg-6">
+                                                                <div class="col-lg-4">
                                                                         <div class="input-group">
                                                                                 <label for="roleId" class="input-group-text border-dark-subtle"><i class='bx bxs-hard-hat'></i></label>
                                                                                 <select formControlName="roleId" id="roleId" class="form-select border-dark-subtle">
@@ -99,6 +99,15 @@
                                                                         </div>
                                                                         <div *ngIf="newStaffForm.get('roleId')?.touched && newStaffForm.get('roleId')?.invalid" class="text-danger">
                                                                                 <small><b>Role is required</b></small>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                        <div class="input-group">
+                                                                                <label for="departmentId" class="input-group-text border-dark-subtle"><i class='bx bxs-building-house'></i></label>
+                                                                                <select formControlName="departmentId" id="departmentId" class="form-select border-dark-subtle">
+                                                                                        <option value="" selected>Please Select Department</option>
+                                                                                        <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
+                                                                                </select>
                                                                         </div>
                                                                 </div>
                                                         </div>

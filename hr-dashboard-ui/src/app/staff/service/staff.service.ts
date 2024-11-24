@@ -1,9 +1,10 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
-import {User} from "../../common/model/staff.model";
-import {catchError, Observable, of, throwError} from "rxjs";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Staff} from "../../common/model/staff.model";
+import {Observable} from "rxjs";
 import {JobPosition} from "../../common/model/job-position.model";
 import {Role} from "../../common/model/role.model";
 import {Injectable} from "@angular/core";
+import {Department} from "../../common/model/department.model";
 
 @Injectable({
         providedIn: 'root'
@@ -14,17 +15,19 @@ export class StaffService {
         private roleUrl = "http://localhost:8080/api/role/all";
         private createUserUrl = "http://localhost:8080/api/user/add";
         private getUsernameUrl = "http://localhost:8080/api/user/byUsername";
-        private getEmailurl = "http://localhost:8080/api/user/byEmail";
+        private getEmailUrl = "http://localhost:8080/api/user/byEmail";
         private deleteUserUrl = "http://localhost:8080/api/user/delete";
+        private getDepartmentUrl = "http://localhost:8080/api/department/all";
+        private  getStaffListUrl = "http://localhost:8080/api/user/all";
 
         constructor(private http: HttpClient) { }
 
-        createUser(user: User): Observable<User> {
+        createUser(user: Staff): Observable<Staff> {
                 const token = localStorage.getItem("access_token");
                 const headers = new HttpHeaders({
                         'Authorization': `Bearer ${token}`
                 });
-                return this.http.post<User>(this.createUserUrl, user, {headers});
+                return this.http.post<Staff>(this.createUserUrl, user, {headers});
         }
 
         getJobPosition(): Observable<JobPosition[]> {
@@ -43,22 +46,22 @@ export class StaffService {
                 return this.http.get<Role[]>(this.roleUrl, {headers});
         }
 
-        getUsername(username: string): Observable<any> {
+        getUsername(username: string): Observable<Staff> {
                 const token = localStorage.getItem("access_token");
                 const headers = new HttpHeaders({
                         'Authorization': `Bearer ${token}`
                 });
                 const params = new HttpParams().set("username", username);
-                return this.http.get<any>(this.getUsernameUrl, {headers, params});
+                return this.http.get<Staff>(this.getUsernameUrl, {headers, params});
         }
 
-        getEmail(email: string): Observable<any> {
+        getEmail(email: string): Observable<Staff> {
                 const token = localStorage.getItem("access_token");
                 const headers = new HttpHeaders({
                         'Authorization': `Bearer ${token}`
                 });
                 const params = new HttpParams().set("email", email);
-                return this.http.get<any>(this.getEmailurl, {headers, params});
+                return this.http.get<Staff>(this.getEmailUrl, {headers, params});
         }
 
         deleteUser(id: number): Observable<any> {
@@ -68,6 +71,22 @@ export class StaffService {
                 });
                 const params = new HttpParams().set("userId", id);
                 return this.http.delete<any>(this.deleteUserUrl, {headers, params});
+        }
+
+        getDepartment(): Observable<Department[]> {
+                const token = localStorage.getItem("access_token");
+                const headers = new HttpHeaders({
+                        'Authorization': `Bearer ${token}`
+                });
+                return this.http.get<Department[]>(this.getDepartmentUrl, {headers});
+        }
+
+        getStaffList(): Observable<any[]> {
+                const token = localStorage.getItem("access_token");
+                const headers = new HttpHeaders({
+                        'Authorization': `Bearer ${token}`
+                });
+                return this.http.get<any[]>(this.getStaffListUrl, {headers});
         }
 
 }

@@ -1,36 +1,37 @@
 import {AfterViewChecked, Component, OnDestroy, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {NgForOf, NgIf} from "@angular/common";
+import {DepartmentService} from "../service/department.service";
 import {NgbModal, NgbModalConfig, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
-import {JobPosition} from "../../common/model/job-position.model";
-import {JobService} from "../service/job.service";
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {NgForOf, NgIf} from "@angular/common";
+import {Department} from "../../common/model/department.model";
 import Swal from "sweetalert2";
 
 @Component({
-        selector: 'app-job-home',
+        selector: 'app-department-home',
         standalone: true,
         imports: [
                 RouterLink,
+                FormsModule,
                 NgIf,
+                ReactiveFormsModule,
                 NgForOf,
-                NgbTooltip,
-                ReactiveFormsModule
+                NgbTooltip
         ],
-        templateUrl: './job-home.component.html',
-        styleUrl: './job-home.component.css'
+        templateUrl: './department-home.component.html',
+        styleUrl: './department-home.component.css'
 })
-export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class DepartmentHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
 
-        pageName: string = "Job Position Management";
+        pageName: string = "Department Management";
+        newDepartmentForm!: FormGroup;
+        isDepartmentNameExists: boolean = false;
         loading: boolean = true;
-        jobPositionList: any[] = [];
+        departmentList: any[] = [];
         private dataTable: any;
         private isDataTableInit: boolean = false;
-        newJobPositionForm!: FormGroup;
-        isJobNameExists: boolean = false;
 
-        constructor(private jobService: JobService, config: NgbModalConfig, private modalService: NgbModal, private formBuilder: FormBuilder) {
+        constructor(private departmentService: DepartmentService, config: NgbModalConfig, private modalService: NgbModal, private formBuilder: FormBuilder) {
                 config.backdrop = "static";
                 config.keyboard = false;
         }
@@ -38,12 +39,12 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
         ngOnInit(): void {
                 this.fetchData();
 
-                this.newJobPositionForm = this.formBuilder.group({
+                this.newDepartmentForm = this.formBuilder.group({
                         name: ['', [Validators.required]]
                 });
 
-                this.newJobPositionForm.get("name")?.valueChanges.subscribe(value => {
-                        this.checkJobPositionName(value);
+                this.newDepartmentForm.get("name")?.valueChanges.subscribe(value => {
+                        this.checkDepartmentName(value);
                 });
         }
 
@@ -60,24 +61,24 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                 }
         }
 
-        fetchData() {
-                this.jobService.getJobNameWithStaffCount().subscribe({
+        fetchData(): void {
+                this.departmentService.getDepartmentWithStaffCount().subscribe({
                         next: (data: any[]) => {
                                 if (!data) {
                                         this.loading = false;
-                                        this.jobPositionList = [];
+                                        this.departmentList = [];
                                         return;
                                 }
 
-                                this.jobPositionList = data.map(item => ({
+                                this.departmentList = data.map(item => ({
                                         id: item.id,
                                         name: item.name,
                                         staffCount: item.staffCount
                                 }));
                                 this.loading = false;
                         },
-                        error: (err: any) => {
-                                console.error("Failed to fetch job position data: ", err);
+                        error: (error) => {
+                                console.error("Failed to fetch department data: ", error);
                                 this.loading = false;
                         }
                 });
@@ -88,7 +89,7 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                         this.dataTable.destroy();
                 }
 
-                this.dataTable = $('#jobListTable').DataTable({
+                this.dataTable = $('#departmentListTable').DataTable({
                         scrollY: "500px",
                         scrollX: true,
                         scrollCollapse: true,
@@ -97,7 +98,7 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                         searching: false,
                         info: false,
                         language: {
-                                "emptyTable": "There is no active job position found",
+                                "emptyTable": "There is no active department found",
                         }
                 });
         }
@@ -115,24 +116,24 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                 this.modalService.open(content, {centered: true});
         }
 
-        checkJobPositionName(name: string): void {
-                this.jobService.getJobPositionName(name).subscribe({
-                        next: (data: any[]) => {
-                                this.isJobNameExists = true;
+        checkDepartmentName(departmentName: string): void {
+                this.departmentService.getDepartmentName(departmentName).subscribe({
+                        next: (data: any) => {
+                                this.isDepartmentNameExists = true;
                         },
-                        error: error => {
-                                this.isJobNameExists = false;
+                        error: (error) => {
+                                this.isDepartmentNameExists = false;
                         }
                 });
         }
 
-        onSubmit() {
+        onSubmit(): void {
 
-                if (this.newJobPositionForm?.valid) {
-                        const jobPositionData: JobPosition = {
-                                ...this.newJobPositionForm.value,
+                if (this.newDepartmentForm?.valid) {
+                        const departmentData: Department = {
+                                ...this.newDepartmentForm.value,
                                 id: 0,
-                                name: this.newJobPositionForm.value.name,
+                                name: this.newDepartmentForm.value.name,
                                 status: "",
                                 createdAt: new Date(),
                                 createdBy: 0,
@@ -140,13 +141,13 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                                 updatedBy: 0
                         };
 
-                        this.jobService.createJobPosition(jobPositionData).subscribe({
-                                next: JobPosition => {
+                        this.departmentService.createDepartment(departmentData).subscribe({
+                                next: (data: Department) => {
                                         this.modalService.dismissAll();
-                                        this.newJobPositionForm.reset();
+                                        this.newDepartmentForm.reset();
                                         Swal.fire({
                                                 icon: "success",
-                                                text: "New Job Position Successfully Created!",
+                                                text: "New Department Successfully Created!",
                                                 allowOutsideClick: false,
                                                 allowEscapeKey: false,
                                                 showConfirmButton: false,
@@ -154,10 +155,10 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                                         });
                                         this.refreshData();
                                 },
-                                error: error => {
+                                error: (error) => {
                                         Swal.fire({
                                                 title: 'Oops!',
-                                                text: 'An error occurred while creating the new Job Position. Please try again.',
+                                                text: 'An error occurred while creating the new Department. Please try again.',
                                                 icon: 'error',
                                                 confirmButtonText: 'OK'
                                         });
@@ -167,13 +168,13 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         }
 
-        deleteJobPosition(jobPositionId: number, staffCount: number): void {
+        deleteDepartment(departmentId: number, staffCount: number): void {
 
                 if (staffCount > 0) {
                         Swal.fire({
                                 icon: "warning",
-                                title: "Job Position cannot be deleted!",
-                                text: "There are active staff with the Job Position.",
+                                title: "Department cannot be deleted!",
+                                text: "There are active staff with the Department.",
                                 allowOutsideClick: false,
                                 allowEscapeKey: false,
                                 showConfirmButton: false,
@@ -184,11 +185,11 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                                 }
                         });
                 } else {
-                        this.jobService.deleteJobPosition(jobPositionId).subscribe({
+                        this.departmentService.deleteDepartment(departmentId).subscribe({
                                 next: (data: any) => {
                                         Swal.fire({
                                                 icon: "success",
-                                                text: "Job Position Successfully Deleted!",
+                                                text: "Department Successfully Deleted!",
                                                 allowOutsideClick: false,
                                                 allowEscapeKey: false,
                                                 showConfirmButton: false,
@@ -196,10 +197,10 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                                         });
                                         this.refreshData();
                                 },
-                                error: error => {
+                                error: (error) => {
                                         Swal.fire({
                                                 title: 'Oops!',
-                                                text: 'An error occurred while deleting the Job Position. Please try again.',
+                                                text: 'An error occurred while deleting the Department. Please try again.',
                                                 icon: 'error',
                                                 confirmButtonText: 'OK'
                                         });

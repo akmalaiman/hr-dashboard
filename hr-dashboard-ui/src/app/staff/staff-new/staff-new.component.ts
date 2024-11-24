@@ -5,8 +5,9 @@ import {NgForOf, NgIf} from "@angular/common";
 import {StaffService} from "../service/staff.service";
 import {JobPosition} from "../../common/model/job-position.model";
 import {Role} from "../../common/model/role.model";
-import {User} from "../../common/model/staff.model";
+import {Staff} from "../../common/model/staff.model";
 import Swal from "sweetalert2";
+import {Department} from "../../common/model/department.model";
 
 @Component({
         selector: 'app-new-user',
@@ -27,10 +28,11 @@ export class StaffNewComponent implements OnInit {
         newStaffForm!: FormGroup;
         jobPositions: JobPosition[] = [];
         roles: Role[] = [];
+        departments: Department[] = [];
         isUsernameExist: boolean = false;
         isEmailExist: boolean = false;
 
-        constructor(private formBuilder: FormBuilder, private userService: StaffService, private router: Router) {
+        constructor(private formBuilder: FormBuilder, private staffService: StaffService, private router: Router) {
         }
 
         ngOnInit(): void {
@@ -41,6 +43,7 @@ export class StaffNewComponent implements OnInit {
                         email: ['', [Validators.required, Validators.email]],
                         password: ['', [Validators.required]],
                         jobPositionId: ['', [Validators.required]],
+                        departmentId: [''],
                         roleId: ['', [Validators.required]],
                         address: [''],
                         city: [''],
@@ -51,6 +54,7 @@ export class StaffNewComponent implements OnInit {
 
                 this.loadJobPositions();
                 this.loadRoles();
+                this.loadDepartments();
 
                 this.newStaffForm.get("username")?.valueChanges.subscribe(value => {
                         this.checkUsername(value);
@@ -63,7 +67,7 @@ export class StaffNewComponent implements OnInit {
         }
 
         loadJobPositions(): void {
-                this.userService.getJobPosition().subscribe({
+                this.staffService.getJobPosition().subscribe({
                         next: data => {
                                 this.jobPositions = data;
                         },
@@ -74,7 +78,7 @@ export class StaffNewComponent implements OnInit {
         }
 
         loadRoles(): void {
-                this.userService.getRole().subscribe({
+                this.staffService.getRole().subscribe({
                         next: data => {
                                 this.roles = data;
                         },
@@ -84,8 +88,19 @@ export class StaffNewComponent implements OnInit {
                 });
         }
 
+        loadDepartments(): void {
+                this.staffService.getDepartment().subscribe({
+                        next: data => {
+                                this.departments = data;
+                        },
+                        error: error => {
+                                console.error("Error fetching departments: ", error);
+                        }
+                });
+        }
+
         checkUsername(username: string): void {
-                this.userService.getUsername(username).subscribe({
+                this.staffService.getUsername(username).subscribe({
                         next: data => {
                                 this.isUsernameExist = true;
                         },
@@ -96,7 +111,7 @@ export class StaffNewComponent implements OnInit {
         }
 
         checkEmail(email: string): void {
-                this.userService.getEmail(email).subscribe({
+                this.staffService.getEmail(email).subscribe({
                         next: data => {
                                 this.isEmailExist = true;
                         },
@@ -119,11 +134,13 @@ export class StaffNewComponent implements OnInit {
                 if (this.newStaffForm?.valid) {
                         const selectedJobPosition = this.newStaffForm.value.jobPositionId;
                         const selectedRole = this.newStaffForm.value.roleId;
+                        const selectedDepartment = this.newStaffForm.value.departmentId;
 
                         const jobPosition = this.jobPositions.find(value => value.id == selectedJobPosition);
                         const role = this.roles.find(value => value.id == selectedRole);
+                        const department = this.departments.find(value => value.id == selectedDepartment);
 
-                        const userData: User = {
+                        const userData: Staff = {
                                 ...this.newStaffForm.value,
                                 id: 0,
                                 postalCode: this.newStaffForm.value.postalCode ? Number(this.newStaffForm.value.postalCode) : 0,
@@ -134,9 +151,10 @@ export class StaffNewComponent implements OnInit {
                                 updatedBy: 0,
                                 jobPositionId: jobPosition,
                                 roles: role ? [{id: role.id, name: role.name}] : [],
+                                departmentId: department
                         };
 
-                        this.userService.createUser(userData).subscribe({
+                        this.staffService.createUser(userData).subscribe({
                                 next: User => {
                                         Swal.fire({
                                                 icon: "success",

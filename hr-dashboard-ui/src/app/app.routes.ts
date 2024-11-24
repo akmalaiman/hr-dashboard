@@ -6,7 +6,8 @@ import {authGuard} from "./guards/auth.guard";
 import {StaffHomeComponent} from "./staff/staff-home/staff-home.component";
 import {StaffNewComponent} from "./staff/staff-new/staff-new.component";
 import {JobHomeComponent} from "./job/job-home/job-home.component";
-import {UploadComponent} from "./upload/upload.component";
+import {UploadHomeComponent} from "./upload/upload-home/upload-home.component";
+import {DepartmentHomeComponent} from "./department/department-home/department-home.component";
 
 export const routes: Routes = [
         {
@@ -44,7 +45,12 @@ export const routes: Routes = [
                         },
                         {
                                 path: "upload",
-                                component: UploadComponent,
+                                component: UploadHomeComponent,
+                                canActivate: [authGuard]
+                        },
+                        {
+                                path: "department",
+                                component: DepartmentHomeComponent,
                                 canActivate: [authGuard]
                         }
                 ]

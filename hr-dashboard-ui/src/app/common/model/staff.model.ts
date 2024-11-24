@@ -1,7 +1,8 @@
 import {JobPosition} from "./job-position.model";
 import {Role} from "./role.model";
+import {Department} from "./department.model";
 
-export interface User {
+export interface Staff {
         id: number;
         firstName: string;
         lastName: string;
@@ -20,4 +21,5 @@ export interface User {
         createdBy: number;
         updatedAt: Date;
         updatedBy: number;
+        departmentId: Department;
 }
