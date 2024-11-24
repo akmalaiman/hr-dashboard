@@ -1,6 +1,6 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {User} from "../../common/model/staff.model";
-import {catchError, Observable, of, throwError} from "rxjs";
+import {Observable} from "rxjs";
 import {JobPosition} from "../../common/model/job-position.model";
 import {Role} from "../../common/model/role.model";
 import {Injectable} from "@angular/core";
@@ -14,8 +14,9 @@ export class StaffService {
         private roleUrl = "http://localhost:8080/api/role/all";
         private createUserUrl = "http://localhost:8080/api/user/add";
         private getUsernameUrl = "http://localhost:8080/api/user/byUsername";
-        private getEmailurl = "http://localhost:8080/api/user/byEmail";
+        private getEmailUrl = "http://localhost:8080/api/user/byEmail";
         private deleteUserUrl = "http://localhost:8080/api/user/delete";
+        private getDepartmentUrl = "http://localhost:8080/api/department/all";
 
         constructor(private http: HttpClient) { }
 
@@ -58,7 +59,7 @@ export class StaffService {
                         'Authorization': `Bearer ${token}`
                 });
                 const params = new HttpParams().set("email", email);
-                return this.http.get<any>(this.getEmailurl, {headers, params});
+                return this.http.get<any>(this.getEmailUrl, {headers, params});
         }
 
         deleteUser(id: number): Observable<any> {
@@ -68,6 +69,14 @@ export class StaffService {
                 });
                 const params = new HttpParams().set("userId", id);
                 return this.http.delete<any>(this.deleteUserUrl, {headers, params});
+        }
+
+        getDepartment(): Observable<any[]> {
+                const token = localStorage.getItem("access_token");
+                const headers = new HttpHeaders({
+                        'Authorization': `Bearer ${token}`
+                });
+                return this.http.get<any[]>(this.getDepartmentUrl, {headers});
         }
 
 }
