@@ -108,6 +108,7 @@ public class UploadService {
                 * 10: country
                 * 11: jobPosition
                 * 12: role
+                * 13: department
                 * */
 
                 int savedCount = 0;
@@ -133,6 +134,7 @@ public class UploadService {
                                 String country = row[10];
                                 String jobPositionName = row[11];
                                 String roleName = row[12];
+                                String departmentName = row[13];
 
                                 Role role = roleRepository.findByName(roleName);
                                 Set<Role> roles = new HashSet<>();
@@ -148,6 +150,16 @@ public class UploadService {
                                         jobPosition.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
                                         jobPosition.setCreatedBy(userId);
                                         jobPositionRepository.save(jobPosition);
+                                }
+
+                                Department department = departmentRepository.findByNameAndStatus(departmentName, "Active");
+                                if (department == null)  {
+                                        department = new Department();
+                                        department.setName(departmentName);
+                                        department.setStatus("Active");
+                                        department.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+                                        department.setCreatedBy(userId);
+                                        departmentRepository.save(department);
                                 }
 
                                 User byUsername = userRepository.findByUsernameAndStatus(username, "Active");
@@ -170,6 +182,7 @@ public class UploadService {
                                         user.setStatus("Active");
                                         user.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
                                         user.setCreatedBy(userId);
+                                        user.setDepartmentId(department);
                                         userList.add(user);
                                         savedCount++;
                                 } else {

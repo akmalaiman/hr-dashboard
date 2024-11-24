@@ -1,2 +1,2 @@
-﻿entity,firstName,lastName,username,email,password,address,city,state,postalCode,country,jobPositionId,role
-staff,,,,,,,,,,,,
+﻿entity,firstName,lastName,username,email,password,address,city,state,postalCode,country,jobPositionId,role,departmentId
+staff,,,,,,,,,,,,,
