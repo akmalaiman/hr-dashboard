@@ -34,13 +34,14 @@ public class TemplateController {
                         String filePath =switch (filename.toLowerCase()) {
                                 case "staff" -> filePath = "template/staff.csv";
                                 case "jobposition" -> filePath = "template/job-position.csv";
-                                default -> filePath = "";
+                                case "department" -> filePath = "template/department.csv";
+                                default -> filePath = null;
                         };
 
                         Resource resource = new ClassPathResource(filePath);
 
                         if (!resource.exists()) {
-                                return ResponseEntity.notFound().build();
+                                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
                         }
 
                         return ResponseEntity.ok()

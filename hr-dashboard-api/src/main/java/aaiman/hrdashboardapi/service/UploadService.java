@@ -1,9 +1,11 @@
 package aaiman.hrdashboardapi.service;
 
 import aaiman.hrdashboardapi.dto.CsvProcessDto;
+import aaiman.hrdashboardapi.model.Department;
 import aaiman.hrdashboardapi.model.JobPosition;
 import aaiman.hrdashboardapi.model.Role;
 import aaiman.hrdashboardapi.model.User;
+import aaiman.hrdashboardapi.repository.DepartmentRepository;
 import aaiman.hrdashboardapi.repository.JobPositionRepository;
 import aaiman.hrdashboardapi.repository.RoleRepository;
 import aaiman.hrdashboardapi.repository.UserRepository;
@@ -28,11 +30,13 @@ public class UploadService {
         private final RoleRepository roleRepository;
         private final UserRepository userRepository;
         private final JobPositionRepository jobPositionRepository;
+        private  final DepartmentRepository departmentRepository;
 
-        public UploadService(RoleRepository roleRepository, UserRepository userRepository, JobPositionRepository jobPositionRepository) {
+        public UploadService(RoleRepository roleRepository, UserRepository userRepository, JobPositionRepository jobPositionRepository, DepartmentRepository departmentRepository) {
                 this.roleRepository = roleRepository;
                 this.userRepository = userRepository;
                 this.jobPositionRepository = jobPositionRepository;
+                this.departmentRepository = departmentRepository;
         }
 
         public CsvProcessDto processFile(MultipartFile file, int userId) {
@@ -43,12 +47,13 @@ public class UploadService {
 
                 try {
 
+                        CSVReader bodyContent = new CSVReader(new InputStreamReader(file.getInputStream()));
                         CSVReader csvReader = new CSVReader(new InputStreamReader(file.getInputStream()));
 
                         //Skip the header row
-                        csvReader.readNext();
+                        bodyContent.readNext();
 
-                        String[] rowContent = csvReader.readNext();
+                        String[] rowContent = bodyContent.readNext();
                         if (rowContent != null && rowContent.length > 0) {
                                 String dataType = rowContent[0];
 
@@ -64,6 +69,12 @@ public class UploadService {
                                                 savedCount = jobPositionResult.getSavedCount();
                                                 duplicateCount = jobPositionResult.getDuplicateCount();
                                                 entity = jobPositionResult.getEntity();
+                                                break;
+                                        case "department":
+                                                CsvProcessDto departmentResult = processDepartment(csvReader, userId);
+                                                savedCount = departmentResult.getSavedCount();
+                                                duplicateCount = departmentResult.getDuplicateCount();
+                                                entity = departmentResult.getEntity();
                                                 break;
                                         default:
                                                 log.error("Invalid data type: {}", dataType);
@@ -106,6 +117,7 @@ public class UploadService {
 
                         List<User> userList = new ArrayList<>();
                         String[] row;
+                        csvReader.readNext();
 
                         while ((row = csvReader.readNext()) != null) {
 
@@ -191,6 +203,7 @@ public class UploadService {
 
                         List<JobPosition> jobPositionList = new ArrayList<>();
                         String[] row;
+                        csvReader.readNext();
 
                         while ((row = csvReader.readNext()) != null) {
 
@@ -219,6 +232,53 @@ public class UploadService {
                 }
 
                 return new CsvProcessDto(savedCount, duplicateCount, "Job Position");
+
+        }
+
+        private CsvProcessDto processDepartment(CSVReader csvReader, int userId) {
+
+                /*
+                 * Department CSV file format
+                 * 0: dataType
+                 *1: name
+                 * */
+
+                int savedCount = 0;
+                int duplicateCount = 0;
+
+                try {
+
+                        List<Department> departmentList = new ArrayList<>();
+                        String[] row;
+                        csvReader.readNext();
+
+                        while ((row = csvReader.readNext()) != null) {
+
+                                String name = row[1];
+
+                                Department byName = departmentRepository.findByNameAndStatus(name, "Active");
+                                if (byName != null) {
+                                        duplicateCount++;
+                                } else {
+                                        Department department = new Department();
+                                        department.setName(name);
+                                        department.setStatus("Active");
+                                        department.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+                                        department.setCreatedBy(userId);
+                                        departmentList.add(department);
+                                        savedCount++;
+                                }
+
+                        }
+
+                        departmentRepository.saveAll(departmentList);
+
+                } catch (Exception e) {
+                        log.error("Failed to process department CSV file: {}", e.getMessage());
+                        throw new RuntimeException("Failed to process department CSV file: " + e.getMessage());
+                }
+
+                return new CsvProcessDto(savedCount, duplicateCount, "Department");
 
         }
 

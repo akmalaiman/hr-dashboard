@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {UploadService} from "../service/upload.service";
-import {NgClass, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import Swal from "sweetalert2";
 
@@ -14,7 +14,8 @@ import Swal from "sweetalert2";
                 NgClass,
                 NgIf,
                 ReactiveFormsModule,
-                FormsModule
+                FormsModule,
+                NgForOf
         ],
         templateUrl: './upload-home.component.html',
         styleUrl: './upload-home.component.css'
@@ -28,6 +29,11 @@ export class UploadHomeComponent {
         selectedFile: File | null = null;
         isUploading: boolean = false;
         uploadResult: {savedCount: number; duplicateCount: number; entity: string}  = {savedCount: 0, duplicateCount: 0, entity: ''};
+        templateList: any[] = [
+                {filename: "staff", displayName: "Staff"},
+                {filename: "jobPosition", displayName: "Job Position"},
+                {filename: "department", displayName: "Department"},
+        ];
 
         constructor(private http: HttpClient, private uploadService: UploadService) {
         }
