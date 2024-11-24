@@ -76,7 +76,7 @@ public class User {
         private int updatedBy;
 
         @ManyToOne
-        @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
+        @JoinColumn(name = "department_id", referencedColumnName = "id")
         private Department departmentId;
 
 }
