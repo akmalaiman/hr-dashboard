@@ -1,1 +1,76 @@
-<p>department-home works!</p>
+<div class="container-fluid">
+        <div class="row mb-lg-5">
+                <div class="col-lg-8"><h4>{{pageName}}</h4></div>
+                <div class="d-flex col-lg-4 justify-content-end">
+                        <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a class="text-decoration-none" [routerLink]="['/home']">Home</a> </li>
+                                        <li class="breadcrumb-item active" aria-current="page">{{pageName}}</li>
+                                </ol>
+                        </nav>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                        <h5>DepartmentList</h5>
+                        <button type="button" class="btn btn-primary" (click)="openModal(content)">Add New Department</button>
+                </div>
+        </div>
+        <hr>
+        <div class="row">
+                <div class="col-lg-12">
+                        <div *ngIf="loading" class="text-center">
+                                <div class="spinner-border" role="status"></div>
+                        </div>
+                </div>
+                <table *ngIf="!loading" id="departmentListTable" class="table table-striped table-hover table-bordered">
+                        <thead class="table-primary text-center" style="width: 100%">
+                        <tr>
+                                <th class="text-center" style="width: 80%;">Job Name</th>
+                                <th class="text-center" style="width: 10%;">Staff Count</th>
+                                <th class="text-center" style="width: 10%;"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let department of departmentList">
+                                <td>{{department.name}}</td>
+                                <td class="text-center" ><i class='bx bxs-user' ></i> {{department.staffCount}}</td>
+                                <td class="text-center">
+                                        <button class="btn btn-danger" placement="auto" ngbTooltip="Delete {{department.name}}" (click)="deleteDepartment(department.id, department.staffCount)"><i class='bx bx-trash' ></i></button>
+                                </td>
+                        </tr>
+                        </tbody>
+                </table>
+        </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">New Department Form</h4>
+                <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <form [formGroup]="newDepartmentForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                        <div class="row mb-3">
+                                <div class="col-lg-12">
+                                        <div class="input-group">
+                                                <span class="input-group-text border-dark-subtle"><i class='bx bxs-briefcase'></i></span>
+                                                <div class="form-floating">
+                                                        <input type="text" formControlName="name" id="name"  placeholder="Department Name" class="form-control border-dark-subtle">
+                                                        <label for="name">Department Name</label>
+                                                </div>
+                                        </div>
+                                        <div *ngIf="newDepartmentForm.get('name')?.touched && newDepartmentForm.get('name')?.invalid" class="text-danger">
+                                                <small><b>Department Name is required</b></small>
+                                        </div>
+                                        <div *ngIf="!isDepartmentNameExists && newDepartmentForm.get('name')?.valid" class="text-danger">
+                                                <small><b>This department already exist!</b></small>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="c('Close')">Close</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="newDepartmentForm!.invalid || !isDepartmentNameExists">Save</button>
+                </div>
+        </form>
+</ng-template>

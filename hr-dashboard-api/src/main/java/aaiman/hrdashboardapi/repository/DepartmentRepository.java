@@ -22,7 +22,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
         @Query(
                 value = "SELECT d.id as id, d.\"name\" AS name, COUNT(u.id) AS staffDepartmentCount " +
                         "FROM department d " +
-                        "LEFT JOIN \"user\" u ON u.job_position_id = d.id AND u.status = 'Active' " +
+                        "LEFT JOIN \"user\" u ON u.department_id = d.id AND u.status = 'Active' " +
                         "WHERE d.status = 'Active' " +
                         "GROUP BY d.id " +
                         "ORDER BY d.\"name\"",

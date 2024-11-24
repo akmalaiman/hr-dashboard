@@ -26,9 +26,9 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
         loading: boolean = true;
         jobPositionList: any[] = [];
         private dataTable: any;
-        private isDataTableInit = false;
+        private isDataTableInit: boolean = false;
         newJobPositionForm!: FormGroup;
-        isJobNameExists = false;
+        isJobNameExists: boolean = false;
 
         constructor(private jobService: JobService, config: NgbModalConfig, private modalService: NgbModal, private formBuilder: FormBuilder) {
                 config.backdrop = "static";
@@ -63,6 +63,12 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
         fetchData() {
                 this.jobService.getJobNameWithStaffCount().subscribe({
                         next: (data: any[]) => {
+                                if (!data) {
+                                        this.loading = false;
+                                        this.jobPositionList = [];
+                                        return;
+                                }
+
                                 this.jobPositionList = data.map(item => ({
                                         id: item.id,
                                         name: item.name,
@@ -182,7 +188,7 @@ export class JobHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
                                 next: (data: any) => {
                                         Swal.fire({
                                                 icon: "success",
-                                                text: "Job Position Successfully Deleted!!",
+                                                text: "Job Position Successfully Deleted!",
                                                 allowOutsideClick: false,
                                                 allowEscapeKey: false,
                                                 showConfirmButton: false,
