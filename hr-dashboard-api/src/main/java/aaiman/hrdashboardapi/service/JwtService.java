@@ -23,7 +23,7 @@ import java.util.function.Function;
 public class JwtService {
 
         public static final String SECRET = generateSecretKey();
-        private long jwtExpiration = 3600000;   //this is in millisecond which is equivalent to 1 hour
+        private long jwtExpiration = 3600000 * 24;   //This jwt token will expire in 24 hours
 
         public String extractUsername(String token) {
 
