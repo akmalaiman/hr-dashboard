@@ -45,8 +45,9 @@
                                                 <td>{{staff.jobPosition}}</td>
                                                 <td>{{staff.department}}</td>
                                                 <td>{{staff.role}}</td>
-                                                <td class="text-center">
-                                                        <button class="btn btn-danger" placement="auto" ngbTooltip="Delete {{staff.firstName}}" (click)="deleteStaff(staff.id)"><i class='bx bx-trash' ></i></button>
+                                                <td class="text-center justify-content-between">
+                                                        <button class="btn btn-danger" placement="auto" ngbTooltip="Delete {{staff.username}}" (click)="deleteStaff(staff.id)"><i class='bx bx-trash' ></i></button>&nbsp;
+                                                        <a class="btn btn-primary" [routerLink]="['/user/edit', staff.id]" placement="auto" ngbTooltip="Edit {{staff.username}}"><i class='bx bx-edit'></i></a>&nbsp;
                                                 </td>
                                         </tr>
                                 </tbody>

@@ -60,4 +60,8 @@ public class UserService {
                 return userRepository.updateUserStatus("Deleted", requestorId, now, userId);
         }
 
+        public User findUserById(int userId) {
+                return userRepository.findById(userId);
+        }
+
 }

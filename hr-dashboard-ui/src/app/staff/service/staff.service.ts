@@ -19,6 +19,7 @@ export class StaffService {
         private deleteUserUrl = "http://localhost:8080/api/user/delete";
         private getDepartmentUrl = "http://localhost:8080/api/department/all";
         private  getStaffListUrl = "http://localhost:8080/api/user/all";
+        private getStaffByIdUrl = "http://localhost:8080/api/user/{id}";
 
         constructor(private http: HttpClient) { }
 
@@ -87,6 +88,15 @@ export class StaffService {
                         'Authorization': `Bearer ${token}`
                 });
                 return this.http.get<any[]>(this.getStaffListUrl, {headers});
+        }
+
+        getStaff(id: number): Observable<any> {
+                const token = localStorage.getItem("access_token");
+                const headers = new HttpHeaders({
+                        'Authorization': `Bearer ${token}`
+                });
+                const url = this.getStaffByIdUrl.replace("{id}", id.toString());
+                return this.http.get<any>(url, {headers});
         }
 
 }
