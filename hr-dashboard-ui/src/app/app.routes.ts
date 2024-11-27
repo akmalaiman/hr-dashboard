@@ -54,5 +54,9 @@ export const routes: Routes = [
                                 canActivate: [authGuard]
                         }
                 ]
+        },
+        {
+                path: "**",
+                redirectTo: "login"
         }
 ];
