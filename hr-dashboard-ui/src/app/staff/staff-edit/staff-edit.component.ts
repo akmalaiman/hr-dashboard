@@ -7,6 +7,7 @@ import {JobPosition} from "../../common/model/job-position.model";
 import {Role} from "../../common/model/role.model";
 import {Department} from "../../common/model/department.model";
 import {Staff} from "../../common/model/staff.model";
+import Swal from "sweetalert2";
 
 @Component({
         selector: 'app-staff-edit',
@@ -27,6 +28,7 @@ export class StaffEditComponent implements OnInit {
         jobPositions: JobPosition[] = [];
         roles: Role[] = [];
         departments: Department[] = [];
+        userId: number = 0;
 
         constructor(private formBuilder: FormBuilder, private staffService: StaffService, private router: Router, private activatedRoute: ActivatedRoute) {
         }
@@ -50,9 +52,10 @@ export class StaffEditComponent implements OnInit {
 
                 this.activatedRoute.params.subscribe(params => {
                         const id = params['id'];
-                        this.fetchStaffById(id);
+                        this.userId = id;
                 });
 
+                this.fetchStaffById(this.userId);
                 this.loadJobPositions();
                 this.loadRoles();
                 this.loadDepartments();
@@ -116,6 +119,57 @@ export class StaffEditComponent implements OnInit {
                 });
         }
 
-        onSubmit(): void {}
+        onSubmit(): void {
+
+                Object.keys(this.editStaffForm.controls).forEach(field => {
+                        const control = this.editStaffForm.get(field);
+
+                        if (control?.hasValidator(Validators.required) && control?.value === '') {
+                                control.markAsTouched();
+                        }
+                });
+
+                if (this.editStaffForm?.valid) {
+                        const selectedJobPosition = this.editStaffForm.value.jobPositionId;
+                        const selectedRoleId = this.editStaffForm.value.roleId;
+                        const selectedDepartmentId = this.editStaffForm.value.departmentId;
+
+                        const jobPosition = this.jobPositions.find(value => value.id == selectedJobPosition);
+                        const role = this.roles.find(value => value.id == selectedRoleId);
+                        const department = this.departments.find(value => value.id == selectedDepartmentId);
+
+                        const staffData: Staff = {
+                                ...this.editStaffForm.value,
+                                id: Number(this.userId),
+                                postalCode: this.editStaffForm.value.postalCode ? Number(this.editStaffForm.value.postalCode) : 0,
+                                status: "",
+                                createdAt: new Date(),
+                                createdBy: 0,
+                                updatedAt: new Date(),
+                                updatedBy: 0,
+                                jobPositionId: jobPosition,
+                                roles: role ? [{id: role.id, name: role.name}] : [],
+                                departmentId: department
+                        };
+
+                        this.staffService.updateStaff(this.userId, staffData).subscribe({
+                                next: (data: Staff) => {
+                                        Swal.fire({
+                                                icon: "success",
+                                                text: "New User Successfully Created!",
+                                                confirmButtonText: "Close",
+                                                allowOutsideClick: false,
+                                                allowEscapeKey: false
+                                        }).then((result) => {
+                                                this.router.navigate(['/user']);
+                                        });
+                                },
+                                error: (error: any) => {
+                                        console.log("Error updating staff: ", error);
+                                }
+                        });
+                }
+
+        }
 
 }

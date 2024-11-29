@@ -60,10 +60,10 @@ public class UserController {
                 User user = userService.getActiveUserByUsername(username);
 
                 if (user == null) {
-                        return ResponseEntity.status(HttpStatus.OK).body(null);
+                        return ResponseEntity.status(HttpStatus.OK).build();
                 }
 
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
 
         }
 
@@ -74,7 +74,7 @@ public class UserController {
                 User user = userService.getActiveUserByEmail(email);
 
                 if (user == null) {
-                        return ResponseEntity.status(HttpStatus.OK).body(null);
+                        return ResponseEntity.status(HttpStatus.OK).build();
                 }
 
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(user);
@@ -92,7 +92,7 @@ public class UserController {
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
                 }
 
-                return ResponseEntity.status(HttpStatus.OK).body(null);
+                return ResponseEntity.status(HttpStatus.OK).build();
         }
 
         @GetMapping("/{userId}")
@@ -101,10 +101,24 @@ public class UserController {
                 User user = userService.findUserById(userId);
 
                 if (user == null) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
                 }
 
                 return ResponseEntity.status(HttpStatus.OK).body(user);
+
+        }
+
+        @PutMapping("/update/{userId}")
+        public ResponseEntity<User> updateUser(@RequestBody User user, HttpServletRequest request) {
+
+                int userId = (Integer) request.getAttribute("userId");
+
+                User updatedUser = userService.updateUser(user, userId);
+                if (updatedUser == null) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
+
+                return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
 
         }
 
