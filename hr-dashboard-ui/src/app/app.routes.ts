@@ -8,6 +8,7 @@ import {StaffNewComponent} from "./staff/staff-new/staff-new.component";
 import {JobHomeComponent} from "./job/job-home/job-home.component";
 import {UploadHomeComponent} from "./upload/upload-home/upload-home.component";
 import {DepartmentHomeComponent} from "./department/department-home/department-home.component";
+import {StaffEditComponent} from "./staff/staff-edit/staff-edit.component";
 
 export const routes: Routes = [
         {
@@ -30,8 +31,18 @@ export const routes: Routes = [
                         },
                         {
                                 path: "user",
-                                component: StaffHomeComponent,
-                                canActivate: [authGuard]
+                                children: [
+                                        {
+                                                path: "",
+                                                component: StaffHomeComponent,
+                                                canActivate: [authGuard]
+                                        },
+                                        {
+                                                path: "edit/:id",
+                                                component: StaffEditComponent,
+                                                canActivate: [authGuard]
+                                        }
+                                ]
                         },
                         {
                                 path: "user/new",

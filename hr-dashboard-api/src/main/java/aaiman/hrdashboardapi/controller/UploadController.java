@@ -18,7 +18,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/upload")
-@Tag(name = "Upload CSV", description = "This API process the contents of CSV and store it in database")
+@Tag(name = "Upload CSV", description = "Handles uploading of CSV files for processing and storing in the database")
 @Slf4j
 public class UploadController {
 

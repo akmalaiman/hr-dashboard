@@ -36,6 +36,7 @@ export class StaffNewComponent implements OnInit {
         }
 
         ngOnInit(): void {
+
                 this.newStaffForm = this.formBuilder.group({
                         firstName: ['', [Validators.required]],
                         lastName: ['', [Validators.required]],

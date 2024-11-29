@@ -25,4 +25,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
         @Query(value = "UPDATE \"user\" SET status = :status, updated_by = :updatedBy, updated_at = :updatedAt WHERE id = :id", nativeQuery = true)
         int updateUserStatus(@Param("status") String status, @Param("updatedBy") int updatedBy, @Param("updatedAt") Timestamp updatedAt, @Param("id") int id);
 
+        User findById(int id);
+
 }

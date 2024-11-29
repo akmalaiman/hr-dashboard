@@ -60,4 +60,30 @@ public class UserService {
                 return userRepository.updateUserStatus("Deleted", requestorId, now, userId);
         }
 
+        public User findUserById(int userId) {
+                return userRepository.findById(userId);
+        }
+
+        public User updateUser(User user, int userId) {
+
+                User existingUser = userRepository.findById(user.getId());
+
+                existingUser.setFirstName(user.getFirstName());
+                existingUser.setLastName(user.getLastName());
+                existingUser.setJobPositionId(user.getJobPositionId());
+                existingUser.setDepartmentId(user.getDepartmentId());
+                existingUser.setAddress(user.getAddress());
+                existingUser.setCity(user.getCity());
+                existingUser.setState(user.getState());
+                existingUser.setPostalCode(user.getPostalCode());
+                existingUser.setCountry(user.getCountry());
+                existingUser.setUpdatedBy(userId);
+                existingUser.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
+
+                existingUser.getRoles().clear();
+                existingUser.getRoles().addAll(user.getRoles());
+
+                return userRepository.save(existingUser);
+        }
+
 }
