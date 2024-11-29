@@ -1,11 +1,12 @@
 import {AfterViewChecked, Component, OnDestroy, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import 'datatables.net';
 import {NgForOf, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
 import {StaffService} from "../service/staff.service";
-import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbModalConfig, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
         selector: 'app-user-management',
@@ -14,7 +15,8 @@ import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
                 RouterLink,
                 NgForOf,
                 NgIf,
-                NgbTooltip
+                NgbTooltip,
+                ReactiveFormsModule
         ],
         templateUrl: './staff-home.component.html',
         styleUrl: './staff-home.component.css'
@@ -26,12 +28,19 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
         loading: boolean = true;
         private dataTable: any;
         private isDataTableInit = false;
+        resetPasswordForm!: FormGroup;
 
-        constructor(private http: HttpClient, private staffService: StaffService) {
+        constructor(private http: HttpClient, private staffService: StaffService, config: NgbModalConfig, private modalService: NgbModal, private formBuilder: FormBuilder) {
+                config.backdrop = "static";
+                config.keyboard = false;
         }
 
         ngOnInit(): void {
                 this.fetchStaffData();
+
+                this.resetPasswordForm = this.formBuilder.group({
+                        password: ['', [Validators.required, Validators.minLength(8)]]
+                });
         }
 
         ngAfterViewChecked() {
@@ -139,6 +148,18 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
                                 "emptyTable": "There is no active staff found",
                         }
                 });
+        }
+
+        openModal(content: any): void {
+                this.modalService.open(content, {centered: true});
+        }
+
+        onSubmit(): void {
+
+                if (this.resetPasswordForm?.valid) {
+
+                }
+
         }
 
 }
