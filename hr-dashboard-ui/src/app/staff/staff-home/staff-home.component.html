@@ -48,7 +48,7 @@
                                                 <td class="text-center justify-content-between">
                                                         <button class="btn btn-danger" placement="auto" ngbTooltip="Delete {{staff.username}}" (click)="deleteStaff(staff.id)"><i class='bx bx-trash' ></i></button>&nbsp;
                                                         <a class="btn btn-primary" [routerLink]="['/user/edit', staff.id]" placement="auto" ngbTooltip="Edit {{staff.username}}"><i class='bx bx-edit'></i></a>&nbsp;
-                                                        <button type="button" class="btn btn-warning" placement="auto" ngbTooltip="Rest password for {{staff.username}}" (click)="openModal(content)"><i class='bx bx-cog'></i></button>
+                                                        <button type="button" class="btn btn-warning" placement="auto" ngbTooltip="Rest password for {{staff.username}}" (click)="openModal(content, staff.id)"><i class='bx bx-cog'></i></button>
                                                 </td>
                                         </tr>
                                 </tbody>

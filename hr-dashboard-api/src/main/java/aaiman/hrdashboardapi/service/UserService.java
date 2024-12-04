@@ -86,4 +86,12 @@ public class UserService {
                 return userRepository.save(existingUser);
         }
 
+        public int updateUserPassword(int userId, String password, int id) {
+
+                Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+                password = new BCryptPasswordEncoder().encode(password);
+                return userRepository.updatePassword(password, userId, now, id);
+
+        }
+
 }

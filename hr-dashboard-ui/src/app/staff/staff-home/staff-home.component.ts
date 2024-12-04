@@ -29,6 +29,7 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
         private dataTable: any;
         private isDataTableInit = false;
         resetPasswordForm!: FormGroup;
+        userId: number = 0;
 
         constructor(private http: HttpClient, private staffService: StaffService, config: NgbModalConfig, private modalService: NgbModal, private formBuilder: FormBuilder) {
                 config.backdrop = "static";
@@ -150,14 +151,41 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
                 });
         }
 
-        openModal(content: any): void {
+        openModal(content: any, id: number): void {
                 this.modalService.open(content, {centered: true});
+                this.userId = id;
         }
 
         onSubmit(): void {
 
                 if (this.resetPasswordForm?.valid) {
+                        const password = this.resetPasswordForm.value.password;
 
+                        this.staffService.updatePassword(this.userId, password).subscribe({
+                                next: (data: any) => {
+                                        Swal.fire({
+                                                icon: "success",
+                                                text: "Password Successfully Updated!",
+                                                confirmButtonText: "Close",
+                                                allowOutsideClick: false,
+                                                allowEscapeKey: false
+                                        });
+                                },
+                                error: (error: any) => {
+                                        Swal.fire({
+                                                icon: "error",
+                                                title: "Oops!",
+                                                text: "An error occurred while updating the password. Please try again.",
+                                                confirmButtonText: "OK",
+                                                allowOutsideClick: false,
+                                                allowEscapeKey: false
+                                        });
+                                        console.log("Error updating password: ", error);
+                                }
+                        });
+
+                        this.modalService.dismissAll();
+                        this.resetPasswordForm.reset();
                 }
 
         }
