@@ -122,4 +122,19 @@ public class UserController {
 
         }
 
+        @PutMapping("/updatePassword/{userId}")
+        @PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER')")
+        public ResponseEntity<User> updateUserPassword(@RequestParam("password") String password, @PathVariable("userId") Integer userId, HttpServletRequest request) {
+
+                int requestorId = (Integer) request.getAttribute("userId");
+
+                int updateStatus = userService.updateUserPassword(requestorId, password, userId);
+
+                if (updateStatus == 0) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                }
+
+                return ResponseEntity.status(HttpStatus.OK).build();
+        }
+
 }

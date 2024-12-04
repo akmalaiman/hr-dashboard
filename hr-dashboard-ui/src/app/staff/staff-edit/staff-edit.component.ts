@@ -165,6 +165,14 @@ export class StaffEditComponent implements OnInit {
                                         });
                                 },
                                 error: (error: any) => {
+                                        Swal.fire({
+                                                icon: "error",
+                                                title: "Oops!",
+                                                text: "An error occurred while updating the staff. Please try again.",
+                                                confirmButtonText: "OK",
+                                                allowOutsideClick: false,
+                                                allowEscapeKey: false
+                                        });
                                         console.log("Error updating staff: ", error);
                                 }
                         });

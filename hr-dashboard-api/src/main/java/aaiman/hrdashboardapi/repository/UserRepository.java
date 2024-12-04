@@ -27,4 +27,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
         User findById(int id);
 
+        @Modifying
+        @Transactional
+        @Query(value = "UPDATE \"user\" SET password = :password, updated_by = :updatedBy, updated_at = :updatedAt WHERE id = :id", nativeQuery = true)
+        int updatePassword(@Param("password") String password, @Param("updatedBy") int updatedBy, @Param("updatedAt") Timestamp updatedAt, @Param("id") int id);
+
 }
