@@ -85,7 +85,7 @@ public class DepartmentServiceTest {
 
                 assertNotNull(departmentList);
                 assertFalse(departmentList.isEmpty());
-                assertEquals(departmentList.size(), 1);
+                assertEquals(1, departmentList.size());
                 verify(departmentRepository, times(1)).findAllByStatus(anyString());
 
         }
@@ -113,6 +113,7 @@ public class DepartmentServiceTest {
                 when(departmentRepository.findAllActiveWithCount()).thenReturn(rawResults);
                 List<DepartmentDto> departmentList = departmentService.getAllActiveDepartmentsWithCount();
 
+                assertNotNull(departmentList);
                 assertEquals(2, departmentList.size());
 
                 DepartmentDto firstDepartment = departmentList.get(0);
