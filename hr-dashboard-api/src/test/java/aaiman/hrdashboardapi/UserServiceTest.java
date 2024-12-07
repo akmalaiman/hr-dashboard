@@ -111,20 +111,20 @@ public class UserServiceTest {
                 User newUser = userService.createUser(testUser, 1);
 
                 assertNotNull(newUser);
-                assertEquals(newUser.getFirstName(), testUser.getFirstName());
-                assertEquals(newUser.getLastName(), testUser.getLastName());
-                assertEquals(newUser.getUsername(), testUser.getUsername());
-                assertEquals(newUser.getEmail(), testUser.getEmail());
-                assertEquals(newUser.getAddress(), testUser.getAddress());
-                assertEquals(newUser.getCity(), testUser.getCity());
-                assertEquals(newUser.getState(), testUser.getState());
-                assertEquals(newUser.getPostalCode(), testUser.getPostalCode());
-                assertEquals(newUser.getCountry(), testUser.getCountry());
-                assertEquals(newUser.getJobPositionId(), testUser.getJobPositionId());
-                assertEquals(newUser.getRoles(), testUser.getRoles());
-                assertEquals(newUser.getStatus(), testUser.getStatus());
-                assertEquals(newUser.getCreatedBy(), testUser.getCreatedBy());
-                assertEquals(newUser.getDepartmentId(), testUser.getDepartmentId());
+                assertEquals(testUser.getFirstName(), newUser.getFirstName());
+                assertEquals(testUser.getLastName(), newUser.getLastName());
+                assertEquals(testUser.getUsername(), newUser.getUsername());
+                assertEquals(testUser.getEmail(), newUser.getEmail());
+                assertEquals(testUser.getAddress(), newUser.getAddress());
+                assertEquals(testUser.getCity(), newUser.getCity());
+                assertEquals(testUser.getState(), newUser.getState());
+                assertEquals(testUser.getPostalCode(), newUser.getPostalCode());
+                assertEquals(testUser.getCountry(), newUser.getCountry());
+                assertEquals(testUser.getJobPositionId(), newUser.getJobPositionId());
+                assertEquals(testUser.getRoles(), newUser.getRoles());
+                assertEquals(testUser.getStatus(), newUser.getStatus());
+                assertEquals(testUser.getCreatedBy(), newUser.getCreatedBy());
+                assertEquals(testUser.getDepartmentId(), newUser.getDepartmentId());
                 verify(userRepository, times(1)).save(any(User.class));
 
         }
@@ -137,7 +137,7 @@ public class UserServiceTest {
 
                 assertNotNull(userList);
                 assertFalse(userList.isEmpty());
-                assertEquals(userList.size(), 1);
+                assertEquals(1, userList.size());
                 verify(userRepository, times(1)).findAllByStatus("Active");
 
         }
@@ -149,7 +149,7 @@ public class UserServiceTest {
                 User user = userService.getActiveUserByUsername("john.doe");
 
                 assertNotNull(user);
-                assertEquals(user.getUsername(), testUser.getUsername());
+                assertEquals(testUser.getUsername(), user.getUsername());
                 verify(userRepository, times(1)).findByUsernameAndStatus("john.doe", "Active");
 
         }
@@ -161,7 +161,7 @@ public class UserServiceTest {
                 User user = userService.getActiveUserByEmail("john.doe@gmail.com");
 
                 assertNotNull(user);
-                assertEquals(user.getEmail(), testUser.getEmail());
+                assertEquals(testUser.getEmail(), user.getEmail());
                 verify(userRepository, times(1)).findByEmailAndStatus("john.doe@gmail.com", "Active");
 
         }
@@ -172,7 +172,7 @@ public class UserServiceTest {
                 when(userRepository.updateUserStatus(anyString(), anyInt(), any(), anyInt())).thenReturn(1);
                 int result = userService.deleteUserById(1, 1);
 
-                assertEquals(result, 1);
+                assertEquals(1, result);
                 verify(userRepository, times(1)).updateUserStatus(anyString(), anyInt(), any(), anyInt());
 
         }
@@ -183,7 +183,7 @@ public class UserServiceTest {
                 when(userRepository.updateUserStatus(anyString(), anyInt(), any(), anyInt())).thenReturn(0);
                 int result = userService.deleteUserById(1, 1);
 
-                assertEquals(result, 0);
+                assertEquals(0, result);
                 verify(userRepository, times(1)).updateUserStatus(anyString(), anyInt(), any(), anyInt());
 
         }
@@ -195,8 +195,8 @@ public class UserServiceTest {
                 User user = userService.findUserById(1);
 
                 assertNotNull(user);
-                assertEquals(user.getId(), testUser.getId());
-                assertEquals(user.getFirstName(), testUser.getFirstName());
+                assertEquals(testUser.getId(), user.getId());
+                assertEquals(testUser.getFirstName(), user.getFirstName());
                 verify(userRepository, times(1)).findById(1);
 
         }
@@ -233,15 +233,15 @@ public class UserServiceTest {
                 User user = userService.updateUser(updatedUser, 1);
 
                 assertNotNull(user);
-                assertEquals(user.getFirstName(), updatedUser.getFirstName());
-                assertEquals(user.getLastName(), updatedUser.getLastName());
-                assertEquals(user.getJobPositionId(), updatedUser.getJobPositionId());
-                assertEquals(user.getDepartmentId(), updatedUser.getDepartmentId());
-                assertEquals(user.getAddress(), updatedUser.getAddress());
-                assertEquals(user.getCity(), updatedUser.getCity());
-                assertEquals(user.getState(), updatedUser.getState());
-                assertEquals(user.getPostalCode(), updatedUser.getPostalCode());
-                assertEquals(user.getCountry(), updatedUser.getCountry());
+                assertEquals(updatedUser.getFirstName(), user.getFirstName());
+                assertEquals(updatedUser.getLastName(), user.getLastName());
+                assertEquals(updatedUser.getJobPositionId(), user.getJobPositionId());
+                assertEquals(updatedUser.getDepartmentId(), user.getDepartmentId());
+                assertEquals(updatedUser.getAddress(), user.getAddress());
+                assertEquals(updatedUser.getCity(), user.getCity());
+                assertEquals(updatedUser.getState(), user.getState());
+                assertEquals(updatedUser.getPostalCode(), user.getPostalCode());
+                assertEquals(updatedUser.getCountry(), user.getCountry());
                 verify(userRepository, times(1)).findById(1);
                 verify(userRepository, times(1)).save(any(User.class));
 
@@ -253,7 +253,7 @@ public class UserServiceTest {
                 when(userRepository.updatePassword(anyString(), anyInt(), any(Timestamp.class), anyInt())).thenReturn(1);
                 int result = userService.updateUserPassword(1, "password", 1);
 
-                assertEquals(result, 1);
+                assertEquals(1, result);
                 verify(userRepository, times(1)).updatePassword(anyString(), anyInt(), any(Timestamp.class), anyInt());
 
         }
@@ -264,7 +264,7 @@ public class UserServiceTest {
                 when(userRepository.updatePassword(anyString(), anyInt(), any(), anyInt())).thenReturn(0);
                 int result = userService.updateUserPassword(1, "password", 1);
 
-                assertEquals(result, 0);
+                assertEquals(0, result);
                 verify(userRepository, times(1)).updatePassword(anyString(), anyInt(), any(), anyInt());
 
         }
