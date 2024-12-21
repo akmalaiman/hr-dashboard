@@ -37,6 +37,7 @@ export class UploadHomeComponent {
                 {filename: "staff", displayName: "Staff"},
                 {filename: "jobPosition", displayName: "Job Position"},
                 {filename: "department", displayName: "Department"},
+                {filename: "holiday", displayName: "Holiday"}
         ];
 
         constructor(private http: HttpClient, private uploadService: UploadService) {

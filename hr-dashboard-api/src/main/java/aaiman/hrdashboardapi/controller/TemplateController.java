@@ -35,6 +35,7 @@ public class TemplateController {
                                 case "staff" -> filePath = "template/staff.csv";
                                 case "jobposition" -> filePath = "template/job-position.csv";
                                 case "department" -> filePath = "template/department.csv";
+                                case "holiday" -> filePath = "template/holiday.csv";
                                 default -> filePath = null;
                         };
 

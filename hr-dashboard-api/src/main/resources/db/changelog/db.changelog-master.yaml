@@ -5,3 +5,5 @@ databaseChangeLog:
                 file: classpath:/db/changelog/changes/002-add-role.sql
         - include:
                 file: classpath:/db/changelog/changes/003-department.sql
+        - include:
+                file: classpath:/db/changelog/changes/004-holiday.sql
