@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {StaffService} from "../service/staff.service";
 import {JobPosition} from "../../common/model/job-position.model";
 import {Role} from "../../common/model/role.model";
@@ -15,7 +15,6 @@ import Swal from "sweetalert2";
         imports: [
                 RouterLink,
                 ReactiveFormsModule,
-                NgIf,
                 NgForOf
         ],
         templateUrl: './staff-edit.component.html',

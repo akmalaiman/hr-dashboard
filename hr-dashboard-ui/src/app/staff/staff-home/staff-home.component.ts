@@ -21,7 +21,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
         templateUrl: './staff-home.component.html',
         styleUrl: './staff-home.component.css'
 })
-export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
+export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         pageName: string = "Staff Management";
         staffList: any[] = [];
@@ -60,7 +60,7 @@ export class StaffHomeComponent implements OnInit, AfterViewChecked, OnDestroy{
         fetchStaffData(): void {
                 this.staffService.getStaffList().subscribe({
                         next: (data: any[]) => {
-                                if  (!data) {
+                                if (!data) {
                                         this.loading = false;
                                         this.staffList = [];
                                         return;

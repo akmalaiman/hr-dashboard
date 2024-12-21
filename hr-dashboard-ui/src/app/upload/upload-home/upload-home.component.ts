@@ -28,7 +28,11 @@ export class UploadHomeComponent {
         showToast: boolean = false;
         selectedFile: File | null = null;
         isUploading: boolean = false;
-        uploadResult: {savedCount: number; duplicateCount: number; entity: string}  = {savedCount: 0, duplicateCount: 0, entity: ''};
+        uploadResult: { savedCount: number; duplicateCount: number; entity: string } = {
+                savedCount: 0,
+                duplicateCount: 0,
+                entity: ''
+        };
         templateList: any[] = [
                 {filename: "staff", displayName: "Staff"},
                 {filename: "jobPosition", displayName: "Job Position"},
