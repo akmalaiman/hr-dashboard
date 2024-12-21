@@ -11,7 +11,6 @@ export class AuthService {
 
                 if (token) {
                         const decodedToken: any = jwtDecode(token);
-                        console.log(decodedToken);
                         return decodedToken.roles;
                 }
 
