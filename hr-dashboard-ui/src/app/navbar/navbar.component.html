@@ -26,19 +26,19 @@
                                                 <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-home-alt-2' ></i> Home</a>
                                         </li>
                                         <li class="nav-item">
-                                                <a class="nav-link" [routerLink]="['/user']" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-user' ></i> Staff Management</a>
+                                                <a class="nav-link" [routerLink]="['/user']" *ngIf="authService.isAdmin()" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-user' ></i> Staff Management</a>
                                         </li>
                                         <li class="nav-item">
-                                                <a class="nav-link" [routerLink]="['/job']" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-briefcase'></i> Job Position Management</a>
+                                                <a class="nav-link" [routerLink]="['/job']" *ngIf="authService.isAdmin()" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-briefcase'></i> Job Position Management</a>
                                         </li>
                                         <li class="nav-item">
-                                                <a class="nav-link" [routerLink]="['/department']" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-briefcase'></i> Department</a>
+                                                <a class="nav-link" [routerLink]="['/department']" *ngIf="authService.isAdmin()" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-briefcase'></i> Department</a>
                                         </li>
                                         <li class="nav-item">
-                                                <a class="nav-link" [routerLink]="['/calendar']" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-calendar'></i> Calendar</a>
+                                                <a class="nav-link" [routerLink]="['/calendar']" *ngIf="authService.isAdmin()" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-calendar'></i> Calendar</a>
                                         </li>
                                         <li class="nav-item">
-                                                <a class="nav-link" [routerLink]="['/upload']" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-cloud-upload'></i> Upload File</a>
+                                                <a class="nav-link" [routerLink]="['/upload']" *ngIf="authService.isAdmin()" routerLinkActive="active" data-bs-dismiss="offcanvas"><i class='bx bx-cloud-upload'></i> Upload File</a>
                                         </li>
                                 </ul>
                         </div>

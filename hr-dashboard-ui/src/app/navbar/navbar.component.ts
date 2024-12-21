@@ -1,20 +1,28 @@
 import {Component} from '@angular/core';
 import {NavigationExtras, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import {NgIf} from "@angular/common";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
         selector: 'app-navbar',
         standalone: true,
         imports: [
                 RouterLink,
-                RouterLinkActive
+                RouterLinkActive,
+                NgIf
         ],
         templateUrl: './navbar.component.html',
         styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
 
-        constructor(private http: HttpClient, private router: Router) {
+        isAdmin: boolean = false;
+        isManager: boolean = false;
+
+        constructor(private http: HttpClient, private router: Router, public authService: AuthService) {
+                this.isAdmin = this.authService.isAdmin();
+                this.isManager = this.authService.isManager();
         }
 
         onLogout() {
