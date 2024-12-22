@@ -9,7 +9,7 @@ import {JobHomeComponent} from "./job/job-home/job-home.component";
 import {UploadHomeComponent} from "./upload/upload-home/upload-home.component";
 import {DepartmentHomeComponent} from "./department/department-home/department-home.component";
 import {StaffEditComponent} from "./staff/staff-edit/staff-edit.component";
-import {CalendarComponent} from "./calendar/calendar.component";
+import {HolidayHomeComponent} from "./holiday/holiday-home/holiday-home.component";
 
 export const routes: Routes = [
         {
@@ -66,8 +66,8 @@ export const routes: Routes = [
                                 canActivate: [authGuard]
                         },
                         {
-                                path: "calendar",
-                                component: CalendarComponent,
+                                path: "holiday",
+                                component: HolidayHomeComponent,
                                 canActivate: [authGuard]
                         }
                 ]
