@@ -23,6 +23,7 @@ export class CalendarComponent implements OnInit{
         loading: boolean = true;
         newHolidayForm!: FormGroup;
         isHolidayExists: boolean = false;
+        currentView: 'list' | 'calendar' = 'list';
 
         constructor(config: NgbModalConfig, private modalService: NgbModal, private formBuilder: FormBuilder) {
                 config.backdrop = "static";
@@ -34,6 +35,10 @@ export class CalendarComponent implements OnInit{
                         name: ['', [Validators.required]],
                         holidayDate: ['', [Validators.required]]
                 });
+        }
+
+        setView(view: 'list' | 'calendar'): void {
+                this.currentView = view;
         }
 
         openModal(content: any): void {
