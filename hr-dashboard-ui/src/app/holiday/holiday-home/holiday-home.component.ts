@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from "../../auth/auth.service";
 import {HolidayService} from "../service/holiday.service";
@@ -137,7 +138,7 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
 
         calendarOptions = signal<CalendarOptions> ({
                 initialView: 'dayGridMonth',
-                plugins: [dayGridPlugin],
+                plugins: [dayGridPlugin, interactionPlugin],
                 headerToolbar: {
                         left: 'prev,today,next',
                         center: 'title',
@@ -151,7 +152,8 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                 },
                 firstDay: 1,
                 events: this.calendarEvents,
-                aspectRatio: 2
+                aspectRatio: 2,
+                selectable: true,
         });
 
         calendarListOptions = signal<CalendarOptions> ({
