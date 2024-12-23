@@ -34,7 +34,7 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
         isAdmin: boolean = false;
         isManager: boolean = false;
         newHolidayForm!: FormGroup;
-        currentView: 'list' | 'calendar' = 'list';
+        currentView: 'list' | 'calendar' = 'calendar';
         holidayList: Holiday[] = [];
         calendarEvents: any[] = [];
 
@@ -141,10 +141,33 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                 headerToolbar: {
                         left: 'prev,today,next',
                         center: 'title',
-                        right: 'prevYear,nextYear'
+                        right: 'prevYear,dayGridMonth,dayGridWeek,dayGridDay,nextYear'
                 },
                 buttonText: {
                         today: 'Today',
+                        month: 'Month',
+                        week: 'Week',
+                        day: 'Day'
+                },
+                firstDay: 1,
+                events: this.calendarEvents,
+                aspectRatio: 2
+        });
+
+        calendarListOptions = signal<CalendarOptions> ({
+                initialView: 'listWeek',
+                plugins: [listPlugin],
+                headerToolbar: {
+                        left: 'prev,today,next',
+                        center: 'title',
+                        right: 'prevYear,listYear,listMonth,listWeek,listDay,nextYear'
+                },
+                buttonText: {
+                        today: 'Today',
+                        listYear: 'Year',
+                        listMonth: 'Month',
+                        listWeek: 'Week',
+                        listDay: 'Day'
                 },
                 firstDay: 1,
                 events: this.calendarEvents,
