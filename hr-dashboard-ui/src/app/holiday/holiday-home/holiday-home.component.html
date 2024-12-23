@@ -64,8 +64,8 @@
                                         </tbody>
                                 </table>
                         </div>
-                        <div *ngIf="!loading && currentView === 'calendar'">
-                                <p>Calendar</p>
+                        <div *ngIf="!loading && currentView === 'calendar'" class="px-5 my-5">
+                                <full-calendar [options]="calendarOptions()"></full-calendar>
                         </div>
                 </div>
         </div>

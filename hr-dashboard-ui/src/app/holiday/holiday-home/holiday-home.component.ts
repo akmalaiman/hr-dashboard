@@ -1,11 +1,15 @@
-import {AfterViewChecked, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import listPlugin from '@fullcalendar/list';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from "../../auth/auth.service";
 import {HolidayService} from "../service/holiday.service";
 import {Holiday} from "../../common/model/holiday.model";
+import {FullCalendarModule} from "@fullcalendar/angular";
 
 @Component({
         selector: 'app-calendar',
@@ -16,7 +20,8 @@ import {Holiday} from "../../common/model/holiday.model";
                 FormsModule,
                 ReactiveFormsModule,
                 DatePipe,
-                NgForOf
+                NgForOf,
+                FullCalendarModule
         ],
         templateUrl: './holiday-home.component.html',
         styleUrl: './holiday-home.component.css'
@@ -31,6 +36,7 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
         newHolidayForm!: FormGroup;
         currentView: 'list' | 'calendar' = 'list';
         holidayList: Holiday[] = [];
+        calendarEvents: any[] = [];
 
         private isDataTableInit: boolean = false;
         private dataTable: any;
@@ -74,6 +80,13 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                                 }
 
                                 this.holidayList = data;
+                                this.holidayList.forEach((holiday: Holiday) => {
+                                        this.calendarEvents.push({
+                                                title: holiday.name,
+                                                start: holiday.holidayDate,
+                                                end: holiday.holidayDate
+                                        });
+                                });
                                 this.loading = false;
 
                         },
@@ -121,5 +134,21 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
         }
 
         onSubmit() {}
+
+        calendarOptions = signal<CalendarOptions> ({
+                initialView: 'dayGridMonth',
+                plugins: [dayGridPlugin],
+                headerToolbar: {
+                        left: 'prev,today,next',
+                        center: 'title',
+                        right: 'prevYear,nextYear'
+                },
+                buttonText: {
+                        today: 'Today',
+                },
+                firstDay: 1,
+                events: this.calendarEvents,
+                aspectRatio: 2
+        });
 
 }
