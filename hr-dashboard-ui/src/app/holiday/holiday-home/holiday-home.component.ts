@@ -11,6 +11,7 @@ import {AuthService} from "../../auth/auth.service";
 import {HolidayService} from "../service/holiday.service";
 import {Holiday} from "../../common/model/holiday.model";
 import {FullCalendarModule} from "@fullcalendar/angular";
+import Swal from "sweetalert2";
 
 @Component({
         selector: 'app-calendar',
@@ -83,6 +84,7 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                                 this.holidayList = data;
                                 this.holidayList.forEach((holiday: Holiday) => {
                                         this.calendarEvents.push({
+                                                id: holiday.id,
                                                 title: holiday.name,
                                                 start: holiday.holidayDate,
                                                 end: holiday.holidayDate
@@ -134,7 +136,47 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                 this.modalService.open(content, {centered: true});
         }
 
-        onSubmit() {}
+        onSubmit() {
+
+                if (this.newHolidayForm?.valid) {
+                        const holidayData: Holiday = {
+                                ...this.newHolidayForm.value,
+                                id: 0,
+                                name: this.newHolidayForm.value.name,
+                                holidayDate: this.newHolidayForm.value.holidayDate,
+                                status: '',
+                                createdAt: new Date(),
+                                createdBy: 0,
+                                updatedAt: new Date(),
+                                updatedBy: 0
+                        };
+
+                        this.holidayService.createHoliday(holidayData).subscribe({
+                                next: (data: Holiday) => {
+                                        this.modalService.dismissAll();
+                                        this.newHolidayForm.reset();
+                                        Swal.fire({
+                                                icon: "success",
+                                                text: "New Holiday Successfully Created!",
+                                                allowOutsideClick: false,
+                                                allowEscapeKey: false,
+                                                showConfirmButton: false,
+                                                timer: 2000,
+                                        });
+                                        this.refreshData();
+                                },
+                                error: (error: any) => {
+                                        Swal.fire({
+                                                title: 'Oops!',
+                                                text: 'An error occurred while creating the new Holiday. Please try again.',
+                                                icon: 'error',
+                                                confirmButtonText: 'OK'
+                                        });
+                                }
+                        });
+                }
+
+        }
 
         calendarOptions = signal<CalendarOptions> ({
                 initialView: 'dayGridMonth',
@@ -157,7 +199,7 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
         });
 
         calendarListOptions = signal<CalendarOptions> ({
-                initialView: 'listWeek',
+                initialView: 'listYear',
                 plugins: [listPlugin],
                 headerToolbar: {
                         left: 'prev,today,next',

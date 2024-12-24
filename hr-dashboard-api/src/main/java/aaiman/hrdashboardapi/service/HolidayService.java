@@ -43,4 +43,24 @@ public class HolidayService {
 
         }
 
+        public Holiday updateHoliday(Holiday holiday, int userId) {
+
+                Holiday existingHoliday = holidayRepository.findById(holiday.getId());
+
+                existingHoliday.setName(holiday.getName());
+                existingHoliday.setHolidayDate(holiday.getHolidayDate());
+                existingHoliday.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
+                existingHoliday.setUpdatedBy(userId);
+
+                holidayRepository.save(existingHoliday);
+
+                return existingHoliday;
+
+        }
+
+        public int deleteHolidayById(int holidayId, int userId) {
+                Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+                return holidayRepository.updateHolidayStatus("Deleted", userId, now, holidayId);
+        }
+
 }

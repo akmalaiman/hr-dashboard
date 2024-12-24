@@ -56,6 +56,7 @@ public class HolidayServiceTest {
         @BeforeEach
         public void setUp() {
                 testHoliday = new Holiday();
+                testHoliday.setId(1);
                 testHoliday.setName("Test Holiday");
                 testHoliday.setHolidayDate(LocalDate.of(2024, 12, 21));
                 testHoliday.setStatus("Active");
@@ -83,9 +84,47 @@ public class HolidayServiceTest {
 
                 assertNotNull(holidayList);
                 assertFalse(holidayList.isEmpty());
-                assertEquals(1, holidayService.getAll().size());
+                assertEquals(1, holidayList.size());
                 verify(holidayRepository, times(1)).findAllByStatus("Active");
 
+        }
+
+        @Test
+        public void updateHolidayTest() {
+
+                Holiday updateHoliday = new Holiday();
+                updateHoliday.setId(testHoliday.getId());
+                updateHoliday.setName("Updated Test Holiday");
+                updateHoliday.setHolidayDate(LocalDate.of(2024, 12, 22));
+
+                when(holidayRepository.findById(anyInt())).thenReturn(testHoliday);
+                when(holidayRepository.save(any(Holiday.class))).thenReturn(updateHoliday);
+
+                Holiday updatedHoliday = holidayService.updateHoliday(updateHoliday, 1);
+
+                assertNotNull(updatedHoliday);
+                assertEquals("Updated Test Holiday", updatedHoliday.getName());
+                assertEquals(LocalDate.of(2024, 12, 22), updatedHoliday.getHolidayDate());
+                verify(holidayRepository, times(1)).findById(anyInt());
+                verify(holidayRepository, times(1)).save(any(Holiday.class));
+        }
+
+        @Test
+        public void deleteHolidayByIdTest_Success() {
+                when(holidayRepository.updateHolidayStatus(anyString(), anyInt(), any(Timestamp.class), anyInt())).thenReturn(1);
+                int result = holidayService.deleteHolidayById(1, 1);
+
+                assertEquals(1, result);
+                verify(holidayRepository, times(1)).updateHolidayStatus(anyString(), anyInt(), any(Timestamp.class), anyInt());
+        }
+
+        @Test
+        public void deleteHolidayByIdTest_Failure() {
+                when(holidayRepository.updateHolidayStatus(anyString(), anyInt(), any(Timestamp.class), anyInt())).thenReturn(0);
+                int result = holidayService.deleteHolidayById(1, 1);
+
+                assertEquals(0, result);
+                verify(holidayRepository, times(1)).updateHolidayStatus(anyString(), anyInt(), any(Timestamp.class), anyInt());
         }
 
 }

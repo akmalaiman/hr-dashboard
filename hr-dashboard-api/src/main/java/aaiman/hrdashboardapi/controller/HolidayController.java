@@ -61,4 +61,50 @@ public class HolidayController {
 
         }
 
+        @PutMapping("/update")
+        @PreAuthorize("hasAuthority('ADMIN')")
+        public ResponseEntity<Holiday> updateHoliday(@RequestBody Holiday holiday, HttpServletRequest request) {
+
+                try {
+
+                        int userId = (Integer) request.getAttribute("userId");
+
+                        Holiday updatedHoliday = holidayService.updateHoliday(holiday, userId);
+
+                        if (updatedHoliday != null) {
+                                return ResponseEntity.ok(updatedHoliday);
+                        } else {
+                                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                        }
+
+                } catch (NullPointerException e) {
+                        log.error("Error while updating Holiday: {}", e.getMessage());
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                }
+
+        }
+
+        @DeleteMapping("/delete/{id}")
+        @PreAuthorize("hasAuthority('ADMIN')")
+        public ResponseEntity<String> deleteHoliday(@PathVariable int id, HttpServletRequest request) {
+
+                try {
+
+                        int userId = (Integer) request.getAttribute("userId");
+
+                        int result = holidayService.deleteHolidayById(id, userId);
+
+                        if (result > 0) {
+                                return ResponseEntity.ok("Holiday deleted successfully.");
+                        } else {
+                                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                        }
+
+                } catch (NullPointerException e) {
+                        log.error("Error while deleting Holiday: {}", e.getMessage());
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                }
+
+        }
+
 }
