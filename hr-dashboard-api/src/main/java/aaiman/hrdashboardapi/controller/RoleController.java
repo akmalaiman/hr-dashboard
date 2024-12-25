@@ -3,6 +3,11 @@ package aaiman.hrdashboardapi.controller;
 import aaiman.hrdashboardapi.model.Role;
 import aaiman.hrdashboardapi.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +28,11 @@ public class RoleController {
         }
 
         @GetMapping("/all")
-        @Operation(summary = "Get all active roles")
+        @Operation(summary = "Get all active roles", description = "Fetches all active roles from the system.")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "204", description = "No content found", content = @Content(schema = @Schema(example = "No role found"))),
+                @ApiResponse(responseCode = "200", description = "List of roles found", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Role.class))))
+        })
         public ResponseEntity<List<Role>> getAllRoles() {
 
                 List<Role> roleList = roleService.getAll();

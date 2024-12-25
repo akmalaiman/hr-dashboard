@@ -3,6 +3,10 @@ package aaiman.hrdashboardapi.controller;
 import aaiman.hrdashboardapi.dto.CsvProcessDto;
 import aaiman.hrdashboardapi.service.UploadService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +33,12 @@ public class UploadController {
 
     @PostMapping("/file")
     @PreAuthorize("hasAuthority('ADMIN')")
-    @Operation(summary = "Upload a CSV file for processing")
+    @Operation(summary = "Upload a CSV file for processing", description = "Uploads a CSV file for processing and storing in the database. Only admin users are allowed to upload a CSV file.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "CSV file uploaded successfully", content = @Content(schema = @Schema(implementation = CsvProcessDto.class))),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(example = "Bad request"))),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema(example = "Internal server error")))
+    })
     public ResponseEntity<CsvProcessDto> uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 
         try {
