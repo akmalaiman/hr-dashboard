@@ -2,6 +2,7 @@ package aaiman.hrdashboardapi.controller;
 
 import aaiman.hrdashboardapi.model.User;
 import aaiman.hrdashboardapi.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -18,123 +19,131 @@ import java.util.List;
 @Slf4j
 public class UserController {
 
-        private final UserService userService;
+    private final UserService userService;
 
-        public UserController(UserService userService) {
-                this.userService = userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Operation(summary = "Add a new user")
+    public ResponseEntity<User> addUser(@RequestBody User user, HttpServletRequest request) {
+
+        try {
+
+            int userId = (Integer) request.getAttribute("userId");
+
+            User createdUser = userService.createUser(user, userId);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+
+        } catch (NullPointerException e) {
+            log.error("Exception occurred while adding user: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
-        @PostMapping("/add")
-        @PreAuthorize("hasAuthority('ADMIN')")
-        public ResponseEntity<User> addUser(@RequestBody User user, HttpServletRequest request) {
+    }
 
-                try {
+    @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Operation(summary = "Get all active users")
+    public ResponseEntity<List<User>> getAllActive() {
 
-                        int userId = (Integer) request.getAttribute("userId");
+        List<User> userList = userService.getAllActiveUsers();
 
-                        User createdUser = userService.createUser(user, userId);
+        return ResponseEntity.status(HttpStatus.OK).body(userList);
 
-                        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
 
-                } catch (NullPointerException e) {
-                        log.error("Exception occurred while adding user: {}", e.getMessage());
-                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-                }
+    @GetMapping("/byUsername")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @Operation(summary = "Get active user by username")
+    public ResponseEntity<User> getActiveUserByUsername(@RequestParam("username") String username) {
 
+        User user = userService.getActiveUserByUsername(username);
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
 
-        @GetMapping("/all")
-        @PreAuthorize("hasAuthority('ADMIN')")
-        public ResponseEntity<List<User>> getAllActive() {
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
 
-                List<User> userList = userService.getAllActiveUsers();
+    }
 
-                return ResponseEntity.status(HttpStatus.OK).body(userList);
+    @GetMapping("/byEmail")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @Operation(summary = "Get active user by email")
+    public ResponseEntity<User> getActiveUserByEmail(@RequestParam("email") String email) {
 
+        User user = userService.getActiveUserByEmail(email);
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
 
-        @GetMapping("/byUsername")
-        @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-        public ResponseEntity<User> getActiveUserByUsername(@RequestParam("username") String username) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(user);
+    }
 
-                User user = userService.getActiveUserByUsername(username);
+    @DeleteMapping("/delete")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Operation(summary = "Delete a user by id")
+    public ResponseEntity<User> deleteUser(@RequestParam("userId") Integer userId, HttpServletRequest request) {
 
-                if (user == null) {
-                        return ResponseEntity.status(HttpStatus.OK).build();
-                }
+        int requestorId = (Integer) request.getAttribute("userId");
 
-                return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        int updateStatus = userService.deleteUserById(userId, requestorId);
 
+        if (updateStatus == 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        @GetMapping("/byEmail")
-        @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-        public ResponseEntity<User> getActiveUserByEmail(@RequestParam("email") String email) {
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
-                User user = userService.getActiveUserByEmail(email);
+    @GetMapping("/{userId}")
+    @Operation(summary = "Get user by id")
+    public ResponseEntity<User> getUserById(@PathVariable("userId") Integer userId) {
 
-                if (user == null) {
-                        return ResponseEntity.status(HttpStatus.OK).build();
-                }
+        User user = userService.findUserById(userId);
 
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(user);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        @DeleteMapping("/delete")
-        @PreAuthorize("hasAuthority('ADMIN')")
-        public ResponseEntity<User> deleteUser(@RequestParam("userId") Integer userId, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(user);
 
-                int requestorId = (Integer) request.getAttribute("userId");
+    }
 
-                int updateStatus = userService.deleteUserById(userId, requestorId);
+    @PutMapping("/update/{userId}")
+    @Operation(summary = "Update an existing user")
+    public ResponseEntity<User> updateUser(@RequestBody User user, HttpServletRequest request) {
 
-                if (updateStatus == 0) {
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-                }
+        int userId = (Integer) request.getAttribute("userId");
 
-                return ResponseEntity.status(HttpStatus.OK).build();
+        User updatedUser = userService.updateUser(user, userId);
+        if (updatedUser == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-        @GetMapping("/{userId}")
-        public ResponseEntity<User> getUserById(@PathVariable("userId") Integer userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
 
-                User user = userService.findUserById(userId);
+    }
 
-                if (user == null) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-                }
+    @PutMapping("/updatePassword/{userId}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER')")
+    @Operation(summary = "Update user password by id")
+    public ResponseEntity<User> updateUserPassword(@RequestParam("password") String password, @PathVariable("userId") Integer userId, HttpServletRequest request) {
 
-                return ResponseEntity.status(HttpStatus.OK).body(user);
+        int requestorId = (Integer) request.getAttribute("userId");
 
+        int updateStatus = userService.updateUserPassword(requestorId, password, userId);
+
+        if (updateStatus == 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        @PutMapping("/update/{userId}")
-        public ResponseEntity<User> updateUser(@RequestBody User user, HttpServletRequest request) {
-
-                int userId = (Integer) request.getAttribute("userId");
-
-                User updatedUser = userService.updateUser(user, userId);
-                if (updatedUser == null) {
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-                }
-
-                return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
-
-        }
-
-        @PutMapping("/updatePassword/{userId}")
-        @PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER')")
-        public ResponseEntity<User> updateUserPassword(@RequestParam("password") String password, @PathVariable("userId") Integer userId, HttpServletRequest request) {
-
-                int requestorId = (Integer) request.getAttribute("userId");
-
-                int updateStatus = userService.updateUserPassword(requestorId, password, userId);
-
-                if (updateStatus == 0) {
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-                }
-
-                return ResponseEntity.status(HttpStatus.OK).build();
-        }
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
 }

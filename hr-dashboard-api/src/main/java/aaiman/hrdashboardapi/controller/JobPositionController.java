@@ -3,6 +3,7 @@ package aaiman.hrdashboardapi.controller;
 import aaiman.hrdashboardapi.dto.JobPositionDto;
 import aaiman.hrdashboardapi.model.JobPosition;
 import aaiman.hrdashboardapi.service.JobPositionService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ public class JobPositionController {
 
         @GetMapping("/all")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Get all active job positions")
         public ResponseEntity<List<JobPosition>> getAllJobPositions() {
 
                 List<JobPosition> jobPositionList = jobPositionService.getAll();
@@ -41,6 +43,7 @@ public class JobPositionController {
 
         @PostMapping("/add")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Add a new job position")
         public ResponseEntity<JobPosition> addJobPosition(@RequestBody JobPosition jobPosition, HttpServletRequest request) {
 
                 try {
@@ -64,6 +67,7 @@ public class JobPositionController {
 
         @GetMapping("/byName")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Get active job position by name")
         public ResponseEntity<JobPosition> getActiveJobPositionByName(@RequestParam("name") String name) {
 
                 JobPosition jobPosition = jobPositionService.getActiveJobPositionByName(name);
@@ -78,9 +82,10 @@ public class JobPositionController {
 
         @GetMapping("/nameWithCount")
         @PreAuthorize("hasAuthority('ADMIN')")
-        public ResponseEntity<List<JobPositionDto>> getAllActiveJobPositionsWIthCount() {
+        @Operation(summary = "Get all active job positions with staff count")
+        public ResponseEntity<List<JobPositionDto>> getAllActiveJobPositionsWithCount() {
 
-                List<JobPositionDto> jobPositionCountList = jobPositionService.getAllActiveJobPositionsWIthCount();
+                List<JobPositionDto> jobPositionCountList = jobPositionService.getAllActiveJobPositionsWithCount();
 
                 if (jobPositionCountList.isEmpty()) {
                         return ResponseEntity.noContent().build();
@@ -92,6 +97,7 @@ public class JobPositionController {
 
         @DeleteMapping("/delete")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Delete a job position by id")
         public ResponseEntity<JobPosition> deleteJobPosition(@RequestParam("id") int id, HttpServletRequest request) {
 
                 int userId = (Integer) request.getAttribute("userId");

@@ -5,6 +5,7 @@ import aaiman.hrdashboardapi.dto.LoginDto;
 import aaiman.hrdashboardapi.model.User;
 import aaiman.hrdashboardapi.repository.UserRepository;
 import aaiman.hrdashboardapi.service.JwtService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,7 @@ public class AuthController {
         }
 
         @PostMapping("/login")
+        @Operation(summary = "Authenticate and get JWT token")
         public ResponseEntity<JwtResponseDto> authenticateAndGetToken(@RequestBody LoginDto loginDto) {
 
                 String username = loginDto.getUsername();

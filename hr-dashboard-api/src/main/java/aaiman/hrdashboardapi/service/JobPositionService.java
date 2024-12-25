@@ -2,7 +2,6 @@ package aaiman.hrdashboardapi.service;
 
 import aaiman.hrdashboardapi.dto.JobPositionDto;
 import aaiman.hrdashboardapi.model.JobPosition;
-import aaiman.hrdashboardapi.model.User;
 import aaiman.hrdashboardapi.repository.JobPositionRepository;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +41,7 @@ public class JobPositionService {
                 return jobPositionRepository.findByNameAndStatus(name, "Active");
         }
 
-        public List<JobPositionDto> getAllActiveJobPositionsWIthCount() {
+        public List<JobPositionDto> getAllActiveJobPositionsWithCount() {
                 List<Map<String, Object>> rawResults = jobPositionRepository.findAllActiveWithCount();
                 return rawResults.stream()
                         .map(row -> {

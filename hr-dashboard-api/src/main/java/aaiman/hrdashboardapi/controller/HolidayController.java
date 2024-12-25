@@ -2,13 +2,13 @@ package aaiman.hrdashboardapi.controller;
 
 import aaiman.hrdashboardapi.model.Holiday;
 import aaiman.hrdashboardapi.service.HolidayService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +26,7 @@ public class HolidayController {
         }
 
         @GetMapping("/all")
+        @Operation(summary = "Get all active holidays")
         public ResponseEntity<List<Holiday>> getAllHoliday() {
 
                 List<Holiday> holidayList = holidayService.getAll();
@@ -40,6 +41,7 @@ public class HolidayController {
 
         @PostMapping("/add")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Add a new holiday")
         public ResponseEntity<Holiday> addHoliday(@RequestBody Holiday holiday, HttpServletRequest request) {
 
                 try {
@@ -63,6 +65,7 @@ public class HolidayController {
 
         @PutMapping("/update")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Update an existing holiday")
         public ResponseEntity<Holiday> updateHoliday(@RequestBody Holiday holiday, HttpServletRequest request) {
 
                 try {
@@ -86,6 +89,7 @@ public class HolidayController {
 
         @DeleteMapping("/delete/{id}")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Delete a holiday by id")
         public ResponseEntity<String> deleteHoliday(@PathVariable int id, HttpServletRequest request) {
 
                 try {

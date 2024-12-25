@@ -2,6 +2,7 @@ package aaiman.hrdashboardapi.controller;
 
 import aaiman.hrdashboardapi.model.Role;
 import aaiman.hrdashboardapi.service.RoleService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class RoleController {
         }
 
         @GetMapping("/all")
+        @Operation(summary = "Get all active roles")
         public ResponseEntity<List<Role>> getAllRoles() {
 
                 List<Role> roleList = roleService.getAll();
