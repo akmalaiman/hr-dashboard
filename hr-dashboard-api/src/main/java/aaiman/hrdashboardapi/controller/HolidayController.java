@@ -132,7 +132,7 @@ public class HolidayController {
             @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(example = "Bad request"))),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema(example = "Internal server error")))
     })
-    public ResponseEntity<String> deleteHoliday(@PathVariable int id, HttpServletRequest request) {
+    public ResponseEntity<Boolean> deleteHoliday(@PathVariable int id, HttpServletRequest request) {
         
         try {
             
@@ -141,7 +141,7 @@ public class HolidayController {
             int result = holidayService.deleteHolidayById(id, userId);
             
             if (result > 0) {
-                return ResponseEntity.ok("Holiday deleted successfully.");
+                return ResponseEntity.ok(true);
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
