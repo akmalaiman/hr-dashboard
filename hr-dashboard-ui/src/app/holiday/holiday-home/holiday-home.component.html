@@ -90,7 +90,7 @@
                             </div>
                         </div>
                         <div *ngIf="newHolidayForm.get('holidayDate')?.touched && newHolidayForm.get('holidayDate')?.invalid" class="text-danger">
-                            <small><b>Holiday Name is required</b></small>
+                            <small><b>Holiday Date is required</b></small>
                         </div>
                     </div>
                     <div *ngIf="isHolidayExists && newHolidayForm.get('name')?.valid && newHolidayForm.get('holidayDate')?.valid" class="text-danger">
@@ -101,8 +101,8 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" (click)="c('Close')">Close</button>
-            <button type="submit" class="btn btn-primary"
-                    [disabled]="newHolidayForm!.invalid || !newHolidayForm">Save
+            <button type="submit" class="btn btn-primary" [disabled]="newHolidayForm!.invalid || !newHolidayForm">
+                Save
             </button>
         </div>
     </form>
@@ -129,6 +129,9 @@
                                 <label for="name">Holiday Name</label>
                             </div>
                         </div>
+                        <div *ngIf="editHolidayForm.get('name')?.touched && editHolidayForm.get('name')?.invalid" class="text-danger">
+                            <small><b>Holiday Name is required</b></small>
+                        </div>
                     </div>
                     <div>
                         <div class="input-group">
@@ -140,14 +143,18 @@
                                 <label for="holidayDate">Date</label>
                             </div>
                         </div>
+                        <div *ngIf="editHolidayForm.get('holidayDate')?.touched && editHolidayForm.get('holidayDate')?.invalid" class="text-danger">
+                            <small><b>Holiday Date is required</b></small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" (click)="c('Close')">Close</button>
-            <button type="submit" class="btn btn-primary"
-                    [disabled]="editHolidayForm!.invalid || !editHolidayForm">Update
+            <button type="button" class="btn btn-warning" (click)="onDelete(holidayDetails.id)">Delete</button>
+            <button type="submit" class="btn btn-primary" [disabled]="editHolidayForm!.invalid || !editHolidayForm">
+                Update
             </button>
         </div>
     </form>

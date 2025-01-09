@@ -12,6 +12,7 @@ export class HolidayService {
     private createHolidayUrl = 'http://localhost:8080/api/holiday/add';
     private getHolidayByIdUrl = 'http://localhost:8080/api/holiday/{id}';
     private updateHolidayUrl = 'http://localhost:8080/api/holiday/update';
+    private deleteHolidayUrl = 'http://localhost:8080/api/holiday/delete/{id}';
 
     constructor(private http: HttpClient) {
     }
@@ -47,6 +48,15 @@ export class HolidayService {
         });
         const url = this.getHolidayByIdUrl.replace("{id}", id.toString());
         return this.http.get<Holiday>(url, {headers});
+    }
+
+    deleteHoliday(id: number): Observable<boolean> {
+        const token = localStorage.getItem("access_token");
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        const url = this.deleteHolidayUrl.replace("{id}", id.toString());
+        return this.http.delete<boolean>(url, {headers});
     }
 
 }

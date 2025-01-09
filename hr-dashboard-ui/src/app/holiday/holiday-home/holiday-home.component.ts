@@ -67,10 +67,9 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
         });
 
         this.editHolidayForm = this.formBuilder.group({
-            name: [''],
-            holidayDate: ['']
+            name: ['', [Validators.required]],
+            holidayDate: ['', Validators.required]
         });
-        console.log("onInit");
     }
 
     ngAfterViewChecked() {
@@ -78,14 +77,12 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
             this.initDataTable();
             this.isDataTableInit = true;
         }
-        console.log("afterViewChecked");
     }
 
     ngOnDestroy() {
         if (this.dataTable) {
             this.dataTable.destroy();
         }
-        console.log("onDestroy");
     }
 
     fetchData(): void {
@@ -237,6 +234,33 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
             });
         }
 
+    }
+
+    onDelete(holidayId: number) {
+        this.holidayService.deleteHoliday(holidayId).subscribe({
+            next: (data: boolean) => {
+                this.modalService.dismissAll();
+                this.editHolidayForm.reset();
+                Swal.fire({
+                    icon: "success",
+                    text: "Holiday Successfully Deleted!",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+                this.refreshData();
+            },
+            error: (error: any) => {
+                console.log("Failed to delete holiday: ", error);
+                Swal.fire({
+                    title: 'Oops!',
+                    text: 'An error occurred while deleting the Holiday. Please try again.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
     }
 
     handleEventClick(eventInfo: EventClickArg): void {
