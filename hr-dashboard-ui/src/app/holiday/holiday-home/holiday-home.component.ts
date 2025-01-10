@@ -1,6 +1,6 @@
-import {AfterViewChecked, Component, OnDestroy, OnInit, signal, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, signal, TemplateRef, ViewChild} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {NgIf} from "@angular/common";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CalendarOptions, EventClickArg} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -10,7 +10,7 @@ import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from "../../auth/auth.service";
 import {HolidayService} from "../service/holiday.service";
 import {Holiday} from "../../common/model/holiday.model";
-import {FullCalendarModule} from "@fullcalendar/angular";
+import {FullCalendarComponent, FullCalendarModule} from "@fullcalendar/angular";
 import Swal from "sweetalert2";
 
 @Component({
@@ -26,7 +26,7 @@ import Swal from "sweetalert2";
     templateUrl: './holiday-home.component.html',
     styleUrl: './holiday-home.component.css'
 })
-export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class HolidayHomeComponent implements OnInit {
 
     pageName: string = 'Holiday';
     loading: boolean = true;
@@ -42,15 +42,12 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
 
     @ViewChild('editForm') editForm!: TemplateRef<any>;
 
-    private isDataTableInit: boolean = false;
-    private dataTable: any;
-
     constructor(
         config: NgbModalConfig,
         private modalService: NgbModal,
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private holidayService: HolidayService
+        private holidayService: HolidayService,
     ) {
         config.backdrop = "static";
         config.keyboard = false;
@@ -70,19 +67,6 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
             name: ['', [Validators.required]],
             holidayDate: ['', Validators.required]
         });
-    }
-
-    ngAfterViewChecked() {
-        if (!this.isDataTableInit && !this.loading) {
-            this.initDataTable();
-            this.isDataTableInit = true;
-        }
-    }
-
-    ngOnDestroy() {
-        if (this.dataTable) {
-            this.dataTable.destroy();
-        }
     }
 
     fetchData(): void {
@@ -114,30 +98,7 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
         });
     }
 
-    initDataTable(): void {
-        if (this.dataTable) {
-            this.dataTable.destroy();
-        }
-
-        this.dataTable = $('#holidayListTable').DataTable({
-            scrollY: "500px",
-            scrollX: true,
-            scrollCollapse: true,
-            paging: true,
-            lengthChange: false,
-            searching: false,
-            info: false,
-            language: {
-                "emptyTable": "There is no active holiday found",
-            }
-        });
-    }
-
     refreshData(): void {
-        if (this.dataTable) {
-            this.dataTable.destroy();
-            this.isDataTableInit = false;
-        }
         this.loading = true;
         this.holidayList = [];
         this.calendarEvents = [];
@@ -171,6 +132,7 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                 next: (data: Holiday) => {
                     this.modalService.dismissAll();
                     this.newHolidayForm.reset();
+                    this.refreshData();
                     Swal.fire({
                         icon: "success",
                         text: "New Holiday Successfully Created!",
@@ -179,7 +141,6 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                         showConfirmButton: false,
                         timer: 2000,
                     });
-                    this.refreshData();
                 },
                 error: (error: any) => {
                     Swal.fire({
@@ -213,6 +174,7 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                 next: (data: Holiday) => {
                     this.modalService.dismissAll();
                     this.editHolidayForm.reset();
+                    this.refreshData();
                     Swal.fire({
                         icon: "success",
                         text: "Holiday Successfully Updated!",
@@ -221,7 +183,6 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                         showConfirmButton: false,
                         timer: 2000,
                     });
-                    this.refreshData();
                 },
                 error: (error: any) => {
                     Swal.fire({
@@ -241,6 +202,7 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
             next: (data: boolean) => {
                 this.modalService.dismissAll();
                 this.editHolidayForm.reset();
+                this.refreshData();
                 Swal.fire({
                     icon: "success",
                     text: "Holiday Successfully Deleted!",
@@ -249,7 +211,6 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
                     showConfirmButton: false,
                     timer: 2000,
                 });
-                this.refreshData();
             },
             error: (error: any) => {
                 console.log("Failed to delete holiday: ", error);
@@ -264,22 +225,26 @@ export class HolidayHomeComponent implements OnInit, AfterViewChecked, OnDestroy
     }
 
     handleEventClick(eventInfo: EventClickArg): void {
-        const holidayId = Number(eventInfo.event.id);
 
-        this.holidayService.getHolidayById(holidayId).subscribe({
-            next: (data: Holiday) => {
-                this.holidayDetails = data;
-                this.editHolidayForm.patchValue({
-                    name: this.holidayDetails.name,
-                    holidayDate: this.holidayDetails.holidayDate
-                });
+        if (this.isAdmin) {
+            const holidayId = Number(eventInfo.event.id);
 
-                this.modalService.open(this.editForm, {centered: true});
-            },
-            error: (error: any) => {
-                console.error("Failed to fetch holiday details: ", error);
-            }
-        });
+            this.holidayService.getHolidayById(holidayId).subscribe({
+                next: (data: Holiday) => {
+                    this.holidayDetails = data;
+                    this.editHolidayForm.patchValue({
+                        name: this.holidayDetails.name,
+                        holidayDate: this.holidayDetails.holidayDate
+                    });
+
+                    this.modalService.open(this.editForm, {centered: true});
+                },
+                error: (error: any) => {
+                    console.error("Failed to fetch holiday details: ", error);
+                }
+            });
+        }
+
     }
 
     calendarOptions = signal<CalendarOptions>({
