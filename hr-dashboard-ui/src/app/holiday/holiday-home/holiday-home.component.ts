@@ -2,7 +2,7 @@ import {Component, OnInit, signal, TemplateRef, ViewChild} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NgIf} from "@angular/common";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {CalendarOptions, EventClickArg} from '@fullcalendar/core';
+import {CalendarOptions, EventApi, EventClickArg} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -41,13 +41,14 @@ export class HolidayHomeComponent implements OnInit {
     calendarEvents: any[] = [];
 
     @ViewChild('editForm') editForm!: TemplateRef<any>;
+    @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
 
     constructor(
         config: NgbModalConfig,
         private modalService: NgbModal,
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private holidayService: HolidayService,
+        private holidayService: HolidayService
     ) {
         config.backdrop = "static";
         config.keyboard = false;
@@ -88,7 +89,9 @@ export class HolidayHomeComponent implements OnInit {
                         end: holiday.holidayDate
                     });
                 });
+
                 this.loading = false;
+                this.refreshCalendar();
 
             },
             error: (error: any) => {
@@ -96,6 +99,18 @@ export class HolidayHomeComponent implements OnInit {
                 this.loading = false;
             }
         });
+    }
+
+    refreshCalendar(): void {
+        const checkInterval = setInterval(() => {
+            if (this.calendarComponent) {
+                clearInterval(checkInterval);
+                const calendarApi = this.calendarComponent.getApi();
+                calendarApi.removeAllEvents();
+                calendarApi.addEventSource(this.calendarEvents);
+                calendarApi.render();
+            }
+        }, 100);
     }
 
     refreshData(): void {
@@ -213,7 +228,6 @@ export class HolidayHomeComponent implements OnInit {
                 });
             },
             error: (error: any) => {
-                console.log("Failed to delete holiday: ", error);
                 Swal.fire({
                     title: 'Oops!',
                     text: 'An error occurred while deleting the Holiday. Please try again.',
@@ -263,9 +277,9 @@ export class HolidayHomeComponent implements OnInit {
         },
         firstDay: 1,
         events: this.calendarEvents,
+        eventClick:this.handleEventClick.bind(this),
         aspectRatio: 2,
         selectable: true,
-        eventClick:(eventInfo) => this.handleEventClick(eventInfo),
     });
 
     calendarListOptions = signal<CalendarOptions>({
