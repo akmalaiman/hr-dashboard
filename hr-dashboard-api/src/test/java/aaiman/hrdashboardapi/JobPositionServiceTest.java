@@ -103,7 +103,7 @@ public class JobPositionServiceTest {
         }
 
         @Test
-        public void getAllActiveJobPositionsWIthCountTest() {
+        public void getAllActiveJobPositionsWithCountTest() {
 
                 List<Map<String, Object>> rawResults = List.of(
                         Map.of("id", 1, "name", "Software Engineer", "staffJobCount", 5),
@@ -111,7 +111,7 @@ public class JobPositionServiceTest {
                 );
 
                 when(jobPositionRepository.findAllActiveWithCount()).thenReturn(rawResults);
-                List<JobPositionDto> jobPositionList = jobPositionService.getAllActiveJobPositionsWIthCount();
+                List<JobPositionDto> jobPositionList = jobPositionService.getAllActiveJobPositionsWithCount();
 
                 assertNotNull(jobPositionList);
                 assertEquals(2, jobPositionList.size());

@@ -3,6 +3,7 @@ package aaiman.hrdashboardapi.controller;
 import aaiman.hrdashboardapi.dto.DepartmentDto;
 import aaiman.hrdashboardapi.model.Department;
 import aaiman.hrdashboardapi.service.DepartmentService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ public class DepartmentController {
         }
 
         @GetMapping("/all")
+        @Operation(summary = "Get all active departments")
         public ResponseEntity<List<Department>> getAllDepartments() {
 
                 List<Department> departmentList = departmentService.getAll();
@@ -40,6 +42,7 @@ public class DepartmentController {
 
         @PostMapping("/add")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Add a new department")
         public ResponseEntity<Department> addDepartment(@RequestBody Department department, HttpServletRequest request) {
 
                 try {
@@ -63,6 +66,7 @@ public class DepartmentController {
 
         @GetMapping("/byName")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Get active department by name")
         public ResponseEntity<Department> getActiveDepartmentByName(@RequestParam String name) {
 
                 Department department = departmentService.getActiveDepartmentByName(name);
@@ -77,6 +81,7 @@ public class DepartmentController {
 
         @GetMapping("/nameWithCount")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Get all active departments with count of employees")
         public ResponseEntity<List<DepartmentDto>> getAllActiveDepartmentsWithCount() {
 
                 List<DepartmentDto> departmentList = departmentService.getAllActiveDepartmentsWithCount();
@@ -91,6 +96,7 @@ public class DepartmentController {
 
         @DeleteMapping("/delete")
         @PreAuthorize("hasAuthority('ADMIN')")
+        @Operation(summary = "Delete a department by id")
         public ResponseEntity<Department> deleteDepartment(@RequestParam("id") int id, HttpServletRequest request) {
 
                 int userId = (Integer) request.getAttribute("userId");

@@ -1,14 +1,8 @@
 package aaiman.hrdashboardapi.service;
 
 import aaiman.hrdashboardapi.dto.CsvProcessDto;
-import aaiman.hrdashboardapi.model.Department;
-import aaiman.hrdashboardapi.model.JobPosition;
-import aaiman.hrdashboardapi.model.Role;
-import aaiman.hrdashboardapi.model.User;
-import aaiman.hrdashboardapi.repository.DepartmentRepository;
-import aaiman.hrdashboardapi.repository.JobPositionRepository;
-import aaiman.hrdashboardapi.repository.RoleRepository;
-import aaiman.hrdashboardapi.repository.UserRepository;
+import aaiman.hrdashboardapi.model.*;
+import aaiman.hrdashboardapi.repository.*;
 import com.opencsv.CSVReader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStreamReader;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,12 +26,14 @@ public class UploadService {
         private final UserRepository userRepository;
         private final JobPositionRepository jobPositionRepository;
         private  final DepartmentRepository departmentRepository;
+        private final HolidayRepository holidayRepository;
 
-        public UploadService(RoleRepository roleRepository, UserRepository userRepository, JobPositionRepository jobPositionRepository, DepartmentRepository departmentRepository) {
+        public UploadService(RoleRepository roleRepository, UserRepository userRepository, JobPositionRepository jobPositionRepository, DepartmentRepository departmentRepository, HolidayRepository holidayRepository) {
                 this.roleRepository = roleRepository;
                 this.userRepository = userRepository;
                 this.jobPositionRepository = jobPositionRepository;
                 this.departmentRepository = departmentRepository;
+                this.holidayRepository = holidayRepository;
         }
 
         public CsvProcessDto processFile(MultipartFile file, int userId) {
@@ -75,6 +72,12 @@ public class UploadService {
                                                 savedCount = departmentResult.getSavedCount();
                                                 duplicateCount = departmentResult.getDuplicateCount();
                                                 entity = departmentResult.getEntity();
+                                                break;
+                                        case "holiday":
+                                                CsvProcessDto holidayResult = processHoliday(csvReader, userId);
+                                                savedCount = holidayResult.getSavedCount();
+                                                duplicateCount = holidayResult.getDuplicateCount();
+                                                entity = holidayResult.getEntity();
                                                 break;
                                         default:
                                                 log.error("Invalid data type: {}", dataType);
@@ -292,6 +295,54 @@ public class UploadService {
                 }
 
                 return new CsvProcessDto(savedCount, duplicateCount, "Department");
+
+        }
+
+        private CsvProcessDto processHoliday(CSVReader csvReader, int userId) {
+
+                /*
+                 * Department CSV file format
+                 * 0: dataType
+                 *1: name
+                 *2: holidayDate
+                 * */
+
+                int savedCount = 0;
+                int duplicateCount = 0;
+
+                try {
+
+                        List<Holiday> holidayList = new ArrayList<>();
+                        String[] row;
+                        csvReader.readNext();
+
+                        while((row = csvReader.readNext()) != null) {
+                                String name = row[1];
+                                LocalDate holidayDate = LocalDate.parse(row[2]);
+
+                                Holiday checkDuplicate = holidayRepository.findByNameDateAndStatus(name, holidayDate, "Active");
+                                if (checkDuplicate != null) {
+                                        duplicateCount++;
+                                } else {
+                                        Holiday holiday = new Holiday();
+                                        holiday.setName(name);
+                                        holiday.setHolidayDate(holidayDate);
+                                        holiday.setStatus("Active");
+                                        holiday.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+                                        holiday.setCreatedBy(userId);
+                                        holidayList.add(holiday);
+                                        savedCount++;
+                                }
+                        }
+
+                        holidayRepository.saveAll(holidayList);
+
+                } catch (Exception e) {
+                        log.error("Failed to process holiday CSV file: {}", e.getMessage());
+                        throw new RuntimeException("Failed to process holiday CSV file: " + e.getMessage());
+                }
+
+                return new CsvProcessDto(savedCount, duplicateCount, "Holiday");
 
         }
 
