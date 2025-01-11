@@ -37,6 +37,7 @@ public class UserService {
         newUser.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
         newUser.setCreatedBy(userId);
         newUser.setDepartmentId(user.getDepartmentId());
+        newUser.setReportingTo(user.getReportingTo());
         
         userRepository.save(newUser);
         return newUser;
