@@ -30,7 +30,12 @@ export class StaffEditComponent implements OnInit {
     managerList: Staff[] = [];
     userId: number = 0;
 
-    constructor(private formBuilder: FormBuilder, private staffService: StaffService, private router: Router, private activatedRoute: ActivatedRoute) {
+    constructor(
+        private formBuilder: FormBuilder,
+        private staffService: StaffService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute
+    ) {
     }
 
     ngOnInit(): void {
