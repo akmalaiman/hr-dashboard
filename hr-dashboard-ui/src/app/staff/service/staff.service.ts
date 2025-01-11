@@ -22,6 +22,7 @@ export class StaffService {
     private getStaffByIdUrl = "http://localhost:8080/api/user/{id}";
     private updateStaffUrl = "http://localhost:8080/api/user/update/{id}";
     private updatePasswordUrl = "http://localhost:8080/api/user/updatePassword/{id}";
+    private getManagerByDepartmentIdUrl = "http://localhost:8080/api/user/managerByDepartment";
 
     constructor(private http: HttpClient) {
     }
@@ -119,6 +120,15 @@ export class StaffService {
         const url = this.updatePasswordUrl.replace("{id}", id.toString());
         const params = new HttpParams().set("password", password);
         return this.http.put<any>(url, null, {headers, params});
+    }
+
+    getManagerByDepartmentId(departmentId: number): Observable<Staff[]> {
+        const token = localStorage.getItem("access_token");
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        const params = new HttpParams().set("departmentId", departmentId);
+        return this.http.get<Staff[]>(this.getManagerByDepartmentIdUrl, {headers, params});
     }
 
 }

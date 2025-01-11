@@ -78,5 +78,8 @@ public class User {
         @ManyToOne
         @JoinColumn(name = "department_id", referencedColumnName = "id")
         private Department departmentId;
+        
+        @Column(name= "reporting_to", nullable = false)
+        private int reportingTo;
 
 }
