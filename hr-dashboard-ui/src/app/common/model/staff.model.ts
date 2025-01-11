@@ -22,5 +22,5 @@ export interface Staff {
         updatedAt: Date;
         updatedBy: number;
         departmentId: Department;
-        reportingToId: number;
+        reportingTo: number;
 }

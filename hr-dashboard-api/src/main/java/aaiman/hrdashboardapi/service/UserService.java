@@ -80,6 +80,7 @@ public class UserService {
         existingUser.setCountry(user.getCountry());
         existingUser.setUpdatedBy(userId);
         existingUser.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        existingUser.setReportingTo(user.getReportingTo());
         
         existingUser.getRoles().clear();
         existingUser.getRoles().addAll(user.getRoles());

@@ -169,7 +169,7 @@ export class StaffNewComponent implements OnInit {
                 jobPositionId: jobPosition,
                 roles: role ? [{id: role.id, name: role.name}] : [],
                 departmentId: department,
-                reportingToId: this.newStaffForm.value.reportingToId ? Number(this.newStaffForm.value.reportingToId) : 0
+                reportingTo: this.newStaffForm.value.reportingToId ? Number(this.newStaffForm.value.reportingToId) : 0
             };
 
             this.staffService.createUser(userData).subscribe({

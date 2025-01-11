@@ -274,13 +274,13 @@ public class UserServiceTest {
     @Test
     public void getManagerByDepartmentListTest() {
         
-        when(userRepository.findManagerByDepartment(1)).thenReturn(Arrays.asList(testUser));
+        when(userRepository.findManagerByDepartment(anyInt())).thenReturn(Arrays.asList(testUser));
         List<User> userList = userService.getManagerByDepartmentList(1);
         
         assertNotNull(userList);
         assertFalse(userList.isEmpty());
         assertEquals(1, userList.size());
-        verify(userRepository, times(1)).findManagerByDepartment(1);
+        verify(userRepository, times(1)).findManagerByDepartment(anyInt());
         
     }
     
